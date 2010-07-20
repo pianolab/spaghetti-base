@@ -1,0 +1,2 @@
+<h1><?php echo $this->pageTitle = "Tabela não existente" ?></h1>
+<p>A tabela <strong><?php echo $details["table"] ?></strong>, definida no model <strong><?php echo $details["model"] ?></strong>, não foi encontrada no banco de dados.</p>

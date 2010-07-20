@@ -1,0 +1,50 @@
+#!/usr/bin/php
+<?php
+/**
+ *  @license   http://www.opensource.org/licenses/mit-license.php The MIT License
+ *  @copyright Copyright 2008-2010, Spaghetti* Framework (http://spaghettiphp.org/)
+ *
+ * Generators for Spaghetti Framework 0.2 (@djalmaaraujo - http://www.djalmaaraujo.com.br/)
+ *
+ * SCRIPT: scripts/generators/bin/generate
+ * PS: When using multiple files, DON'T use SPACES. Eg: index, edit. Use: index,edit. Spaces will be detected as another parameter.
+ * PS2: The script puts underscore automaticaly for camelCase names. Eg: imageGallery will procude: image_gallery_controller.php
+ *
+ * USAGE:
+ * (CONTROLLERS) generate controller1,controller2 -vm name,name2 a,b,c,d
+ *	-v: views (will generate views for actions passed)
+ *	-m: model (will create basic controller model)
+ * 	name: name of controllers
+ *	a,b,c,d..: Methods of controller
+ *
+ * +Eg: generate controller News -mv index,insert,edit,delete
+ * 
+ *
+ * (VIEWS) generate view folder a,b,c,d
+ *	folder: you know.
+ *	a,b,c,d: Filenames want to create
+ *
+ * +Eg: generate view news home,view,list
+ * 
+ *
+ * (MODELS) generate model name,name2 table,table2
+ *	name: Name of the model
+ *	table: database table
+ *
+ * +Eg: generate model news,galleryImages news,gallery_images
+ **/
+
+	set_include_path(dirname(__FILE__) . "/../lib");
+	require_once 'bootstrap.php';
+	
+	/**
+	 * Args
+	 */
+	$args = new Args();
+	$arguments = $args->parse($_SERVER['argv']);
+	
+	/**
+	 * Instance Generate class and Return Result.
+	 */
+	$generate = new Generate($arguments);
+	echo $generate->start();

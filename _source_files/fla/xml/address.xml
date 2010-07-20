@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<sections>
+	<!-- 404 -->
+	<section id="404" child="" last="true">
+		<code></code>
+		<title>404</title>
+		<url>404.swf</url>
+	</section>
+	<!-- FIM 404 -->
+		
+	<!-- HOME -->
+	<section id="home" child="" last="true">
+		<code></code>
+		<title>HOME</title>
+		<url>home.swf</url>
+	</section>
+	<!-- FIM HOME -->
+		
+	<!-- ARTE -->
+	<section id="arte" child="" last="false">
+		<code></code>
+		<title>ARTE</title>
+		<url>arte.swf</url>
+	</section>
+	<section id="consultoria" child="arte" last="true">
+		<code>1</code>
+		<title>Consultoria</title>
+		<url>arte_interna.swf</url>
+	</section>
+	<section id="curadoria" child="arte" last="true">
+		<code>2</code>
+		<title>Curadoria</title>
+		<url>arte_interna.swf</url>
+	</section>
+	<section id="projeto-de-instalacao" child="arte" last="true">
+		<code>3</code>
+		<title>Projeto de instalação</title>
+		<url>arte_interna.swf</url>
+	</section>
+	<section id="projeto-de-comunicacao-visual" child="arte" last="true">
+		<code>4</code>
+		<title>Projeto de comunicação visual</title>
+		<url>arte_interna.swf</url>
+	</section>
+	<section id="projeto-museografico" child="arte" last="true">
+		<code>5</code>
+		<title>Projeto museográfico</title>
+		<url>arte_interna.swf</url>
+	</section>
+	<section id="avaliacao-e-intermediacao" child="arte" last="true">
+		<code>6</code>
+		<title>Avaliação e intermediação</title>
+		<url>arte_interna.swf</url>
+	</section>
+	<!-- child é igual ao id do indice - 1 do array, se -->
+	<!-- FIM DE ARTE -->
+		
+	<!-- DESIGN -->
+	<section id="design" child="" last="false">
+		<code></code>
+		<title>Design</title>
+		<url>design.swf</url>
+	</section>
+	<section id="linha-fios" child="design" last="false">
+		<code></code>
+		<title>Linha fios</title>
+		<url></url>
+	</section>
+	<section id="colecao-fios-01" child="linha-fios" last="true">
+		<code></code>
+		<title>Coleção fios 01</title>
+		<url>design_interna.swf</url>
+	</section>
+	<section id="colecao-fios-02" child="linha-fios" last="true">
+		<code></code>
+		<title>Coleção fios 02</title>
+		<url>design_interna.swf</url>
+	</section>
+	<section id="linha-metais" child="design" last="false">
+		<code></code>
+		<title>Linha metais</title>
+		<url></url>
+	</section>
+	<section id="colecao-metais-01" child="linha-metais" last="true">
+		<code></code>
+		<title>Coleção metais 01</title>
+		<url>design_interna.swf</url>
+	</section>
+	<section id="colecao-metais-02" child="linha-metais" last="true">
+		<code></code>
+		<title>Coleção metais 02</title>
+		<url>design_interna.swf</url>
+	</section>
+	<section id="publicacoes" child="design" last="true">
+		<code></code>
+		<title>Publicações</title>
+		<url>design_interna.swf</url>
+	</section>
+	<!-- FIM DESIGN -->
+		
+	<!-- PERFIL -->
+	<section id="bio" child="" last="false">
+		<code></code>
+		<title>Bio</title>
+		<url>bio.swf</url>
+	</section>	
+	<section id="1970" child="bio" last="true">
+		<code></code>
+		<title>1970</title>
+		<url>bio_interna.swf</url>
+	</section>
+	<section id="1980" child="bio" last="true">
+		<code></code>
+		<title>1980</title>
+		<url>bio_interna.swf</url>
+	</section>
+	<section id="1990" child="bio" last="true">
+		<code></code>
+		<title>1990</title>
+		<url>bio_interna.swf</url>
+	</section>
+	<section id="2000" child="bio" last="true">
+		<code></code>
+		<title>2000</title>
+		<url>bio_interna.swf</url>
+	</section>
+	<!-- FIM PERFIL -->
+		
+	<!-- BLOG -->
+	<section id="blog" child="" last="true">
+		<code></code>
+		<title>Blog</title>
+		<url>blog.swf</url>
+	</section>	
+	<!-- FIM BLOG -->
+		
+	<!-- VÍDEOS -->
+	<section id="videos" child="" last="true">
+		<code></code>
+		<title>Vídeos</title>
+		<url>videos.swf</url>
+	</section>	
+	<!-- FIM VÍDEOS -->
+</sections>
+
+<!-- 
+	
+-->
