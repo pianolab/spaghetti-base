@@ -23,13 +23,15 @@ class m2brimagem {
 	private $rgb;
 	// mensagem de erro
 	private $erro;
+	// gray scale
+	public $grayscale;
 	
 	/**
 	 * Construtor
 	 * @param $string caminho da imagem a ser carregada
 	 * @return void
 	*/
-	public function m2brimagem( $origem = '', $extensoes_validas = array( 'jpg', 'jpeg', 'jpe', 'gif', 'bmp', 'png' ) ) 
+	public function m2brimagem( $origem = '', $extensoes_validas = array( 'jpg', 'jpeg', 'jpe', 'gif', 'bmp', 'png' ), $grayscale = false ) 
 	{
 		
 		$this->origem					= $origem;
@@ -41,11 +43,12 @@ class m2brimagem {
 		$this->formato					= 0;
 		$this->extensao					= '';
 		$this->tamanho					= '';
-		$this->extensoes_validas		= $extensoes_validas;
+		$this->extensoes_validas		= ($extensoes_validas) ? $extensoes_validas : array( 'jpg', 'jpeg', 'jpe', 'gif', 'bmp', 'png' );
 		$this->arquivo					= '';
 		$this->diretorio				= '';
 		$this->rgb						= array( 255, 255, 255 );
 		$this->tamanho_html				= '';
+		$this->grayscale = $grayscale;
 		
 		if ( $this->origem ) 
 		{
@@ -197,6 +200,7 @@ class m2brimagem {
 				trigger_error( 'Arquivo inv�lido!', E_USER_WARNING );
 				break;
 		}
+		($this->grayscale) ? imagefilter($this->img, IMG_FILTER_GRAYSCALE) : '';
 	} // fim criaImagem
 
 //------------------------------------------------------------------------------
@@ -545,7 +549,7 @@ class m2brimagem {
 	 * @param Int $qualidade qualidade da imagem no caso de JPEG (0-100)
 	 * @return void
 	*/	
-	public function grava( $destino='', $qualidade=100 ) 
+	public function grava( $destino='', $qualidade=100, $grayscale = false) 
 	{
 		// dados do arquivo de destino	
 		if ( $destino ) 
