@@ -12,7 +12,7 @@
 class AppController extends Controller {
 	
 	public $components = array('Auth');
-	public $helpers = array("Html", "Form", "Date", 'Pagination');
+	public $helpers = array("Html", "Form", "Date", 'Pagination','Text');
 	public $layout = 'default';
 	public $arrView = null;
 	
@@ -82,5 +82,3 @@ class AppController extends Controller {
 		$this->arrView['page_title'] = Config::read('app.name') . $compl;
 	}
 }
-
-?>
