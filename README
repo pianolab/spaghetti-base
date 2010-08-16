@@ -1,0 +1,20 @@
+Swift Mailer include: require_once 'lib/utils/Mailer.php';
+
+Usage: 
+[php]
+$mailer_new = new Mailer(array(
+	'from' => array(Config::read('app.email_root') => Config::read('app.name')),
+	'to' => array(
+		$info_user['username'] => $info_user['name']
+		),
+	'subject' => '[' . Config::read('app.name') . '] RECUPERAR SENHA',
+	'views' => array(
+	'text/plain' => 'users/mail_forgot.txt',
+	'text/html' => 'users/mail_forgot.htm'
+	),
+	'data' => array(
+					'info_user' => $info_user,
+					'new_password_jedi' => $new_password_jedi
+	)));
+	return $mailer_new->send();
+[/php]
