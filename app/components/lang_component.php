@@ -1,4 +1,5 @@
 <?php
+App::import('Helper','lang_helper');
 /**
  * ################# Lang Component ##################
  * Helps you to work with multilang on your system
@@ -34,6 +35,7 @@ class LangComponent extends Component
 	 * Lang variavel
 	 */
 	private $lang;
+	private $lang_helper = null;
 
 	/**
 	 * Initialize Function
@@ -41,9 +43,9 @@ class LangComponent extends Component
 	public function initialize()
 	{
 		/**
-		 * Auto Check and Set Language
+		 * Lang helper info
 		 */
-		$this->setLang((Session::read('language')) ? Session::read('language') : Config::read('default_language'));
+		$this->lang_helper = new LangHelper();
 	}
 	
 	/**
@@ -54,6 +56,15 @@ class LangComponent extends Component
 		$this->lang = $lang;
 		Config::write('language', $this->lang);
 		Session::write('language', $this->lang);
+	}
+	
+	/**
+	 * Translante using lang helper
+	 *
+	 **/
+	public function translate($string = '')
+	{
+		return $this->lang_helper->_($string);
 	}
 	
 	/**

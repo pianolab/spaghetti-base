@@ -42,9 +42,13 @@ class LangHelper extends Helper {
     private function translate($string)
     {
     	foreach ($this->xml->item as $item):
-    		if ($item['id'] == $string):
-    			echo $item;
-    		endif;
+				if ($this->lang == $this->default_lang):
+					return $string;
+				else:
+					if (strtolower($item['id']) == strtolower($string)):
+	    			return $item;
+	    		endif;
+				endif;
     	endforeach;
     }
     /**
