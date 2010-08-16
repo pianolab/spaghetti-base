@@ -54,28 +54,37 @@ class AppController extends Controller {
 		*/
 	}
 	
+	/**
+	 * Execute something before Render Views
+	 */
 	public function beforeRender()
 	{
 		
-		//Get the actual Page
+		// Get the actual Page
 		$actual_page = explode('/',Mapper::here());
 		$this->set('actual_page', end($actual_page));
 		$this->set('url_params', $actual_page);
 		$this->set('url_base', Config::read('app.url_base'));
 				
-		//Page title default
+		// Page title default
 		if (!$this->arrView['page_title']):
 			$this->page_title('');
 		endif;
 		
-		//To we don't have to repeat the set function with arrView variable.
+		// To we don't have to repeat the set function with arrView variable.
 		$this->set($this->arrView);
 	}
 	
+	/**
+	 * Check if actual request is Ajax
+	 */
 	public function isXhr(){
 		return array_key_exists('HTTP_X_REQUESTED_WITH', $_SERVER) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest';
 	}
-	
+
+	/**
+	 * Set the page title in controllers
+	 */
 	public function page_title($title = null)
 	{
 		$compl = ($title) ? ' » ' . $title : '';
