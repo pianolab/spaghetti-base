@@ -21,4 +21,9 @@ blockquote, q{ quotes: "" ""}
 html{overflow:-moz-scrollbars-vertical}
 a{color:#989898}
 a:hover{text-decoration:underline}
-/* end reset */
+.clear {clear: both;}
+.radius{
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+}
