@@ -121,15 +121,15 @@ class Model extends Object {
      *  Retorna o datasource em uso.
      *
      *  @return object Datasource em uso
-     */
-    public static function &getConnection($environment = null) {
+		 * MODIFIED TO SUPPORT MULTIPLE INSTANCES
+      */
+		public static function &getConnection($environment = null) {
         static $instance = array();
-        if(!isset($instance[0]) || !$instance[0]):
-            $instance[0] = Connection::getDatasource($environment);
+        if(!isset($instance[$environment]) || !$instance[$environment]):
+            $instance[$environment] = Connection::getDatasource($environment);
         endif;
-        return $instance[0];
-    }
-    /**
+        return $instance[$environment];
+    }    /**
      *  Define a tabela a ser usada pelo modelo.
      *
      *  @param string $table Nome da tabela a ser usada
