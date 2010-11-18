@@ -20,7 +20,7 @@ class DateHelper extends Helper {
         return date($format, $timestamp);
     }
     
-    function dayofweek($data) {
+    public function dayofweek($data) {
 		$ano =  substr("$data", 0, 4);
 		$mes =  substr("$data", 5, -3);
 		$dia =  substr("$data", 8, 9);

@@ -11,6 +11,10 @@
 	?>
 </head>
 <body>
+	<?php
+		// Alert/Flash message
+		echo $this->element('elements/flash');
+	?>
 	<div id="container">
 		<div id="header">
 			<a href="<?php echo Mapper::url('/'); ?>"><img src="<?php echo Mapper::url('/images/logo.png'); ?>" width="258" height="246" alt="Logo" /></a>

@@ -40,7 +40,7 @@ class AppController extends Controller {
 		
 		/**
 		 * Auth Component Conf.
-		 
+		 *
 		 
 		$this->AuthComponent->loginAction = '/login';
 		$this->AuthComponent->logoutAction = '/logout';
