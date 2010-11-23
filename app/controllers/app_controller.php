@@ -34,10 +34,6 @@ class AppController extends Controller {
 	public function beforeFilter()
 	{
 	
-		if ($this->isXhr()):
-			$this->layout = false;
-		endif;
-		
 		/**
 		 * Auth Component Conf.
 		 *
@@ -60,6 +56,9 @@ class AppController extends Controller {
 	public function beforeRender()
 	{
 		
+		// Document Root to upload and resize components
+		$this->document_root = $_SERVER['DOCUMENT_ROOT'] . '/';
+		
 		// Get the actual Page
 		$actual_page = explode('/',Mapper::here());
 		$this->set('actual_page', end($actual_page));
@@ -73,13 +72,6 @@ class AppController extends Controller {
 		
 		// To we don't have to repeat the set function with arrView variable.
 		$this->set($this->arrView);
-	}
-	
-	/**
-	 * Check if actual request is Ajax
-	 */
-	public function isXhr(){
-		return array_key_exists('HTTP_X_REQUESTED_WITH', $_SERVER) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest';
 	}
 
 	/**
