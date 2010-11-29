@@ -32,6 +32,9 @@ a:hover{text-decoration:none;}
 
 body {}
 
+/* alert */
+#alert-message {background:#000; font-size:14px; text-align:center; color:#fff; font-weight:bold; padding:20px;}
+
 /* header */
 
 /* content */
