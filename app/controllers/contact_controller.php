@@ -2,6 +2,7 @@
 require_once 'lib/utils/Mailer.php';
 class ContactController extends AppController {
 
+	public $uses = array();
     public function index() {
         if(!empty($this->data)):
     			if ($this->Contact->Validate($this->data)):
