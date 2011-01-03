@@ -13,7 +13,7 @@
 <body>
 	<?php
 		// Alert/Flash message
-		echo $this->element('elements/flash');
+		echo $flash->flash();
 	?>
 	<div id="container">
 		<div id="header">

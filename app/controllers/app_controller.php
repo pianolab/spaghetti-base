@@ -12,7 +12,7 @@
 class AppController extends Controller {
 	
 	public $components = array('Auth');
-	public $helpers = array("Html", "Form", "Date", 'Pagination','Text');
+	public $helpers = array('Html', "Form", 'Date', 'Pagination', 'Text', 'Flash');
 	public $layout = 'default';
 	public $arrView = null;
 	
