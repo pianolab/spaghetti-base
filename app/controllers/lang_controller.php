@@ -5,7 +5,7 @@ class LangController extends AppController
 	public function change($lang)
 	{
 		$this->LangComponent->setLang($lang);
-		$this->redirect('/');
+		$this->redirect($this->urlHistory);
 	}
 }
 ?>
