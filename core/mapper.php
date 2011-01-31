@@ -265,7 +265,7 @@ class Mapper extends Object {
      *  @param bool $full Verdadeiro para gerar uma URL completa
      *  @return string URL gerada para a aplicação
      */
-    public static function url($path, $full = false) {
+    public static function url($path, $full = true) {
         if(is_array($path)):
             $here = self::parse();
             $params = $here["named"];
