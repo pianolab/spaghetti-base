@@ -15,5 +15,12 @@ $(function(){
 	
 	// END
 	
+	/**
+	 * TARGET BLANK
+	 */
+	$('.target-blank').click(function(){
+		$(this).attr('target', '_blank').click();
+		return false;
+	});
 	
 })
