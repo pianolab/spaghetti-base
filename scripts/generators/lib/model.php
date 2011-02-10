@@ -55,8 +55,15 @@ class Model extends Utils
 			$handle = fopen ($file->file, "w+");
 			$content = "<?php \n";
 			$content .= "class " . $file->name . " extends AppModel {\n";
-			$content .= '	public $table = "' . $file->table . '";';
+			$content .= '	public $table = "' . $file->table . '";' . "\n";
+			$content .= '	public $order = "id DESC";' . "\n";
+			$content .= '	public $searchableFields = array();' . "\n";
+			$content .= '	public $cantBeEqualFields = array();' . "\n";
 			$content .= " \n";
+			$content .= "	public $validates = array(\n";
+			$content .= "		'field' => array('rule' => 'notEmpty', 'message' => 'Campo obrigatório')\n";
+			$content .= "	);\n";
+			$content .= " \n";			
 			$content .= "}";
 			fwrite($handle, $content);
 			fclose($handle);
