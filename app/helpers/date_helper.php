@@ -60,6 +60,46 @@ class DateHelper extends Helper {
 		return ($short) ? substr($return,0,3) : $return;
 	}
 	
+	function timeAgo($date)
+	{
+	    if(empty($date)) {
+	        return "No date provided";
+	    }
+
+	    $periods         = array("segundo", "minuto", "hora", "dia", "semana", "mês", "ano", "década");
+	    $lengths         = array("60","60","24","7","4.35","12","10");
+
+	    $now             = time();
+	    $unix_date         = strtotime($date);
+
+	       // check validity of date
+	    if(empty($unix_date)) {    
+	        return "Bad date";
+	    }
+
+	    // is it future date or past date
+	    if($now > $unix_date) {    
+	        $difference     = $now - $unix_date;
+	        $tense         = "atrás";
+
+	    } else {
+	        $difference     = $unix_date - $now;
+	        $tense         = "de agora";
+	    }
+
+	    for($j = 0; $difference >= $lengths[$j] && $j < count($lengths)-1; $j++) {
+	        $difference /= $lengths[$j];
+	    }
+
+	    $difference = round($difference);
+
+	    if($difference != 1) {
+	        $periods[$j].= "s";
+	    }
+
+	    return "$difference $periods[$j] {$tense}";
+	}
+	
 	function format_date($date = '', $return = 'date', $separate = '/') {
 		$time = substr($date,10);
 		$date = substr($date,0,10);
@@ -74,5 +114,3 @@ class DateHelper extends Helper {
 		return $formated_date;
 	}
 }
-
-?>

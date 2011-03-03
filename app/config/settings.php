@@ -32,3 +32,10 @@ endif;
 
 // Debug mode
 Config::write('debug', true);
+
+// Currency settings
+Config::write('app.currency', 'R$');
+Config::write('app.currency_name', 'Real');
+Config::write('app.currency_format_decimals', 2);
+Config::write('app.currency_format_dec_point', ',');
+Config::write('app.currency_format_thousands_sep', '.');
