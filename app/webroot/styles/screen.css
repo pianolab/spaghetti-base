@@ -35,3 +35,10 @@ body {}
 /* forms */
 
 /* extra */
+
+/* benchmark */
+#benchmark {padding:30px; color:#666}
+#benchmark h2 {font-size:30px; font-weight:bold;}
+#benchmark table {width:100%;}
+#benchmark table th {font-weight:bold; font-size:18px}
+#benchmark tr, #benchmark td, #benchmark th {border:1px solid #666; padding:10px}

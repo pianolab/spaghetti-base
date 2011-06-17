@@ -6,13 +6,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 	<title><?php echo Config::read('app.name'); ?> - ERRO 404 - Página não encontrada</title>
-	<?php
-	    //CSS
-	    echo $html->stylesheet(array("screen.css")); 
-	?>
-	
 </head>
-<body style="background-image:none !important;">
+<body>
 	<div id="container" style="background-image:none !important; width:500px; margin:20px auto">
 		<?php
 		if (Config::read('debug')):
