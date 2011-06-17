@@ -12,7 +12,7 @@ require_once CORE . DS . "basics.php";
 /**
  *  Inclusão de todas as classes necessárias para a aplicação.
  */
-App::import("Core", array("class_registry", "component", "connection", "controller", "cookie", "datasource", "dispatcher", "helper", "inflector", "mapper", "model", "security", "session", "utils", "validation", "view", "http"));
+App::import("Core", array("class_registry", "component", "connection", "controller", "cookie", "datasource", "dispatcher", "helper", "inflector", "mapper", "model", "security", "session", "utils", "validation", "view", "http", 'benchmark'));
 
 /**
  *  Inclusão dos arquivos de configuração da aplicação.
