@@ -24,4 +24,19 @@ class AppModel extends Model {
 		endforeach;
 		return $return;
 	}
+	
+	/**
+	 * Loop to build a search query based on model searchableFields variable
+	 */ 
+	public function buildSearchQuery($param = null) {
+		if ($param):
+			$string = '%' . strip_tags($param) . '%';
+			foreach ($this->searchableFields as $field):
+				$conditions_or[$field . ' LIKE'] = $string;
+			endforeach;
+			return $conditions_or;
+		else:
+			return false;
+		endif;
+	}
 }

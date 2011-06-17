@@ -2,10 +2,9 @@
 /**
  *  Default app config
  */
-Config::write('app.name','Projeto Base');
+Config::write('app.name', false);
 Config::write('app.conv.perpage', 10);
 Config::write('app.upload_url', 'http://upload.projeto.com.br/');
-Config::write('app.images_url', 'http://images.projeto.com.br/');
 Config::write('app.url_base', 'http://www.projeto.com.br/');
 Config::write('app.hash', 'md5');
 Config::write('analytics', false);
