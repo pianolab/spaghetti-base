@@ -15,7 +15,7 @@
  * - Security Salt change OK
  * - Mail settings OK
  * - App default settings OK
- * - Production database
+ * - Production database OK
  * - 
  * 
  */ 
