@@ -32,7 +32,7 @@ class Benchmark extends View {
 		# END signature
 		
 		$return['CNPJ_CLIENT'] = (Config::read('cnpj_client')) ? 'OK' : '[WARNING] All websites needs a CNPJ by the LAW. Check in your JOB for this information or contact your superior';
-		$return['MAIL_SETTINGS'] = (Config::read('Mailer.smtp.username') || Config::read('Mailer.smtp.password') || Config::read('Mailer.smtp.port') || Config::read('Mailer.smtp.host') || Config::read('Mailer.smtp.transport')) ? '[ERROR] You need to SET UP mail settings to your application' : 'OK';
+		$return['MAIL_SETTINGS'] = (Config::read('Mailer.smtp.username') || Config::read('Mailer.smtp.password') || Config::read('Mailer.smtp.port') || Config::read('Mailer.smtp.host') || Config::read('Mailer.transport')) ? '[ERROR] You need to SET UP mail settings to your application' : 'OK';
 		$return['APP_DEFAULT_SETTINGS_PAGE_TITLE'] = (Config::read('app.name')) ? 'OK' : '[WARNING] Insert a PAGE_TITLE setting in app/config/settings.php';
 		$return['APP_DEFAULT_SETTINGS_UPLOAD_PATH'] = (Config::read('app.upload_url') != 'http://upload.projeto.com.br/') ? 'OK' : '[WARNING] Insert a app.upload_url setting in app/config/settings.php';
 		$return['APP_DEFAULT_SETTINGS_UPLOAD_PATH'] = (Config::read('app.url_base') != 'http://www.projeto.com.br/') ? 'OK' : '[WARNING] Insert a app.base_url setting in app/config/settings.php';
