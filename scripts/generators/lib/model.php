@@ -22,8 +22,7 @@ class Model extends Utils
 		$this->document_root = dirname(__FILE__) . "/../../../app/models/";
 	}
 	
-	public function match()
-	{
+	public function match() {
 		$this->output[] = "[Model] Criando Modelos.. \n";
 		if ($this->args->names):
 			for ($x = 0; $x < count($this->args->names) ; $x++):
@@ -49,8 +48,7 @@ class Model extends Utils
 	/**
 	 * Create File
 	 **/
-	private function create_file($file)
-	{
+	private function create_file($file) {
 		try {
 			$handle = fopen ($file->file, "w+");
 			$content = "<?php \n";

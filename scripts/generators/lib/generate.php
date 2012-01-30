@@ -11,15 +11,13 @@ class Generate
 	private $args;
 	private $return;
 	
-	public function __construct($args)
-	{
+	public function __construct($args) {
 		if ($args):
 			$this->setArgs($args);
 		endif;
 	}
 
-	public function start()
-	{
+	public function start() {
 		$args = $this->getArgs();	
 		switch ($args->type):
 			case 'model':
@@ -41,21 +39,18 @@ class Generate
 		$this->output();
 	}
 	
-	private function output()
-	{
+	private function output() {
 		foreach ($this->return as $msg):
 			echo "* " . $msg;
 			echo "\n";
 		endforeach;
 	}
 	
-	private function setArgs($args)
-	{
+	private function setArgs($args) {
 		$this->args = $args;
 	}
 	
-	private function getArgs()
-	{
+	private function getArgs() {
 		return $this->args;
 	}
 }

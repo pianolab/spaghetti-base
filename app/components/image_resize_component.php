@@ -11,8 +11,7 @@ class ImageResizeComponent extends Component
 	var $allowed_ext = array('jpg', 'jpeg', 'gif', 'png');
 
 	// Resize the image and save on cache
-	public function resize($file, $width, $height)
-	{
+	public function resize($file, $width, $height) {
 		$file_info = pathinfo($file);
 		$resized_file = $file_info['dirname'].'/'.$width.'X'.$height.'-'.$file_info['basename'];
 
@@ -36,8 +35,7 @@ class ImageResizeComponent extends Component
 		endif;
 	}
 	
-	public function grayscale($file, $width, $height)
-	{
+	public function grayscale($file, $width, $height) {
 		$oImg = new m2brimagem($file,null,true);
 		$validates = $oImg->valida();
 		if ($validates == 'OK') {
@@ -48,8 +46,7 @@ class ImageResizeComponent extends Component
 		}
 	}
 	
-	private function captureImage($filename = '', $data = false, $enable_partial = true, $speedlimit = 0)
-	{
+	private function captureImage($filename = '', $data = false, $enable_partial = true, $speedlimit = 0) {
 	    if ($filename == '')
 	    {
 	        return FALSE;

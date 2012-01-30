@@ -40,8 +40,7 @@ class LangComponent extends Component
 	/**
 	 * Initialize Function
 	 */
-	public function initialize()
-	{
+	public function initialize() {
 		/**
 		 * Lang helper info
 		 */
@@ -51,8 +50,7 @@ class LangComponent extends Component
 	/**
 	 * Sets langs on app
 	 */
-	public function setLang($lang)
-	{
+	public function setLang($lang) {
 		$this->lang = $lang;
 		Config::write('language', $this->lang);
 		Session::write('language', $this->lang);
@@ -62,16 +60,14 @@ class LangComponent extends Component
 	 * Translante using lang helper
 	 *
 	 **/
-	public function translate($string = '')
-	{
+	public function translate($string = '') {
 		return $this->lang_helper->_($string);
 	}
 	
 	/**
 	 * Return the actual lang
 	 */
-	public function lang()
-	{
+	public function lang() {
 		return $this->lang;
 	}
 }

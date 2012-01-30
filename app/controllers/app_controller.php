@@ -1,14 +1,4 @@
 <?php
-/**
- *  AppController é o controller usado como base para todos os outros controllers
- *  da aplicação. Estando na biblioteca, é utilizado somente quando não há outro
- *  AppController definido pelo usuário.
- *
- *  @license   http://www.opensource.org/licenses/mit-license.php The MIT License
- *  @copyright Copyright 2008-2009, Spaghetti* Framework (http://spaghettiphp.org/)
- *
- */
-
 class AppController extends Controller {
 	
 	public $components = array();
@@ -17,7 +7,7 @@ class AppController extends Controller {
 	public $arrView = null;
 	
 	# Autoloading by Klawdyo
-	public function __get($class){
+	public function __get($class) {
       if(!isset($this->{$class})):
          $pattern = '(^[A-Z]+([a-z]+(Component)?))';
          if(preg_match($pattern, $class, $out)):
@@ -37,11 +27,7 @@ class AppController extends Controller {
 	 */ 
 	
 	# Some defatuls settings 
-	private function beforeRenderConfig()
-	{
-		# Document Root to upload and resize components
-		$this->document_root = $_SERVER['DOCUMENT_ROOT'] . '/';
-		
+	private function beforeRenderConfig() {
 		# Page title default
 		if (!$this->arrView['page_title'])	$this->pageTitle('');
 		
@@ -53,15 +39,13 @@ class AppController extends Controller {
 	}
 	
 	# Set the page title in controllers
-	private function pageTitle($title = null)
-	{
+	private function pageTitle($title = null) {
 		$compl = ($title) ? ' » ' . $title : '';
 		$this->arrView['page_title'] = Config::read('app.name') . $compl;
 	}	
 	
 	# Actual Page
-	private function actual_page()
-	{
+	private function actual_page() {
 		$actual_page = explode('/',Mapper::here());
 		$this->set('actual_page', end($actual_page));
 		$this->set('url_params', $actual_page);
@@ -69,17 +53,15 @@ class AppController extends Controller {
 	} 
 	
 	# Some defaults settings
-	private function beforeFilterConfig()
-	{
+	private function beforeFilterConfig() {
+		# Document Root to upload and resize components
+		$this->document_root = $_SERVER['DOCUMENT_ROOT'] . '/';
 		$this->authConfig();
-		
-		// Url history
 		$this->urlHistory = Session::read('urlHistory');
 	}
 	
 	# Url history
-	private function setUrlHistory()
-	{
+	private function setUrlHistory() {
 		$explode = explode('/', Mapper::here());
 		if ((Mapper::here() != $this->urlHistory) && ($explode[2] != 'get_categories') && ($explode[1] != 'get_suppliers')):
 			Session::write('urlHistory', Mapper::here());
@@ -87,8 +69,7 @@ class AppController extends Controller {
 	}
 	
 	# Auth Component Config
-	private function authConfig()
-	{
+	private function authConfig() {
 		/**
 		$this->AuthComponent->loginAction = '/login';
 		$this->AuthComponent->logoutAction = '/logout';

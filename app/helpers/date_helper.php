@@ -60,8 +60,7 @@ class DateHelper extends Helper {
 		return ($short) ? substr($return,0,3) : $return;
 	}
 	
-	function timeAgo($date)
-	{
+	function timeAgo($date) {
 	    if(empty($date)) {
 	        return "No date provided";
 	    }

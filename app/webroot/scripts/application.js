@@ -2,8 +2,8 @@
  * Application Scripts
  * Use it only for default methods around the website
  */
-(function($){
+$(function(){
 	
 	// Code goes here
 	
-})(jQuery);
+});

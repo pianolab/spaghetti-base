@@ -22,8 +22,7 @@ class Controller extends Utils
 		$this->document_root = dirname(__FILE__) . "/../../../app/controllers/";
 	}
 	
-	public function match()
-	{
+	public function match() {
 		$this->output[] = "[Controller] Criando controllers.. \n";
 		if ($this->args->names):
 			for ($x = 0 ; $x<count($this->args->names) ; $x++):
@@ -88,8 +87,7 @@ class Controller extends Utils
 	/**
 	 * Create File
 	 **/
-	private function create_file($controller)
-	{
+	private function create_file($controller) {
 		try {	
 			$handle = fopen ($controller->file, "w+");
 			$content = "<?php \n";

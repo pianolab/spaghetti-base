@@ -31,8 +31,7 @@ class m2brimagem {
 	 * @param $string caminho da imagem a ser carregada
 	 * @return void
 	*/
-	public function m2brimagem( $origem = '', $extensoes_validas = array( 'jpg', 'jpeg', 'jpe', 'gif', 'bmp', 'png' ), $grayscale = false ) 
-	{
+	public function m2brimagem( $origem = '', $extensoes_validas = array( 'jpg', 'jpeg', 'jpe', 'gif', 'bmp', 'png' ), $grayscale = false )  {
 		
 		$this->origem					= $origem;
 		$this->img						= '';
@@ -62,8 +61,7 @@ class m2brimagem {
 	 * @param
 	 * @return void
 	*/	
-	private function dados() 
-	{
+	private function dados()  {
 		
 		// mensagem padr�o, sem erro
 		$this->erro = 'OK';
@@ -100,8 +98,7 @@ class m2brimagem {
 	 * @param
 	 * @return String string com erro de mensagem ou 'OK' para imagem v�lida
 	*/	
-	public function valida() 
-	{
+	public function valida()  {
 		return $this->erro;
 	} // fim valida
 	
@@ -110,8 +107,7 @@ class m2brimagem {
 	 * @param String caminho da imagem a ser carregada
 	 * @return void
 	*/	
-	public function carrega( $origem = '' ) 
-	{
+	public function carrega( $origem = '' )  {
 		$this->origem			= $origem;
 		$this->dados();
 	} // fim carrega
@@ -124,8 +120,7 @@ class m2brimagem {
 	 * @param
 	 * @return void
 	*/	
-	private function dimensoes() 
-	{
+	private function dimensoes()  {
 		$dimensoes 				= getimagesize( $this->origem );
 		$this->largura 	 		= $dimensoes[0];
 		$this->altura	 		= $dimensoes[1];
@@ -140,8 +135,7 @@ class m2brimagem {
 	 * @param
 	 * @return void
 	*/	
-	private function dadosArquivo() 
-	{
+	private function dadosArquivo()  {
 		// imagem de origem
 		$pathinfo 			= pathinfo( $this->origem );
 		$this->extensao 	= strtolower( $pathinfo['extension'] );
@@ -155,8 +149,7 @@ class m2brimagem {
 	 * @param
 	 * @return Boolean true/false
 	*/	
-	private function eImagem() 
-	{
+	private function eImagem()  {
 		// filtra extens�o
 		if ( !in_array( $this->extensao, $this->extensoes_validas ) )
 		{
@@ -176,8 +169,7 @@ class m2brimagem {
 	 * @param
 	 * @return void
 	*/	
-	private function criaImagem() 
-	{
+	private function criaImagem()  {
 		switch ( $this->formato )
 		{
 			case 1: 
@@ -213,8 +205,7 @@ class m2brimagem {
 	 * @param String $tipo m�todo para redimensionamento (padr�o [vazio], 'fill' [preenchimento] ou 'crop')
 	 * @return Boolean/void
 	*/	
-	public function redimensiona( $nova_largura = 0, $nova_altura = 0, $tipo = '', $rgb = array( 255,255,255 ) ) 
-	{
+	public function redimensiona( $nova_largura = 0, $nova_altura = 0, $tipo = '', $rgb = array( 255,255,255 ) )  {
 	
 		// seta vari�veis passadas via par�metro
 		$this->nova_largura		= $nova_largura;
@@ -262,8 +253,7 @@ class m2brimagem {
 	 * @param
 	 * @return void
 	*/	
-	private function resize() 
-	{	
+	private function resize()  {	
 		// cria imagem de destino tempor�ria
 		$imgtemp	= imagecreatetruecolor( $this->nova_largura, $this->nova_altura );
 		
@@ -277,8 +267,7 @@ class m2brimagem {
 	 * @param
 	 * @return void
 	*/	
-	private function resizeFill() 
-	{
+	private function resizeFill()  {
 		// cria imagem de destino tempor�ria
 		$imgtemp	= imagecreatetruecolor( $this->nova_largura, $this->nova_altura );
 		
@@ -313,8 +302,7 @@ class m2brimagem {
 	 * http://www.findmotive.com/2006/12/13/php-crop-image/
 	 * @return void
 	*/	
-	private function resizeCrop() 
-	{
+	private function resizeCrop()  {
 		// cria imagem de destino tempor�ria
 		$imgtemp	= imagecreatetruecolor( $this->nova_largura, $this->nova_altura );
 	
@@ -356,8 +344,7 @@ class m2brimagem {
 	 * @param String $tipo tipo de espelhamento: h - horizontal, v - vertical
 	 * @return void
 	*/	
-	public function flip( $tipo = 'h' ) 
-	{
+	public function flip( $tipo = 'h' )  {
 		$w = imagesx( $this->img );
 		$h = imagesy( $this->img );
 		
@@ -391,8 +378,7 @@ class m2brimagem {
 	 * @param Array $rgb cor RGB para preenchimento
 	 * @return void
 	*/	
-	public function girar( $graus, $rgb = array( 255,255,255 ) ) 
-	{
+	public function girar( $graus, $rgb = array( 255,255,255 ) )  {
 		$corfundo	= imagecolorallocate( $this->img, $rgb[0], $rgb[1], $rgb[2] );
 		$this->img	= imagerotate( $this->img, $graus, $corfundo );
 	} // fim girar
@@ -408,8 +394,7 @@ class m2brimagem {
 	 * @param String $fonte nome da fonte truetype a ser utilizada
 	 * @return void
 	*/	
-	public function legenda( $texto, $tamanho = 10, $x = 0, $y = 0, $rgb = array( 255,255,255 ), $truetype = false, $fonte = '' ) 
-	{     
+	public function legenda( $texto, $tamanho = 10, $x = 0, $y = 0, $rgb = array( 255,255,255 ), $truetype = false, $fonte = '' )  {     
 		$cortexto = imagecolorallocate( $this->img, $rgb[0], $rgb[1], $rgb[2] );
 		
 		// truetype ou fonte do sistema?
@@ -433,8 +418,7 @@ class m2brimagem {
 	 			  -> se utilizar alfa, a fun��o imagecopymerge n�o preserva
 				  -> o alfa nativo do PNG
 	 */	
-	public function marca( $imagem, $x = 0, $y = 0, $alfa = 100 ) 
-	{
+	public function marca( $imagem, $x = 0, $y = 0, $alfa = 100 )  {
 		// cria imagem tempor�ria para merge
 		if ( $imagem ) {
 			$pathinfo = pathinfo( $imagem );
@@ -484,8 +468,7 @@ class m2brimagem {
 	 * @param Int $alfa valor para transpar�ncia (0-100)
 	 * @return void
 	*/	
-	public function marcaFixa( $imagem, $posicao, $alfa = 100 ) 
-	{
+	public function marcaFixa( $imagem, $posicao, $alfa = 100 )  {
 
 		// dimens�es da marca d'�gua
 		list( $marca_w, $marca_h ) = getimagesize( $imagem );
@@ -549,8 +532,7 @@ class m2brimagem {
 	 * @param Int $qualidade qualidade da imagem no caso de JPEG (0-100)
 	 * @return void
 	*/	
-	public function grava( $destino='', $qualidade=100, $grayscale = false) 
-	{
+	public function grava( $destino='', $qualidade=100, $grayscale = false)  {
 		// dados do arquivo de destino	
 		if ( $destino ) 
 		{	
@@ -684,8 +666,7 @@ function imagecreatefrombmp($filename) {
    while ($Y >= 0)
    {
 	$X=0;
-	while ($X < $BMP['width'])
-	{
+	while ($X < $BMP['width']) {
 	 if ($BMP['bits_per_pixel'] == 24)
 		$COLOR = @unpack("V",substr($IMG,$P,3).$VIDE);
 	 elseif ($BMP['bits_per_pixel'] == 16)

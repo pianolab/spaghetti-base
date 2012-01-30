@@ -1,8 +1,7 @@
 /**
  * Utils methods
  */
-(function(){
-	
+$(function(){
 	/**
 	 * Useful to standard target blank links
 	 */
@@ -10,5 +9,4 @@
 		$(this).attr('target', '_blank').click();
 		return false;
 	});
-	
-})();
+});

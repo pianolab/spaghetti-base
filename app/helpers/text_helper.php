@@ -21,8 +21,7 @@ class TextHelper extends Helper {
 	 * @param boolean $allow_exceed_word Allow to exceed the max lenght putting the last word or don't allow, cutting the phrase before.
 	 * @return String
 	 **/
-	public function substr_phrase($text, $maxlenght = 54, $point = null, $allow_exceed_word = false)
-	{
+	public function substr_phrase($text, $maxlenght = 54, $point = null, $allow_exceed_word = false) {
 		
 		$i = 0;
 		$c = 0;

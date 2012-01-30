@@ -73,8 +73,7 @@ class Date {
 	 *	@return string : passend time (like: 3 hours ago)
 	 */
 
-	public static function timeAgo($date)
-	{
+	public static function timeAgo($date) {
 		if(empty($date)):
 			return "No date provided";
 		endif;

@@ -12,8 +12,7 @@ class Args
 	private $args;
 	private $obj_args;
 	
-	public function Parse($args = null)
-	{
+	public function Parse($args = null) {
 		if ($args):
 			
 			//Set Args
@@ -53,13 +52,11 @@ class Args
 		return $this->obj_args;
 	}
 	
-	private function setArgs($args)
-	{
+	private function setArgs($args) {
 		$this->args = $args;
 	}
 	
-	private function getArgs()
-	{
+	private function getArgs() {
 		return $this->args;
 	}
 	

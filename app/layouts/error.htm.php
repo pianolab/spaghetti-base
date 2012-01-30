@@ -1,19 +1,25 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE HTML>
+<html lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
-	<title><?php echo Config::read('app.name'); ?> - ERRO 404 - Página não encontrada</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Erro encontrado!</title>
+	<meta name="author" content="Pianolab">
+	<?php echo $html->stylesheet(array("sample.css")); ?>
+	<?php echo $this->element('shared/analytics'); ?>
 </head>
 <body>
-	<div id="container" style="background-image:none !important; width:500px; margin:20px auto">
-		<?php
-		if (Config::read('debug')):
-			echo $this->contentForLayout;
-		endif;
-		?>
-	</div>
+	<section id="container">
+		<header></header>
+		<div id="content">
+			<div id="wrapper">
+			    <h1>Error.page.404</h1>
+			    <?php if (Config::read('debug')): ?>
+					<?php echo $this->contentForLayout; ?>
+				<?php endif; ?>
+		  </div>
+		</div>
+	</section> <!-- End Container -->
+	<footer></footer>
 </body>
 </html>

@@ -21,8 +21,7 @@ class View extends Utils
 		$this->document_root = dirname(__FILE__) . "/../../../app/views/";
 	}
 	
-	public function match()
-	{
+	public function match() {
 		$this->output[] = "[View] Criando views.. \n";
 		$this->args = $this->args;
 		
@@ -59,8 +58,7 @@ class View extends Utils
 	 * Create File
 	 **/
 	
-	private function create_file($file_path)
-	{
+	private function create_file($file_path) {
 		try {	
 			$handle = fopen ($file_path, "w+");
 			$content = "<?php \n";
