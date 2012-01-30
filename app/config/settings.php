@@ -37,3 +37,11 @@ Config::write('Mailer.smtp.password', false); //password
 
 // Debug mode
 Config::write('debug', true);
+
+// Facebook tags
+Config::write('face.title', 'Nome do site');
+Config::write('face.type', 'article');
+Config::write('face.description', 'Alguma descrição do site');
+Config::write('face.url', 'http://www.meusite.com.br/');
+Config::write('face.image', 'http://www.temqueporaurlcompleta.com.br/images/facebook.jpg');
+Config::write('face.site_name', 'Nome do site');

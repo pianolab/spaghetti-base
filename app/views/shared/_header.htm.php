@@ -13,6 +13,7 @@
 		"utils.js")); 
 	?>
 	<!--[if lt IE 9]><script src="<?php echo Mapper::url('/scripts/html5.js', true); ?>"></script><![endif]-->
+	<?php echo $this->element('shared/facebook_tags'); ?>
 	<?php echo $this->element('shared/analytics'); ?>
 </head>
 <body>
