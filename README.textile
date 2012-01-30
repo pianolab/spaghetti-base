@@ -1,0 +1,9 @@
+h1. pianolab.base
+h2. spaghetti fw + html5 cross-browser startup
+
+* 1. git clone https://pianolab@github.com/pianolab/spaghetti-base.git
+* 2. remover pasta .git
+* 3. work!
+
+bq. piano.base @pianolabweb. It's released under the MIT license.
+
