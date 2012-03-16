@@ -1,13 +1,8 @@
-h1. pianolab.base
+h1. pianolab.base (SpaghettiPHP framework + Bootstrap, from Twitter (v2.0.2))
 
 
-h3. piano.base @pianolabweb. It's released under the MIT license.
+h3. piano.base it's released under the MIT license.
 
-
-
-* 1. git clone https://pianolab@github.com/pianolab/spaghetti-base.git
-* 2. remove .git folder
-* 3. work!
 
 bq. piano.base @pianolabweb. It's released under the MIT license.
 
