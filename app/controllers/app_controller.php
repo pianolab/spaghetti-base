@@ -1,12 +1,18 @@
 <?php
 class AppController extends Controller {
-	
-	public $components = array();
-	public $helpers = array('Html', "Form", 'Date', 'Pagination', 'Text');
+
 	public $layout = 'default';
 	public $arrView = null;
+	public $components = array('Auth');
+	public $helpers = array(
+		'Html', 
+		'Form', 
+		'Date', 
+		'Pagination', 
+		'Text'
+	);
 	
-	# Autoloading by Klawdyo
+	// Autoloading by Klawdyo
 	public function __get($class) {
       if(!isset($this->{$class})):
          $pattern = '(^[A-Z]+([a-z]+(Component)?))';
@@ -22,29 +28,25 @@ class AppController extends Controller {
 	public function beforeFilter() { $this->beforeFilterConfig(); }
 	public function beforeRender() { $this->beforeRenderConfig(); }
 	
-	/**
-	 * PRIVATES METHODS
-	 */ 
-	
-	# Some defatuls settings 
+	// Some defatuls settings 
 	private function beforeRenderConfig() {
-		# Page title default
+		// Page title default
 		if (!$this->arrView['page_title'])	$this->pageTitle('');
 		
-		# set the history url
+		// set the history url
 		$this->setUrlHistory();
 		
-		# To we don't have to repeat the set function with arrView variable.
+		// To we don't have to repeat the set function with arrView variable.
 		$this->set($this->arrView);
 	}
 	
-	# Set the page title in controllers
+	// Set the page title in controllers
 	private function pageTitle($title = null) {
 		$compl = ($title) ? ' » ' . $title : '';
 		$this->arrView['page_title'] = Config::read('app.name') . $compl;
 	}	
 	
-	# Actual Page
+	// Actual Page
 	private function actual_page() {
 		$actual_page = explode('/',Mapper::here());
 		$this->set('actual_page', end($actual_page));
@@ -52,23 +54,23 @@ class AppController extends Controller {
 		$this->set('url_base', Config::read('app.url_base'));
 	} 
 	
-	# Some defaults settings
+	// Some defaults settings
 	private function beforeFilterConfig() {
-		# Document Root to upload and resize components
+		// Document Root to upload and resize components
 		$this->document_root = $_SERVER['DOCUMENT_ROOT'] . '/';
 		$this->authConfig();
 		$this->urlHistory = Session::read('urlHistory');
 	}
 	
-	# Url history
+	// Url history
 	private function setUrlHistory() {
 		$explode = explode('/', Mapper::here());
-		if ((Mapper::here() != $this->urlHistory) && ($explode[2] != 'get_categories') && ($explode[1] != 'get_suppliers')):
+		if (Mapper::here() != $this->urlHistory) {
 			Session::write('urlHistory', Mapper::here());
-		endif;
+		}
 	}
 	
-	# Auth Component Config
+	// Auth Component Config
 	private function authConfig() {
 		/**
 		$this->AuthComponent->loginAction = '/login';
