@@ -1,8 +1,5 @@
 h1. pianolab.base (SpaghettiPHP framework + Bootstrap, from Twitter (v2.0.2))
 
 
-h3. piano.base it's released under the MIT license.
-
-
 bq. piano.base @pianolabweb. It's released under the MIT license.
 
