@@ -32,10 +32,11 @@ class AppModel extends Model {
 	/**
 	 * Useful latest method
 	 */ 
-	public function latest($limit = 10) {
+	public function latest($limit = 10, $conditions = false) {
 		return $this->all(array(
 			'order' => $this->order,
-			'limit' => $limit
+			'limit' => $limit,
+			'conditions' => $conditions
 		));
 	}
 }
