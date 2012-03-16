@@ -1,6 +1,6 @@
   <div id="wrapper">
     <h1>pianolab.base</h1>
-    <h2>spaghetti fw + html5 cross-browser startup</h2>
+    <h2>spaghetti fw + twitter bootstrap startup</h2>
 
 	<pre>
 1. git clone https://pianolab@github.com/pianolab/spaghetti-base.git
