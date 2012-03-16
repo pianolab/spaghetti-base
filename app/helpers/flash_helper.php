@@ -73,7 +73,7 @@ class FlashHelper extends HtmlHelper
 		
 		
 		$title = str_replace(array(
-			''
+			'',
 			'warning',
 			'success',
 			'error',
