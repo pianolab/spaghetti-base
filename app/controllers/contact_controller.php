@@ -23,16 +23,16 @@ class ContactController extends AppController {
 				));
 
 				if ($mailer->send()) {
-					Session::writeFlash('system.alert', 'Sua mensagem foi enviada com sucesso. <br /> Entreremos em contato com você o mais breve possível. Obrigado.');
+					Session::writeFlash('site.alert', array('warning', 'Sua mensagem foi enviada com sucesso. <br /> Entreremos em contato com você o mais breve possível. Obrigado.'));
 					$this->redirect('/');
 				} else {
-					Session::writeFlash('system.alert', 'Preencha os campos corretamente.');
+					Session::writeFlash('site.alert', array('warning', 'Preencha os campos corretamente.'));
 					Session::writeFlash('form.data', $this->data);
 					$this->redirect('/fale-conosco');
 				}
 				
 			} else {
-				Session::writeFlash('system.alert', $this->Contact->errors);
+				Session::writeFlash('site.alert', array('error', $this->Contact->errors));
 				Session::writeFlash('form.data', $this->data);
 				$this->redirect('/fale-conosco');
 			}

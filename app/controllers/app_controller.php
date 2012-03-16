@@ -9,7 +9,8 @@ class AppController extends Controller {
 		'Form', 
 		'Date', 
 		'Pagination', 
-		'Text'
+		'Text',
+		'Flash'
 	);
 	
 	// Autoloading by Klawdyo
