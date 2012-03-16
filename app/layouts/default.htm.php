@@ -1,3 +1,3 @@
-<?php echo $this->element('shared/header'); ?>
-	<div id="content"><?php echo $this->contentForLayout; ?></div>
+<?php echo $this->element('shared/header', $this->data); ?>
+<?php echo $this->contentForLayout; ?>
 <?php echo $this->element('shared/footer'); ?>

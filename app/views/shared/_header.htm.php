@@ -1,3 +1,4 @@
+<?php $this->pageTitle = ($page_title) ? $page_title : $this->pageTitle; ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

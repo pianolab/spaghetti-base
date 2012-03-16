@@ -1,6 +1,6 @@
 <?php
 // Default app config
-Config::write('app.name', false);
+Config::write('app.name', 'piano.base');
 Config::write('app.conv.perpage', 10);
 Config::write('app.upload_url', 'http://upload.projeto.com.br/');
 Config::write('app.url_base', 'http://www.projeto.com.br/');

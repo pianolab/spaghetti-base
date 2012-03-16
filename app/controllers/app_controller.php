@@ -43,7 +43,7 @@ class AppController extends Controller {
 	// Set the page title in controllers
 	private function pageTitle($title = null) {
 		$compl = ($title) ? ' » ' . $title : '';
-		$this->arrView['page_title'] = Config::read('app.name') . $compl;
+		$this->set('page_title', Config::read('app.name') . $compl);
 	}	
 	
 	// Actual Page
