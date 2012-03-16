@@ -71,9 +71,8 @@ class FlashHelper extends HtmlHelper
 			$html_message = $message[1];
 		endif;
 		
-		
+		$message[0] = (empty($message[0])) ? 'warning' : $message[0];
 		$title = str_replace(array(
-			'',
 			'warning',
 			'success',
 			'error',
@@ -81,14 +80,12 @@ class FlashHelper extends HtmlHelper
 			'danger'
 		), array(
 			'Atenção!',
-			'Atenção!',
 			'Sucesso!',
 			'Erro!',
-			'Atenção!',
+			'Informação!',
 			'Erro!'
 		), $message[0]);
-		
-		
+
 		$base_html .= $this->tag('script', "Prompts.openAlert('" . $message[0] . "','" . $html_message . "', '" . $title . "');", array('type' => 'text/javascript'));
 		return $base_html;
 	}
