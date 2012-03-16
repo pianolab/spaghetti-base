@@ -38,8 +38,4 @@ class ContactController extends AppController {
 			}
 		}
 	}
-	
-	public function mail_contact() {
-		$this->layout = 'email';
-	}
 }
