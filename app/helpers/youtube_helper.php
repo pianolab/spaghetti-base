@@ -61,8 +61,6 @@ class YoutubeHelper extends Helper {
       $arr = explode("/www.youtube.com/", $url);
       $strings = explode("/",$arr[1]);
       foreach ($strings as $key => $string) {
-        echo "<br>$key => $string";
-
         if ($string == 'v') {
           $return = $strings[$key + 1];
           break;
