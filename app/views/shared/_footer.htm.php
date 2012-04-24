@@ -13,6 +13,8 @@
 	<?php echo $html->script(array(
 		'jquery.min', 
 		'bootstrap.min', 
+		'jcheck-0.7.1.min.js',
+		'jcheck.pt-br.js',
 		'modules/prompt.modal.js'
 	)); ?>
 	<?php echo $this->scriptsForLayout; ?>
