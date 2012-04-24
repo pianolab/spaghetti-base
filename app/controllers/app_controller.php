@@ -3,7 +3,8 @@ class AppController extends Controller {
 
 	public $layout = 'default';
 	public $arrView = null;
-	public $components = array('Auth');
+	public $components = array();
+	public $logged = null;
 	public $helpers = array(
 		'Html', 
 		'Form', 
@@ -13,24 +14,35 @@ class AppController extends Controller {
 		'Flash'
 	);
 	
-	// Autoloading by Klawdyo
-	public function __get($class) {
-      if(!isset($this->{$class})):
-         $pattern = '(^[A-Z]+([a-z]+(Component)?))';
-         if(preg_match($pattern, $class, $out)):
-            $type = (isset($out[2])) ? 'Component' : 'Model';
-            $this->{$class} = ClassRegistry::load($class, $type);
-            if($type == 'Component') $this->{$class}->initialize($this);
-            return $this->{$class};
-         endif;
-      endif;
-   }
 
-	public function beforeFilter() { $this->beforeFilterConfig(); }
-	public function beforeRender() { $this->beforeRenderConfig(); }
+	/**
+	 * Filtro antes de executar
+	 * o método do controller
+	 *
+	 * @return void
+	 * @author Djalma Araújo
+	 */
+	public function beforeFilter() {
+		
+		// Document Root para UPLOADS
+		$this->document_root = $_SERVER['DOCUMENT_ROOT'] . '/';
+		
+		// Auth config
+		require_once APP . '/config/auth.php';
+		
+		// Histórico da última URL
+		$this->urlHistory = Session::read('urlHistory');
+	}
+
 	
-	// Some defatuls settings 
-	private function beforeRenderConfig() {
+	/**
+	 * Filtro antes de renderizar
+	 * a view do método
+	 *
+	 * @return void
+	 * @author Djalma Araújo
+	 */
+	public function beforeRender() {
 		// Page title default
 		if (!$this->arrView['page_title'])	$this->pageTitle('');
 		
@@ -41,29 +53,27 @@ class AppController extends Controller {
 		$this->set($this->arrView);
 	}
 	
-	// Set the page title in controllers
+	
+	/**
+	 * Define o título da página
+	 *
+	 * @param string $title 
+	 * @return void
+	 * @author Djalma Araújo
+	 */
 	private function pageTitle($title = null) {
 		$compl = ($title) ? ' » ' . $title : '';
 		$this->set('page_title', Config::read('app.name') . $compl);
 	}	
 	
-	// Actual Page
-	private function actual_page() {
-		$actual_page = explode('/',Mapper::here());
-		$this->set('actual_page', end($actual_page));
-		$this->set('url_params', $actual_page);
-		$this->set('url_base', Config::read('app.url_base'));
-	} 
 	
-	// Some defaults settings
-	private function beforeFilterConfig() {
-		// Document Root to upload and resize components
-		$this->document_root = $_SERVER['DOCUMENT_ROOT'] . '/';
-		$this->authConfig();
-		$this->urlHistory = Session::read('urlHistory');
-	}
-	
-	// Url history
+	/**
+	 * Seta a última URL acessada
+	 * na sessão
+	 *
+	 * @return void
+	 * @author Djalma Araújo
+	 */
 	private function setUrlHistory() {
 		$explode = explode('/', Mapper::here());
 		if (Mapper::here() != $this->urlHistory) {
@@ -71,18 +81,18 @@ class AppController extends Controller {
 		}
 	}
 	
-	// Auth Component Config
-	private function authConfig() {
-		/**
-		$this->AuthComponent->loginAction = '/login';
-		$this->AuthComponent->logoutAction = '/logout';
-		$this->AuthComponent->loginError = "Seu nome de usuário ou senha estão incorretos";
-		$this->AuthComponent->authError = "Você precisa estar autenticado para acessar essa área";
-		$this->AuthComponent->hash = 'md5';
-		$this->AuthComponent->deny();
-		
-		$this->AuthComponent->allow('/register');
-		
-		*/
+
+	/**
+	 * Método utilitário para retorno
+	 * em JSON
+	 *
+	 * @param string $response 
+	 * @return void
+	 * @author Djalma Araújo
+	 */
+	protected function JSONOutput($response) {
+		header('Content-Type: application/json');
+		echo json_encode($response);
+		exit;
 	}
 }

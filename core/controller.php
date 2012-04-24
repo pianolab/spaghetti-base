@@ -56,6 +56,21 @@ class Controller extends Object {
     public $view = array();
     public $methods = array();
 
+
+	// Autoloading by Klawdyo
+	public function __get($class) {
+		if(!isset($this->{$class})) {
+			$pattern = '(^[A-Z]+([a-z]+(Component)?))';
+			if(preg_match($pattern, $class, $out)) {
+				$type = (isset($out[2])) ? 'Component' : 'Model';
+				$this->{$class} = ClassRegistry::load($class, $type);
+				if($type == 'Component') $this->{$class}->initialize($this);
+				return $this->{$class};
+			}
+		}
+	}
+
+
     public function __construct() {
         if(is_null($this->name) && preg_match("/(.*)Controller/", get_class($this), $name)):
             if($name[1] && $name[1] != "App"):

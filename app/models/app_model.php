@@ -1,8 +1,15 @@
 <?php
 class AppModel extends Model {
+	
 	/**
-	 * Check for equal information in database based on cantBeEqualFields public variable of each model
-	 */ 
+	 * Checa se há no banco de dados informações
+	 * para os campos definidos na variável "cantBeEqualFields"
+	 *
+	 * @param string $data 
+	 * @param string $id 
+	 * @return void
+	 * @author Djalma Araújo
+	 */
 	public function hasEqualInformations($data, $id = null) {
 		$return = false;
 		foreach ($this->cantBeEqualFields as $field):
@@ -14,9 +21,16 @@ class AppModel extends Model {
 		return $return;
 	}
 	
+	
 	/**
-	 * Loop to build a search query based on model searchableFields variable
-	 */ 
+	 * Método utilitário para popular o array
+	 * de condições para uma busca, utilizando
+	 * o "or" e "LIKE"
+	 *
+	 * @param string $param 
+	 * @return void
+	 * @author Djalma Araújo
+	 */
 	public function buildSearchQuery($param = null) {
 		if ($param):
 			$string = '%' . strip_tags($param) . '%';
@@ -29,14 +43,37 @@ class AppModel extends Model {
 		endif;
 	}
 	
+	
 	/**
-	 * Useful latest method
-	 */ 
+	 * Pega últimos registros do moelo
+	 * passando condições como opcional
+	 *
+	 * @param string $limit 
+	 * @param string $conditions 
+	 * @return void
+	 * @author Djalma Araújo
+	 */
 	public function latest($limit = 10, $conditions = false) {
 		return $this->all(array(
 			'order' => $this->order,
 			'limit' => $limit,
 			'conditions' => $conditions
 		));
+	}
+	
+	
+	/**
+	 * Gera um TOKEN padrão. Caso seja passado
+	 * um array com o campo created, será 
+	 * influenciado.
+	 *
+	 * @param string $data 
+	 * @return void
+	 * @author Djalma Araújo
+	 */
+	public function generateToken($data = null) {
+		$default = date('Y-m-d H:i:s') . date('Y-m-d H:i:s') . rand(rand(1,100),9);
+		$content = ($data) ? substr(md5($data['created']), 0, 7) . $default : $default;
+		return sha1($content);
 	}
 }

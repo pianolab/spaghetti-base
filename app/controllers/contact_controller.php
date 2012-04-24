@@ -1,8 +1,14 @@
 <?php
 require_once 'lib/utils/Mailer.php';
 class ContactController extends AppController {
-
 	public $uses = array();
+	
+	/**
+	 * Método de envio de e-mail padrão
+	 *
+	 * @return void
+	 * @author Djalma Araújo
+	 */
 	public function index() {
 
 		if(!empty($this->data)) {
@@ -10,7 +16,7 @@ class ContactController extends AppController {
 			
 				$mailer = new Mailer(array(
 					'from' => array($this->data['email'] => $this->data['name']),
-					'to' => 'agencia@pianolab.com.br',
+					'to' => Config::read('Mailer.send.default'),
 					'subject' => 'Formulário de Contato [' . Config::read('app.name') . ']',
 					'views' => array(
 						'text/plain' => 'contact/mail_contact.txt',
