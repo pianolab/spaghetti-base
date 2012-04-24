@@ -17,7 +17,7 @@ Config::write("defaultExtension", "htm");
 Config::write('multilang', false);
 Config::write('default_language', 'br');
 
-// Environment (Deve deixar assim, não colocar IF's. Ou troca por production ou fica development)
+// Environment
 Config::write("environment", 'development');
 
 // Currency settings
