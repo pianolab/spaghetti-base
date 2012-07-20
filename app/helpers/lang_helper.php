@@ -1,31 +1,29 @@
 <?php
 /**
  *  LangHelper provê conversão de texto em multilínguas
- *	por DjalmaAraújo
+ *  por DjalmaAraújo
  *  @license   http://www.opensource.org/licenses/mit-license.php The MIT License
  *
  */
-
 class LangHelper extends Helper {
-    
+
     public $lang;
     public $default_lang = 'br';
-    public $xml;
-    public $xml_path;
+    public $json;
+    public $json_path;
     
     /**
      * Construtor
      */
     public function __construct()
     {
-    	if (Session::read('language')) {
-    		$this->lang = Session::read('language');
-    	} else {
-    		$this->lang = $this->default_lang;
-    	}
-    	$this->xml_path = APP . '/webroot/locale/';
-    	$this->xml = new SimpleXmlElement($this->getTranslate());
-    	
+      if (Session::read('language')) {
+        $this->lang = Session::read('language');
+      } else {
+        $this->lang = $this->default_lang;
+      }
+      $this->json_path = APP . '/webroot/locale/';
+      $this->json = $this->getTranslate();
     }
     
     /**
@@ -33,35 +31,41 @@ class LangHelper extends Helper {
      */
     public function _($string)
     {
-    	return $this->output($this->translate($string));
+      return $this->output($this->translate($string));
     }
     
     /**
-     * Tradução da string procurada no XML
+     * Tradução da string procurada no json
      */
     private function translate($string)
     {
-    	foreach ($this->xml->item as $item):
-				if ($this->lang == $this->default_lang):
-					return $string;
-				else:
-					if (strtolower($item['id']) == strtolower($string)):
-	    			return $item;
-	    		endif;
-				endif;
-    	endforeach;
+      $translate = $this->json[$this->lang][$string];
+      if (!isset($translate)) {
+        return $string;
+      } else {
+        if (is_array($translate)) {
+          $return = array();
+          foreach ($translate['itens'] as $item) {
+            $return[] = "<{$translate['tag']}>" . $item . "</{$translate['tag']}>";
+          }
+          $translate = implode(null, $return);
+        }
+        return $translate;
+      }
     }
     /**
-     * Captura o XML da língua
+     * Captura o json da língua
      */
     private function getTranslate()
     {
-    	$file = $this->xml_path . $this->lang . '.xml';
-    	if (file_exists($file)):
-    		return file_get_contents($file);
-    	else:
-    		exit('[LANG HELPER] O arquivo ' . $this->lang . '.xml não se encontra para tradução, crie um novo.');
-    	endif;
+      $file = $this->json_path . $this->lang . '.json';
+      if (file_exists($file)) {
+        $json = file_get_contents($file);
+      } else {
+        $file = $this->json_path . $this->default_lang . '.json';
+        $json = file_exists($file) ? file_get_contents($file) : '{}';
+      }
+      return json_decode($json, true);
     }
 }
-?>
+
