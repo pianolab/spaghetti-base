@@ -3,7 +3,7 @@
  *  AuthComponent é o responsável pela autenticação e controle de acesso na aplicação.
  *  Esta versão do AuthComponent é baseada em SESSÃO.
  *
- * 	Modificado por Djalma Araújo de Andrade - www.djalmaaraujo.com.br
+ *   Modificado por Djalma Araújo de Andrade - www.djalmaaraujo.com.br
  *
  *  @license   http://www.opensource.org/licenses/mit-license.php The MIT License
  *  @copyright Copyright 2008-2009, Spaghetti* Framework (http://spaghettiphp.org/)
@@ -199,8 +199,8 @@ class AuthComponent extends Component {
      *  @return boolean Verdadeiro caso o usuário esteja autenticado
      */
     public function loggedIn() {
-    	
-    	$user_session = Session::read($this->prefixCrypt . 'user_logged');
+      
+      $user_session = Session::read($this->prefixCrypt . 'user_logged');
         if(is_null($this->loggedIn)):
             $user = $user_session['user_id'];
             $password = $user_session["password"];
@@ -215,7 +215,7 @@ class AuthComponent extends Component {
             endif;
             
         else:
-        	return $this->loggedIn;
+          return $this->loggedIn;
         endif;
     }
     /**
@@ -254,7 +254,7 @@ class AuthComponent extends Component {
       *  @return void
       */
     public function login() {
-    	if(!empty($this->Controller->data)):
+      if(!empty($this->Controller->data)):
             $password = $this->hash($this->Controller->data[$this->fields["password"]]);
             $user = $this->identify(array(
                 $this->fields["username"] => $this->Controller->data[$this->fields["username"]],
@@ -285,7 +285,7 @@ class AuthComponent extends Component {
       *  @return void
       */
     public function authenticate($id, $password) {
-    	Session::write($this->prefixCrypt . 'user_logged', array('user_id' => $id,'password' => $password));	
+      Session::write($this->prefixCrypt . 'user_logged', array('user_id' => $id,'password' => $password));  
     }
     /**
       *  Efetua o logout do usuário.

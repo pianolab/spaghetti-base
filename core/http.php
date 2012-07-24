@@ -11,8 +11,8 @@
   *
   *    - Encurtando uma url com o bit.ly
   *    $params = array(
-  *      'login'	  => 'klawdyo', //Registro em http://bit.ly/account/register
-  *      'apiKey'	  => 'R_2531c63fdc13b904d94fc084', //http://bit.ly/account/your_api_key
+  *      'login'    => 'klawdyo', //Registro em http://bit.ly/account/register
+  *      'apiKey'    => 'R_2531c63fdc13b904d94fc084', //http://bit.ly/account/your_api_key
   *      'longUrl'  => 'http://google.com'
   *    );
   *    echo Http::post('http://api.bit.ly/v3/shorten', $params);

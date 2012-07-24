@@ -62,7 +62,7 @@ class Mailer {
     }
     public function render($message) {
         $view = new View();
-				$view->data = $this->data;
+        $view->data = $this->data;
         foreach($this->views as $type => $path):
             $content = $view->render($path, $this->layout);
             $message->addPart($content, $type);

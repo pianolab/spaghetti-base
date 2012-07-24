@@ -8,10 +8,10 @@
     <meta name="author" content="" />
 
     <!-- Le styles -->
-	<?php echo $html->stylesheet(array(
-		'bootstrap.min',
-		'mail'
-	), array(), true, true); ?>
+  <?php echo $html->stylesheet(array(
+    'bootstrap.min',
+    'mail'
+  ), array(), true, true); ?>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -21,7 +21,7 @@
 
   <body>
     <div class="container">
-		<?php echo $this->contentForLayout; ?>
-	</div>
+    <?php echo $this->contentForLayout; ?>
+  </div>
   </body>
 </html>

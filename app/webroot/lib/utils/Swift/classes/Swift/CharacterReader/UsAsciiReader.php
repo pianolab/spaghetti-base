@@ -28,16 +28,16 @@ class Swift_CharacterReader_UsAsciiReader
    */
   public function getCharPositions($string, $startOffset, &$currentMap, &$ignoredChars)
   {
-  	$strlen=strlen($string);
-  	$ignoredChars='';
-  	for( $i = 0; $i < $strlen; ++$i)
-  	{
-  	  if ($string[$i]>"\x07F")
-  	  { // Invalid char
-  	  	$currentMap[$i+$startOffset]=$string[$i];
-  	  }
-  	}
-  	return $strlen;
+    $strlen=strlen($string);
+    $ignoredChars='';
+    for( $i = 0; $i < $strlen; ++$i)
+    {
+      if ($string[$i]>"\x07F")
+      { // Invalid char
+        $currentMap[$i+$startOffset]=$string[$i];
+      }
+    }
+    return $strlen;
   }
   
   /**
@@ -46,7 +46,7 @@ class Swift_CharacterReader_UsAsciiReader
    */
   public function getMapType()
   {
-  	return self::MAP_TYPE_INVALID;
+    return self::MAP_TYPE_INVALID;
   }
  
   /**

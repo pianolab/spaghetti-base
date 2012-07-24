@@ -240,17 +240,17 @@ class FormHelper extends HtmlHelper {
             if($div === true):
                 $div = "input {$options['type']} control-group";
 
-				if ($options['error']) { 
-					$div .= ' error'; 
-					$contentDiv .= '<div>';
-					$contentDiv .= $input;
-					$contentDiv .= '<span class="help-inline">' . $options['error'] . '</span>';
-					$contentDiv .= '</div>';
-				} else {
-					$contentDiv = $input;
-				}
-				
-				
+        if ($options['error']) { 
+          $div .= ' error'; 
+          $contentDiv .= '<div>';
+          $contentDiv .= $input;
+          $contentDiv .= '<span class="help-inline">' . $options['error'] . '</span>';
+          $contentDiv .= '</div>';
+        } else {
+          $contentDiv = $input;
+        }
+        
+        
             endif;
             $input = $this->div($contentDiv, $div);
         endif;

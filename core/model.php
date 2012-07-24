@@ -121,9 +121,9 @@ class Model extends Object {
      *  Retorna o datasource em uso.
      *
      *  @return object Datasource em uso
-		 * MODIFIED TO SUPPORT MULTIPLE INSTANCES
+     * MODIFIED TO SUPPORT MULTIPLE INSTANCES
       */
-		public static function &getConnection($environment = null) {
+    public static function &getConnection($environment = null) {
         static $instance = array();
         if(!isset($instance[$environment]) || !$instance[$environment]):
             $instance[$environment] = Connection::getDatasource($environment);

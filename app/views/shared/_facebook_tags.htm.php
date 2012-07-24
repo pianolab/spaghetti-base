@@ -7,8 +7,8 @@ $image = (Session::read('face.image')) ? Session::read('face.image') : Config::r
 $site_name = (Session::read('face.site_name')) ? Session::read('face.site_name') : Config::read('face.site_name');
 ?>
 <meta property="og:title" content="<?php echo $title; ?>" />
-	<meta property="og:type" content="<?php echo $type; ?>"/>
-	<meta property="og:description" content="<?php echo $description; ?>" />
-	<meta property="og:url" content="<?php echo $url; ?>"/>
-	<meta property="og:image" content="<?php echo $image; ?>" />
-	<meta property="og:site_name" content="<?php echo $site_name; ?>"/>
+  <meta property="og:type" content="<?php echo $type; ?>"/>
+  <meta property="og:description" content="<?php echo $description; ?>" />
+  <meta property="og:url" content="<?php echo $url; ?>"/>
+  <meta property="og:image" content="<?php echo $image; ?>" />
+  <meta property="og:site_name" content="<?php echo $site_name; ?>"/>

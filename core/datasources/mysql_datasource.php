@@ -51,7 +51,7 @@ class MysqlDatasource extends Datasource {
     public function connect() {
         $this->connection = mysql_connect($this->config["host"], $this->config["user"], $this->config["password"]);
         if(mysql_select_db($this->config["database"], $this->connection)):
-        	mysql_set_charset('utf8');
+          mysql_set_charset('utf8');
             $this->connected = true;
         endif;
         return $this->connection;
