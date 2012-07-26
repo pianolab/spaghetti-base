@@ -98,7 +98,7 @@ class AppController extends Controller {
    *
    * @param string $response 
    * @return void
-   * @author Djalma Araújo
+   * @author Walmir Neto
    */
   protected function uploadFiles($params = array()) {
     /**
