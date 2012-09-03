@@ -7,7 +7,10 @@
  *  @copyright Copyright 2008-2009, Spaghetti* Framework (http://spaghettiphp.org/)
  *
  */
-
+/**
+ * Alterando error_reporting: Ocultando notices
+ */
+error_reporting(E_ALL ^ E_NOTICE);
 /**
  *  O Spaghetti suporta apenas a versão 5 do PHP. Um erro é gerado caso a versão
  *  seja anterior a 5.0.
