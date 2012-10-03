@@ -17,6 +17,8 @@
  */
 class YoutubeHelper extends Helper {
 
+  public $viewCount = false;
+
   function thumb($url)
   {
     return "http://img.youtube.com/vi/" .$this->returnId($url) . "/3.jpg";
@@ -30,6 +32,15 @@ class YoutubeHelper extends Helper {
   function getUrl($url)
   {
     return 'http://www.youtube.com/v/' . $this->returnId($url) . '?version=3&amp;hl=pt_BR';
+  }
+
+  function getViewCount($url)
+  {
+    $json = file_get_contents('https://gdata.youtube.com/feeds/api/videos?q=' . $this->returnId($url) . '&alt=json');
+    $json = json_decode($json);
+    $this->viewCount = $json->{'feed'}->{'entry'}[0]->{'yt$statistics'}->{'viewCount'};
+
+    return $this->viewCount;
   }
 
   private function returnId($url)
