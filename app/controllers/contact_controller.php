@@ -32,12 +32,12 @@ class ContactController extends AppController {
         } else {
           Session::writeFlash('site.alert', array('warning', 'Preencha os campos corretamente.'));
           Session::writeFlash('form.data', $this->data);
-          $this->redirect('/fale-conosco');
+          $this->redirect('/contato');
         }
       } else {
         Session::writeFlash('site.alert', array('error', $this->Contact->errors));
         Session::writeFlash('form.data', $this->data);
-        $this->redirect('/fale-conosco');
+        $this->redirect('/contato');
       }
     }
   }
