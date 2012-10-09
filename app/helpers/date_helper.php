@@ -26,7 +26,7 @@ class DateHelper extends Helper {
   }
 
   public function save($date) {
-    return $this->format('Y-m-d H:i:s', $date);
+    return implode('-', array_reverse(explode('/', $date)));
   }
   
   public function dayofweek($data) {
