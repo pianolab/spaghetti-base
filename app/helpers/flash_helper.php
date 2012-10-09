@@ -57,16 +57,10 @@ class FlashHelper extends HtmlHelper
   private function show($message)
   {
     if (is_array($message[1])):
-      $html_message = '';
-      foreach ($message[1] as $msg):
-            $html_message .= "<br /> \n";
-        endforeach;
+      $html_message = implode('<br />', $message[1]);
     else:
       if (!is_array($message)):
-        $temp = $message;
-        $message = array();
-        $message[0] = 'warning';
-        $message[1] = $temp;
+        $message = array('warning', $message);
       endif;
       $html_message = $message[1];
     endif;
