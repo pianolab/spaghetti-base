@@ -36,9 +36,9 @@ Config::write('app.currency_format_thousands_sep', '.');
  * Configurações para o helper de TAGS
  * do FACEBOOK
  */
-Config::write('face.title', 'Nome do site');
-Config::write('face.type', 'article');
-Config::write('face.description', 'Alguma descrição do site');
-Config::write('face.url', 'http://www.meusite.com.br/');
-Config::write('face.image', 'http://www.temqueporaurlcompleta.com.br/images/facebook.jpg');
-Config::write('face.site_name', 'Nome do site');
+Config::write('face.title', false); // Nome do site
+Config::write('face.type', false); // article
+Config::write('face.description', false); // Alguma descrição do site
+Config::write('face.url', false); // http://www.meusite.com.br/
+Config::write('face.image', false); // http://www.temqueporaurlcompleta.com.br/images/facebook.jpg
+Config::write('face.site_name', false); // Nome do site
