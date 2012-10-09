@@ -13,7 +13,7 @@ if (Config::read('environment') == 'production') {
   Config::write('Mailer.smtp.port', '25');
   Config::write('Mailer.smtp.encryption', '');
   Config::write('Mailer.smtp.username', 'email@domain.com'); 
-  Config::write('Mailer.smtp.password', '*******'); 
+  Config::write('Mailer.smtp.password', 'mailpassword'); 
 } # endif
 elseif (Config::read('environment') == 'development') {
   # email default
@@ -25,5 +25,5 @@ elseif (Config::read('environment') == 'development') {
   Config::write('Mailer.smtp.port', '25');
   Config::write('Mailer.smtp.encryption', '');
   Config::write('Mailer.smtp.username', 'email@domain.com'); 
-  Config::write('Mailer.smtp.password', '*******'); 
+  Config::write('Mailer.smtp.password', 'mailpassword'); 
 } # endelseif
