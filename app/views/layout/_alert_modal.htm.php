@@ -5,3 +5,4 @@
     <p class="alert-text"></p>
   </div>
 </div>
+<?php echo $flash->flash(); ?>

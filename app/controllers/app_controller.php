@@ -2,18 +2,10 @@
 class AppController extends Controller {
 
   public $layout = 'default';
-  public $arrView = null;
-  public $components = array('Upload');
+  public $arrView = array();
+  public $components = array('ImageResize');
   public $logged = null;
-  public $helpers = array(
-    'Html', 
-    'Form', 
-    'Date', 
-    'Pagination', 
-    'Text',
-    'Flash',
-    'Lang'
-  );
+  public $helpers = array('Html', 'Form', 'Date', 'Pagination', 'Text', 'Flash', 'Lang');
 
   /**
    * Filtro antes de executar
@@ -26,12 +18,6 @@ class AppController extends Controller {
     
     // Document Root para UPLOADS
     $this->document_root = $_SERVER['DOCUMENT_ROOT'] . '/';
-    
-    // Auth config
-    require_once APP . '/config/auth.php';
-    
-    // Histórico da última URL
-    $this->urlHistory = Session::read('urlHistory');
   }
   
   /**
@@ -42,6 +28,9 @@ class AppController extends Controller {
    * @author Djalma Araújo
    */
   public function beforeRender() {
+    // Histórico da última URL
+    $this->urlHistory = Session::read('urlHistory');
+    
     // Page title default
     if (!$this->arrView['page_title'])  $this->pageTitle('');
     
@@ -101,6 +90,8 @@ class AppController extends Controller {
    * @author Walmir Neto
    */
   protected function uploadFiles($params = array()) {
+    $this->components[] = 'Upload';
+
     /**
      * Upload Settings
      */
@@ -109,7 +100,6 @@ class AppController extends Controller {
     $this->UploadComponent->path = $_SERVER["DOCUMENT_ROOT"] . DS;
     if (isset($params['path'])) $this->UploadComponent->setPath($params['path']);  
     
-
     /**
      * Upload
      */

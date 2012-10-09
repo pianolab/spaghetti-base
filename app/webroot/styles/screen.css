@@ -1,84 +1,21 @@
 /* ------------------------------------
   CSS Desenvolvido pela
   Pianolab | www.pianolab.com.br
- 	Author: Luiz Paulo Valença| luizpaulo165@gmail.com
+  	Author: Luiz Paulo Valença| luizpaulo165@gmail.com
   Ultima Atualização:
   Alterado Por:
     Favor não quebrar meu código, caso precise atualizar-lo, favor use a mesma semântica.
 ------------------------------------ */ 
 /* =============================================================================
-   Reset
-========================================================================== */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small,strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,  caption, figure{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-size:100%;vertical-align:baseline;text-decoration:none}
-strong{font-weight:bold;}
-:focus{outline:0}
-body{font-family:Arial,Verdana,Tahoma,Helvetica, sans-serif;background:url(../images/content/bg.gif) repeat center top;}
-ol, ul{list-style:none}
-table{border-collapse: separate;border-spacing:0}
-caption, th, td{text-align: left;font-weight: normal}
-blockquote:before, blockquote:after, q:before, q:after {content: ""}
-blockquote, q{ quotes: "" ""}
-/* =============================================================================
-	Base
-========================================================================== */
-::-moz-selection {background:#fe57a1;color:#fff;text-shadow:none}
-::-webkit-selection {background:#fe57a1;color:#fff;text-shadow:none}
-::-o-selection {background:#fe57a1;color:#fff;text-shadow:none}
-::-ms-selection {background:#fe57a1;color:#fff;text-shadow:none}
-::selection {background:#fe57a1;color:#fff;text-shadow:none}
-/* =============================================================================
-   Geral
-========================================================================== */
-.radius{-moz-border-radius: 8px;border-radius: 8px;-webkit-border-radius: 8px;-o-box-shadow:0px 0px -10px #575757;-ms-box-shadow:0px 0px -10px #575757;}
-.shadow{box-shadow:4px 5px 0px #F1F1F1;-moz-box-shadow:4px 5px 0px #F1F1F1;-webkit-box-shadow:4px 5px 0px #F1F1F1;-o-box-shadow:4px 5px 0px #F1F1F1;-ms-box-shadow:4px 5px 0px #F1F1F1;}
-.transition{transition:0.2s;-moz-transition:0.2s;-webkit-transition:0.2s;-o-transition:0.2s;-ms-transition:0.2s;}
-/* margins */
-.noMarginTop{margin-top:0px!important;}
-.noMarginRight{margin-right:0px!important;}
-.noMarginBottom{margin-bottom:0px!important;}
-.noMarginLeft{margin-left:0px!important;}
-/* padding */
-.noPaddingTop{padding-top:0px!important;}
-.noPaddingRight{padding-right:0px!important;}
-.noPaddingBottom{padding-bottom:0px!important;}
-.noPaddingLeft{padding-left:0px!important;}
-/* noBg */
-.noBg{background:none!important;}
-/* border */
-.noBorderTop{border-top:0px!important;}
-.noBorderRight{border-right:0px!important;}
-.noBorderBottom{border-bottom:0px!important;}
-.noBorderLeft{border-left:0px!important;}
-/* alert */
-.alert {margin-bottom: 0 !important}
-/* =============================================================================
-	Typography
+  Typography
 ========================================================================== */
 
 /* =============================================================================
-	Container
+  Container
 ========================================================================== */
-.container{width:960px;overflow:hidden}
+.container{}
 
 /* =============================================================================
-	footer
+  footer
 ========================================================================== */
 footer{display:block;} 
-
-
-/* =============================================================================
-	JCHECK
-========================================================================== */
-#jcheck-error-dialog { background: #000000; border: 1px solid #000; border-top: 0; width: 500px; position: fixed; top: 0; border-radius: 8px; border-top-right-radius: 0; border-top-left-radius: 0; box-shadow: 0 0 6px #000; -moz-border-radius: 8px; -webkit-border-radius: 8px; -moz-box-shadow: 0 0 6px #000; -webkit-box-shadow: 0 0 6px #000; -moz-border-radius-topleft: 0; -moz-border-radius-topright: 0; -webkit-border-top-left-radius: 0; -webkit-border-top-right-radius: 0;}
-#jcheck-error-dialog ul { margin: 10px; list-style: none; padding: 0;}
-#jcheck-error-dialog li { margin: 0; padding: 0; color: #fff;  }
-#jcheck-error-dialog.ie-fixed { position: absolute; top: expression(document.compatMode == "CSS1Compat" ? document.documentElement.scrollTop + "px" : body.scrollTop + "px") }
-
-.jcheck-inline-balloon-tip { margin-left: -30px; margin-top: 3px; }
-.jcheck-inline-balloon-tip .content { background: #000000; border: 1px solid #000; padding: 2px 5px; border-radius: 8px; box-shadow: 0 0 6px #000; -moz-border-radius: 8px; -webkit-border-radius: 8px; -moz-box-shadow: 0 0 6px #000; -webkit-box-shadow: 0 0 6px #000; }
-.jcheck-inline-balloon-tip ul { margin: 3px; list-style: none; padding: 0;}
-.jcheck-inline-balloon-tip li { margin: 0; padding: 0; color: #fff }
-.jcheck-inline-balloon-tip .arrow-container { margin-top: -2px; width: 19px; margin-left: 20px;}
-.jcheck-inline-balloon-tip .arrow-container div {background: #000000; border: 1px solid #000; border-width: 0 1px; box-shadow: 0 2px 3px #000; -moz-box-shadow: 0 2px 3px #000; -webkit-box-shadow: 0 2px 3px #000;}
-.jcheck-inline-balloon-tip .arrow-container div.line2 {background: #000; border: 0;}
-.jcheck-inline-balloon-tip .arrow-container div.line1 {background: #000; border: 0;}
