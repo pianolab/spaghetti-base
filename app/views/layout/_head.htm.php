@@ -11,7 +11,7 @@
 <!-- Le styles 
 ================================================== -->
 <?php echo $html->stylesheet(array('reset', 'bootstrap/bootstrap.min', 'screen', 'jcheck')); ?>
-<?php echo $this->scriptsForLayout; ?>
+<?php echo $this->stylesForLayout; ?>
 
 <!-- Le favicons 
 ================================================== -->

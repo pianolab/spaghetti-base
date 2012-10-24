@@ -1,3 +1,7 @@
+<!-- Le base path
+================================================== -->
+<script type="text/javascript">var base_path = "<?php echo Mapper::url('/', true); ?>"</script>
+
 <!-- Placed at the end of the document so the pages load faster -->
 <?php echo $html->script(array(
 	# jquery
