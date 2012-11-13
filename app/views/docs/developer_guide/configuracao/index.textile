@@ -1,0 +1,51 @@
+Ao contrário do que você possa imaginar, a configuração de um _framework_ não precisa ser longa e tediosa, tomando vários minutos a cada nova aplicação. O Spaghetti* foi desenvolvido preferindo convenção ao invés de configuração, e isso significa que o Spaghetti* já adota vários padrões, sem que você precise definir onde fica cada coisa e como o _framework_ deve funcionar.
+
+Se você pretende criar uma aplicação que não utilize banco de dados, o Spaghetti* está pronto para rodar assim que ele for instalado. Como sabemos que isso raramente acontece, a única configuração básica para que uma aplicação comum funcione é a configuração de banco de dados.
+
+h2(#configuracao/db). Configurando o banco de dados
+
+Para configurar seu banco de dados, você precisa editar o arquivo @/app/config/database.php@. O Spaghetti* já vem com algumas configurações de exemplo como mostrado abaixo, então você só precisará alterar os campos necessários.
+
+pre. Config::write("database", array(
+    "development" => array(
+        "driver" => "mysql",
+        "host" => "",
+        "user" => "",
+        "password" => "",
+        "database" => "",
+        "prefix" => ""
+    ),
+    "production" => array(
+        "driver" => "",
+        "host" => "",
+        "user" => "",
+        "password" => "",
+        "database" => "",
+        "prefix" => ""
+    )
+));
+
+A configuração de banco de dados consiste em vários _environments_, ou ambientes de desenvolvimento, cada um contendo configurações específicas para os banco de dados. Os _environments_ existem para que você não precise mudar as configurações de seu banco de dados a cada _deploy_ da aplicação. O Spaghetti* já traz como exemplo os ambientes @development@, para quando a aplicação está em desenvolvimento, e @production@, para a aplicação em produção. Você pode criar quantos _environments_ forem necessários, não sendo necessário limitar-se aos já pré-definidos.
+
+Em cada configuração, você pode definir as configurações necessárias para o banco de dados. São elas:
+
+* @driver@ define o _datasource_ que o Spaghetti* deverá usar para se conectar com o banco de dados. @mysql@ atualmente é o único disponível com a instalação padrão do Spaghetti*.
+* @host@ define o endereço no qual se encontra o servidor de banco de dados.
+* @user@ define o nome de usuário usado para a conexão.
+* @password@ define a senha do usuário usado para a conexão.
+* @database@ define o nome do banco de dados em que o Spaghetti* irá se conectar.
+* @prefix@ define o prefixo que as tabelas do banco de dados estão utilizando. Normalmente esse prefixo é usado apenas para evitar colisão com tabelas pré-existentes no banco de dados.
+
+h2(#configuracao/environment). Escolhendo o Ambiente de Desenvolvimento
+
+Em @/app/config/settings.php@, você pode escolher o _environment_ a ser usado com o Spaghetti* através da configuração @environment@:
+
+pre. Config::write("environment", "development");
+
+Você também pode usar essa configuração dentro de sua aplicação, assim como qualquer outra que você deseje escrever. Você pode aprender sobre isso em "A classe Config":/docs/developer-guide/configuracao/classe-config.
+
+h2. E o que mais?
+
+Você realmente esperava mais? Sentimos em desapontá-lo, mas é só isso mesmo. Há algumas outras configurações que também podem ser usados, e eles estão documentados no próprio arquivo de configuração. Eles também são citados com mais detalhes ao longo do manual.
+
+Agora sim, estamos prontos pra começar a colocar a mão na massa!

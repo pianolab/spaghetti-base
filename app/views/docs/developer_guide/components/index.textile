@@ -1,0 +1,43 @@
+Você já viu essa história antes: você começa um projeto, programa uma solução, começa um novo projeto, programa novamente a mesma solução. _Components_ são extensões auto-suficientes, _plug and play_, para que você não se incomode mais com tarefas repetitivas.
+
+Os exemplos mais clássicos de _components_ incluem o envio de e-mails, _upload_ de arquivos, autenticação de usuários, redimensionamento de imagens, alguns deles já disponíveis no Spaghetti*. Estamos sempre desenvolvendo novos _components_ para nossos próprios problemas, então novas funcionalidades ou melhoramentos em funcionalidades antigas aparecem de tempos em tempos.
+
+h2(#components/instalando). Instalando um _component_
+
+Não há segredos quanto a instalação de um novo _component_ em sua aplicação. Quando você baixar um componente, apenas extraia o arquivo ZIP e copie o arquivo PHP para a pasta @/app/components@. E é isso, ele já está instalado!
+
+Um _component_, entretanto, não é ativado por padrão, mesmo depois de instalado. Isso quer dizer que você precisa informar quando deseja usar um _component_ dentro de um _controller_. Para tal, você precisa "habilitá-lo":/docs/developer-guide/controllers#controllers/models-helpers-components:
+
+pre. public $components = array("NomeDoComponente");
+
+Você pode ainda carregar vários _components_ dentro de um _controller_ passando vários itens dentro do _array_:
+
+pre. public $components = array("NomeDoComponente1", "Nome do Componente2");
+
+h2(#components/usando). Utilizando _components_
+
+Vamos supor que você tenha carregado o componente de _upload_ de arquivos, o @UploadComponent@, em seu _controller_ @Fotos@. Para que você tenha acesso às funcionalidades dentro de @FotosController@, a instância de @UploadComponent@ fica gravada em @$this->UploadComponent@.
+
+Por exemplo, caso você precise utilizar o método @UploadComponent::upload()@, você o faria dentro de uma _action_ da seguinte maneira:
+
+pre. public function upload() {
+	$this->UploadComponent->upload($this->data["images"]);
+}
+
+p(note). *Nota:* Lembre-se sempre que cada _component_ possui seus próprios métodos e próprio funcionamento. O exemplo acima meramente ilustra como carregar, instanciar e utilizar os métodos de um _component_.
+
+h2(#componentes/criando). Escrevendo seus próprios _components_
+
+Como um _component_ é uma boa maneira de manter código que pode ser usado em várias aplicações diferentes, talvez você queira criar seus próprios _components_ para suas aplicações, contendo funcionalidades que você usa frequentemente.
+
+Um _component_ basicamente é composto por uma classe, chamada de @NomeComponent@, que estende a classe @Component@. O arquivo deve ser chamado, neste exemplo, @nome_component.php@, e deve estar na pasta de componentes da sua aplicação em @/app/components/@.
+
+Um objeto da classe do seu _component_ será instanciado automaticamente sempre que um _controller_ estiver habilitado para utilizá-lo. Portanto, pelo fato de se tratar de um processo automático, não há como passar parâmetros para o construtor de sua classe. Isso significa que, se você precisar atribuir valores às variáveis de instância, deve fazê-lo dentro do controlador, conforme o exemplo:
+
+pre. protected function configComponent() {
+	$person = $this->PersonComponent;
+	$person->name = "Roberto";
+	$person->age = 32;
+}
+
+Em alguns _components_ do Spaghetti*, também é necessário definir algumas configurações antes de qualquer ação do _controller_, em @Controller::beforeFilter()@. Você também pode se utilizar dessa técnica para _components_ que atuem automaticamente baseado em alguma configuração.

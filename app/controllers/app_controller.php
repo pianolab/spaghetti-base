@@ -5,7 +5,7 @@ class AppController extends Controller {
   public $arrView = array();
   public $components = array('ImageResize');
   public $logged = null;
-  public $helpers = array('Html', 'Form', 'Date', 'Pagination', 'Text', 'Flash', 'Lang');
+  public $helpers = array('Html', 'Form', 'Date', 'Pagination', 'Text', 'Flash', 'Lang', 'Textile');
 
   /**
    * Filtro antes de executar

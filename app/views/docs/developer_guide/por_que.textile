@@ -1,0 +1,13 @@
+Spaghetti* é fácil de aprender de utilizar. O _framework_ esconde todo o código complexo e monótono, deixando que você se foque apenas na parte importante do desenvolvimento de suas aplicações. O código gerado no uso do Spaghetti* é simples de compreender, e você precisará codificar só o necessário, evitando erros e aumentando sua produtividade.
+
+Para que você use o Spaghetti*, você não precisa aprender novas linguagens de _template_ nem entender complexos arquivos de configuração em XML. Tudo o que você precisa é o seu conhecimento em PHP e Programação Orientada a Objetos. As _views_ do Spaghetti* são escritas apenas no PHP e HTML que você já conhece, e as poucas configurações necessárias para o _framework_ são feitas com a própria linguagem.
+
+Falando em configurações, as configurações no Spaghetti* foram trazidas para o mínimo, e preferimos convenções em vez de configurações. Basta instalar o Spaghetti*, configurar a conexão com o banco de dados e sua aplicação já estará funcionando. Entretanto, isso não tira a capacidade de customizar várias funcionalidades do _framework_, que é facilmente extensível em vários aspectos.
+
+O Spaghetti* foi todo escrito visando conformidade com o PHP 5. Isso significa que você terá um _framework_ que não possui código suportando versões legadas do PHP, e tira todo o proveito das funcionalidades do PHP 5.2 (em próximas versões, o Spaghetti* virá com suporte a PHP 5.3 também). Isso também significa que você não terá _strict warnings_, e a migração para o PHP 5.3 é extremamente simples.
+
+O Spaghetti* também possui uma documentação compreensiva de todas as funcionalidades disponíveis, além de uma comunidade ativa e em crescimento que está sempre disposta a ajudar através do "nosso fórum":http://forum.spaghettiphp.org/. Com isso, você não precisa entender o código interno do _framework_ para poder trabalhar, e sempre que você tiver problemas terá onde procurar ajuda.
+
+Para os que pretendem mergulhar no código do Spaghetti*, nosso código é limpo, conciso, bem formatado e bem documentado, permitindo que outros desenvolvedores possam fazer alterações no código sem problemas, seja para adicionar novas funcionalidades no Spaghetti*, corrigir _bugs_ ou personalizar o código para seu próprio uso. O Spaghetti* é disponibilizado sob a "MIT License":http://www.opensource.org/licenses/mit-license.php, permitindo que você altere o código e também o redistribua segundo os termos da licença.
+
+O código do Spaghetti* é mantido em um repositório público no "GitHub":http://github.com/spaghettiphp/spaghettiphp, e qualquer um é bem vindo a submeter alterações e correções ao Spaghetti*. Você nem mesmo precisa pedir nossa permissão, basta criar um _fork_ do repositório e fazer suas alterações.

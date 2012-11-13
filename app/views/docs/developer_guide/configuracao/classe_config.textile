@@ -1,0 +1,21 @@
+Além das configurações padrão do Spaghetti*, você também pode criar suas próprias configurações para serem usadas em sua aplicação. Em @/app/config/settings.php@, você pode adicionar suas configurações, e mais tarde acessá-las de qualquer outra parte de sua aplicação.
+
+h2(#config/write). Escrevendo Configurações
+
+Como você já deve ter percebido através das configurações já existentes, a gravação de uma configuração se faz através do método @Config::write()@. Para esse método, passamos dois parâmetros, o primeiro sendo o nome da chave de configuração, e o segundo sendo seu valor. Embora o primeiro parâmetro tenha que ser uma _string_, o valor da configuração pode ser qualquer tipo permitido pelo PHP.
+
+Você pode definir uma configuração com qualquer nome, desde que este não entre em conflito com as configurações já existentes do Spaghetti*. Sugerimos, entretanto, que você adicione prefixos, apenas para identificar quais são configurações do Spaghetti* e quais são as configurações de sua aplicação. Por exemplo, você pode usar o prefixo @App@, ou mesmo o nome de sua aplicação.
+
+pre. Config::write("App.language", "pt-br");
+
+As configurações não precisam obrigatoriamente estar em @/app/config/settings.php@. Mas lembre-se que elas só estarão disponíveis para a aplicação depois de definidas, já que o Spaghetti* não faz _cache_ de configurações para que elas estejam disponíveis de uma requisição para outra.
+
+h2(#config/read). Lendo Configurações
+
+Para a leitura de configurações, usamos o método @Config::read()@. Seu único parâmetro deve ser o nome da configurações que queremos buscar. Por exemplo, para buscarmos @App.language@ que havíamos definido anteriormente, usamos:
+
+pre. Config::read("App.language"); // => 'pt-br'
+
+As chamadas a @Config::read()@ podem ser usadas em qualquer parte de sua aplicação, seja em _controllers_, _models_, componentes, _helpers_ e até mesmo em _views_.
+
+Você pode usar esses métodos de configuração para criar configurações específicas que você deseja distribuir, ou para centralizar configurações de uma aplicação qualquer, como seu nome ou o e-mail de quem receberá contatos vindos da aplicação por exemplo. Assim, a cada vez que você precisar usar ou modificar alguma dessas configurações, saberá exatamente onde ela está.

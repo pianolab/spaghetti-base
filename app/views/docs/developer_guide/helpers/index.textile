@@ -1,0 +1,25 @@
+_Helpers_ são classes semelhante aos "componentes":/docs/developer-guide/components/index, porém são exclusivas para as _views_ e para a lógica presentacional compartilhada entre _views_, _layouts_ e _elements_. Nestas classes você encontra funções que tornam o seu desenvolvimento _client-side_ mais rápido e fácil.
+
+Dois _helpers_ vêm habilitados por padrão na instalação do Spaghetti*: um para  "HTML":/docs/developer-guide/helpers/html-helper e outro para "formulários":/docs/developer-guide/helpers/form-helper.
+
+h2(#helpers/carregando). Utilizando _Helpers_
+
+Para poder utilizar um _helper_, você precisa "habilitá-lo":/docs/developer-guide/controllers#controllers/models-helpers-components nos _controllers_ onde pretende utilizá-lo.
+
+Depois de habilitar um novo _helper_, ele já vai estar disponível em suas _views_. Os _helpers_ ficam disponíveis em uma variável local com o mesmo nome do _helper_. Assim, @HtmlHelper@ fica disponível na _view_ como @$html@. Caso ocorra colisão no nome de variáveis, no caso de já existir uma variável com o nome do _helper_, o _helper_ ficará disponível através de seu nome mais @_helper@, como @$html_helper@.
+
+h2(#helpers/criando). Criando seu próprios _helpers_
+
+Para criar um _helper_, crie um arquivo @nome_helper.php@ na pasta @/app/helpers@. Por exemplo, se fôssemos criar um _helper_ chamado @Number@, para formatação de números, ele seria criado no arquivo @/app/helpers/number_helper.php@, e dentro dele haveria a classe @NumberHelper@, estendendo @Helper@.
+
+pre. class NumberHelper extends Helper { }
+
+Dentro dessa classe, você pode criar os métodos necessários para sua lógica de apresentação. Caso você vá retornar código HTML, você também pode estender @HtmlHelper@ em vez de apenas @Helper@, e usar os métodos que você precisar.
+
+Por convenção, os _helpers_ não devem *imprimir* código, apenas retorná-lo, para que a própria aplicação decida o que fazer com eles. Por convenção, o Spaghetti* também usa o método @Helper::output()@ para processar a saída de código. Por padrão, o método apenas retorna o que for passado a ele, mas em determinadas ocasiões pode ser necessário escapar a saída, ou algum outro processamento. Portanto, prefira usar @Helper::output()@ em vez de imprimir diretamente.
+
+pre. class NumberHelper extends Helper {
+     public function format($number, $decimals) {
+          return $this->output(number_format($number, $decimals));
+     }
+}

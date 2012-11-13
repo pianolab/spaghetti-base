@@ -1,0 +1,53 @@
+Com o Spaghetti*, a escrita de consultas SQL é simplesmente desnecessária na maioria dos casos mais simples. A menos que você precise se preocupar com performance ou com consultas realmente complicadas, o Spaghetti* oferece bastante flexibilidade e simplicidade com a sintaxe de _arrays_.
+
+Basicamente, um _array_ de condições contém pares de chaves e valores definindo cada declaração. A condição abaixo, por exemplo, encontrará registros em que @title@ é igual a @Hello World@.
+
+pre. $conditions = array(
+	"title" => "Hello World"
+);
+
+É tão simples que você esquecerá que um dia precisou escrever SQL. Embora o mecanismo seja simples, é possível utilizar muitas das funcionalides do SQL. Por exemplo, para adicionar mais declarações, basta adicionar mais itens ao _array_.
+
+pre. $conditions = array(
+	"id" => "3",
+	"title" => "Hello World"
+);
+
+Agora vamos a outros tipos de comparações. E se você estiver procurando um registro no qual o título *não* seja @Hello World@?
+
+pre. $conditions = array(
+	"title <>" => "Hello World"
+);
+
+Usando o operador SQL @<>@ ou @!=@, o Spaghetti* encontrará registros em que o título seja diferente de @Hello World@. Além desses operadores, você pode usar qualquer outro operador SQL válido, como @>@, @<@, @LIKE@ ou @REGEXP@, e o Spaghetti* o reconhecerá e montará a consulta corretamente.
+
+p(note). Para que o operador SQL seja reconhecido como tal, é necessário que ele esteja separado do nome do campo por um espaço.
+
+Além de comparações com um valor, também é possível usar comparações com um conjunto de valores, como em uma consulta @IN@:
+
+pre. $conditions = array(
+	"title" => array("Primeiro Post", "Segundo Post", "Terceiro Post")
+);
+
+Esse mesmo princípio funciona com diferentes campos em uma mesma condição @OR@:
+
+pre. $conditions = array(
+	"or" => array(
+		"id" => 3,
+		"title" => "Hello World"
+	)
+);
+
+Assim como @or@, outros operadores lógicos são aceitos, como @or not@, @not@, @and@, @and not@, @xor@, @||@ e @&&@.
+
+Consultas @BETWEEN@ também são criadas facilmente, basta adicionar o operador @BETWEEN@ juntamente com o nome do campo.
+
+pre. $conditions = array(
+	"id BETWEEN" => array(1, 15)
+);
+
+Embora o Spaghetti* cuide do trabalho sujo para você, algumas vezes é necessário sujar as mãos e escrever SQL diretamente. Para isso, você só precisa passar uma string como parâmetro.
+
+pre. $conditions = "id = 1 AND title = 'Hello World'";
+
+p(note). *Nota*: em consultas manuais, os valores não são escapados pelo Spaghetti*. Nunca confie em dados vindos do usuário, e sempre faça o escape de valores.

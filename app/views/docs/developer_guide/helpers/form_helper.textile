@@ -1,0 +1,157 @@
+A criação de formulários costuma ser um pesadelo para vários desenvolvedores. Não pela dificuldade, mas sim pela quantidade de marcação que precisa ser gerada em alguns casos. O Spaghetti* já traz na instalação padrão um _helper_ para as principais tarefas relacionadas a formulários, o @FormHelper@.
+
+O @FormHelper@ gera vários tipos diferentes de campos para seus formulários, todos com uma marcação padronizada e facilmente estilizável por CSS. Em vez de você precisar criar vários elementos @<div>@, @<label>@ e tudo o mais, o _helper_ já fará tudo isso por você.
+
+h2(#form-helper/criando). Criando um formulário
+
+Antes de começar a criar os campos de seu formulário é necessário criar a tag @<form>@, para que seu formulário possa ser submetido corretamente. Como o Spaghetti* precisa manipular o atributo @action@ de seu formulário para que a URL seja criada corretamente, usamos o método @FormHelper::create()@. Caso nenhum parâmetro seja passado para o método, será criado um formulário com o atributo @action@ apontando para a própria página em que o formulário foi criado. Para definir uma outra URL qualquer, é necessário passá-la como o primeiro parâmetro.
+
+pre. echo $form->create("/users/login");
+// => <form action="/users/login" method="post">
+
+Por padrão, o @HtmlHelper@ assume que seus formulários usarão @method=post@. Entretanto, nada impede que você use @method=get@. Você pode fazer essa alteração passando um segundo parâmetro, um _array_ de atributos para o formulário. Além dos métodos comuns, o Spaghetti* também suporta um método @file@, que gerará um formulário de envio de arquivos.
+
+pre. echo $form->create("/photos/upload", array("method" => "file"));
+// => <form action="/photos/upload" method="post" enctype="multipart/form-data">
+
+Assim como você precisa abrir o formulário, é necessário fechá-lo também. Você pode fazer isso através de @</form>@, ou através de @FormHelper::close()@. Sem receber nenhum parâmetro, a saída é o prório @</form>@, mas o _helper_ é capaz de um pouco mais que isso: você já pode gerar o botão de envio automaticamente.
+
+Passando algum texto como primeiro parâmetro, @FormHelper@ criará uma tag @<button type="submit">@, com o texto do parâmetro como legenda do botão. Esse botão pode receber qualquer atributo, passando um _array_ contendo seus nomes e valores.
+
+pre. echo $form->close("Enviar", array("class" => "send"));
+// => <button type="submit" class="send">Enviar</button>
+
+Também existe um atributo especial, chamado @tag@. Ele permite que você use outros tipos de botão além do padrão @<button>@. Você pode usar @input@ para criar um @<input type="submit" />@ ou @image@ para criar um @<input type="image" />@.
+
+pre.. echo $form->close("Enviar", array("tag" => "input"));
+// => <input type="submit" value="enviar" />
+
+echo $form->close("Enviar", array(
+	"tag" => "image",
+	"src" => "input.png")
+);
+// => <input type="image" src="/images/input.png" alt="Enviar" />
+
+h2(#form-helpers/campos). Inserindo campos
+
+No Spaghetti*, apenas um método é usado diretamente para criar vários tipos diferentes de campos de formulário. @FormHelper::input()@ pode criar campos de texto e de senha, _combo boxes_, _checkboxes_, botões _radio_, entre outros, apenas com a modificação de um parâmetro.
+
+@FormHelper::input()@ chamado com o primeiro parâmetro contendo o nome do campo gerará um campo de texto comum, mas já contendo toda a marcação auxiliar para estilização.
+
+pre. echo $form->input("name");
+
+O campo acima geraria a seguinte marcação, automaticamente:
+
+pre(.brush: xml). <div class="input text">
+	<label for="FormName">Name</label>
+	<input id="FormName" type="text" name="name" />
+</div>
+
+Como você pode notar, o método já criou toda a estrutura necessária para o campo: uma @<div>@ externa, um @<label>@ já com conteúdo, e nosso campo propriamente dito.
+
+Todos os campos gerados pelo @FormHelper@ tem basicamente a mesma estrutura. Mas isso não significa que você precisa se prender a ela. É possível modificar bastante essa estrutura através de um segundo parâmetro do método, um _array_ de atributos. Os atributos nesse _array_ serão passados diretamente para o @<input>@, exceto por alguns atributos especiais, que possuem outros comportamentos e não aparecem diretamente como atributos de um campo. Eles serão vistos logo mais.
+
+pre. echo $form->input("name", array("value" => "Spaghetti* Framework"));
+
+@FormHelper::input()@ gera uma tag @<label>@ de acordo com o nome do campo a ser gerado. Se um campo se chamar @name@, seu _label_ será @Name@, se o campo se chamar @last_name@, o _label_ será @Last Name@, e assim por diante. Como nem sempre os nomes dos campos fazem sentido para o usuário, é possível alterar manualmente esse valor para que ele faça mais sentido. Isso é feito através do atributo especial @label@:
+
+pre. echo $form->input("username", array("label" => "Nome de Usuário"));
+// => <label for="FormUsername">Nome de Usuário</label>
+
+Outro atributo especial para um campo é o atributo @div@. Ele permite que sejam adicionados atributos à @<div>@ externa caso seja necessário. Passando um atributo em texto, ele se tornará a classe da @<div>@. Caso você forneça um _array_, este sobrescreverá todos os atributos do elemento (inclusive a classe do elemento).
+
+pre.. echo $form->input("name", array("div" => "input text left"));
+// => <div class="input text left">
+
+echo $form->input("name", array("div" => array(
+	"id" => "input-name"
+)));
+// => <div id="input-name">
+
+h2(#form-helper/tipos). Tipos de campos
+
+Além de apenas campos de texto, @FormHelper::input()@ também pode criar outros tipos de campos, como campos de senha, _combo boxes_, _checkboxes_, botões _radio_, entre outros. Isso é feito através de outro atributo especial, @type@. os tipos possíveis de campos são os seguintes:
+
+|_. Tipo |_. Campo |
+| @text@ | Campo de texto |
+| @textarea@ | Caixa de texto multi-linha |
+| @password@ | Campo de senha |
+| @checkbox@ | Campo de caixa de seleção |
+| @radio@ | Botões _radio_ |
+| @select@ | Caixa de seleção |
+| @date@ | Campo de seleção de data |
+| @hidden@ | Campo oculto |
+
+Além de poder definir o tipo de campo, @type@ também traz outras peculiaridades. A primeira delas é a classe da @<div>@ externa: ela não possui sempre o valor @input text@. A classe @input@ permanece, enquanto @text@ é trocado pelo tipo escolhido para o campo.
+
+pre. echo $form->input("message", array("type" => "textarea"));
+
+A saída do comando acima será:
+
+pre(.brush: xml). <div class="input textarea">
+	<label for="FormMessage">Message</label>
+	<textarea id="FormMessage" name="message"></textarea>
+</div>
+
+Outros tipos de campos também requerem ou permitem que outros atributos sejam informados. No caso de @select@ e @radio@, um atributo obrigatório é @options@, as opções disponíveis para seleção nesses campos. Esse atributo deve ser um _array_ (associativo ou não) contendo o valor e o texto dessas opções.
+
+pre. echo $form->input("type", array(
+	"type" => "radio",
+	"options" => array(
+		"text" => "Text field",
+		"passoword" => "Password field",
+		"textarea" => "Textarea field"
+	)
+));
+
+O comando acima terá a saída mostrada abaixo. Note que, para @type=radio@, a marcação é ligeiramente diferente por causa das peculiaridades dos botões _radio_.
+
+pre(.brush: xml). <div class="input radio">
+	<fieldset>
+		<legend>Type</legend>
+		<input id="TypeText" type="radio" name="type" value="text"/>
+		<label for="TypeText">Text field</label>
+		<input id="TypePassword" type="radio" name="type" value="password"/>
+		<label for="TypePassword">Password field</label>
+		<input id="TypeTextarea" type="radio" name="type" value="textarea"/>
+		<label for="TypeTextarea">Textarea field</label>
+	</fieldset>
+</div>
+
+Outros campos bem particulares são os do tipo @date@, para seleção de data. Como é difícil validar a entrada de dados do usuário, esse tipo de campo gera 3 caixas de seleção: uma com uma lista de dias, uma segunda com uma lista de meses e ainda uma terceira com uma lista de anos. Um simples campo @date@ terá a seguinte saída:
+
+pre(.brush: xml). <div class="input date">
+	<label for="FormDate">Date</label>
+	<select id="FormDateD" name="date[d]">
+		...
+	</select>
+	<select id="FormDateM" name="date[m]">
+		...
+	</select>
+	<select id="FormDateY" name="date[y]">
+		...
+	</select>
+</div>
+
+Em seus _controllers_ ou _models_, você também receberá os dados de uma forma diferente, semelhante à seguinte:
+
+pre. Array
+(
+    [date] => Array
+        (
+			[d] => 01,
+			[m] => 01,
+			[y] => 2009
+        )
+)
+
+Como campos de data são mais complexos, eles recebem alguns parâmetros extras:
+
+|_. Parâmetro |_. Descrição |
+| @startYear@ | Ano inicial a aparecer na listagem |
+| @endYear@ | Ano final a aparecer na listagem |
+| @currentDay@ | Dia a aparecer selecionado |
+| @currentMonth@ | Mês a aparecer selecionado  |
+| @currentYear@ | Ano a aparecer selecionado |
+
+Embora as opções @currentDay@, @currentMonth@ e @currentYear@ permitam selecionar a data atual manualmente, elas são complicadas demais. Teríamos que definir cada pedaço da data separadamente. O método pode fazer tudo isso sozinho, sem você precisar definir nada mais além de @value@. Você pode definir qualquer aceita por @strtotime()@, como @2009-01-01@, @-15 days@, @+1 month@, e assim por diante.

@@ -1,0 +1,108 @@
+A autenticação de usuários é algo comum para uma grande parte de aplicações, e é sempre uma tarefa tediosa de se implementar. Para evitar que você perca tempo em coisas tão mundanas, o Spaghetti* já traz um componente de autenticação, o @AuthComponent@.
+
+O uso do @AuthComponent@ é extremamente simples. Assim como boa parte do Spaghetti*, ele precisa de um mínimo de configuração. Em poucos minutos você já tem um sistema de autenticação de usuários funcionando.
+
+Para poder usar o @AuthComponent@, primeiro é preciso ativá-lo nos _controllers_ em que você deseja usá-lo. Geralmente a autenticação se estende a toda aplicação, então é uma boa prática ativar o componente em @AppController@.
+
+pre. class AppController extends Controller {
+	public $components = array("Auth");
+}
+
+Assim que o componente é ativado, ele se torna disponível dentro do _controller_ através de @$this->AuthComponent@. Assim, podemos começar a utilizar seus métodos.
+
+h2(#auth-component/modelo). Criando o modelo de usuários
+
+@AuthComponent@ busca as informações de usuário no banco de dados. Por isso, é necessário um modelo @Users@, que contenha no mínimo os campos @id@, @username@ e @password@. O campo @id@ é apenas a chave primária da tabela, @username@ representa o nome de usuário e @password@ representa a senha.
+
+Como manter senhas em texto plano é inseguro (e você realmente não deveria fazer isso), o Spaghetti* trata todas as senhas com um _hash_. Ou seja, se você adicionar usuários diretamente ao banco de dados, com as senhas em texto plano, o @AuthComponent@ não conseguirá autenticar o usuário.
+
+@AuthComponent@ usa _SHA1_ como padrão para gerar _hashes_ de senhas. Além disso, para assegurar que as senhas não sejam quebradas através de ataques de _rainbow tables_, é adicionado um prefixo chamado _security salt_ à todas as senhas salvas pelo Spaghetti*. Essa string, definida na configuração @securitySalt@ em @/app/config/settings.php@, pode ser uma string aleatória, desde que ela não seja mudada após a criação de usuários.
+
+h2(#auth-component/registro). Registrando usuários
+
+Para que você não precise se preocupar com a parte dos _hashes_, vamos criar usuários através do Spaghetti*. Você precisará criar uma _action_ de registro, com pelo menos os campos @username@ e @password@. No _controller_, você simplesmente salvará os dados normalmente.
+
+pre. class UsersController extends AppController {
+	public function register() {
+		if(!empty($this->data)):
+			$this->Users->save($this->data);
+		endif;
+	}
+}
+
+A parte da encriptação das senhas ficará toda no _model_ @Users@. Para não precisarmos reescrever @Model::save()@, vamos usar um _callback_, @Model::beforeSave()@. Dentro desse _callback_, faremos a encriptação da senha com @Security::hash()@.
+
+pre. class Users extends AppModel {
+	public function beforeSave($data) {
+		$data["password"] = Security::hash($data["password"], true);
+		return $data;
+	}
+}
+
+Depois disso (e de configurado o seu @securitySalt@), você já pode começar a cadastrar usuários, e eles poderão autenticar-se em sua aplicação.
+
+h2(#auth-component/actions). _Actions_ de Login e Logout
+
+Para que possamos fazer a autenticação do usuário, precisaremos das _actions_ para login e logout. O @AuthComponent@, por padrão, redireciona o usuário para @/users/login@ e @/users/logout@. Então, no seu _controller_ @Users@, você deve criar essas duas ações.
+
+pre. class UsersController extends AppController {
+	public function login() {
+	}
+	public function logout() {
+		$this->AuthComponent->logout();
+	}
+}
+
+Sua _action_ @login@ pode ficar vazia, já que o @AuthComponent@ fará todo o trabalho de verificar se um usário está tentando se autenticar ou se só está abrindo a página pela primeira vez. Já em @logout@, é necessário chamar o método @AuthComponent::logout()@, para que o usuário possa fazer logout corretamente.
+
+Além das _actions_, você também vai precisar de uma _view_ para o login. Essa _view_ precisa ter apenas os campos @username@ e @password@.
+
+pre. <?php echo $form->create() ?>
+<?php echo $form->input("username") ?>
+<?php echo $form->input("password") ?>
+<?php echo $form->close("Login") ?>
+
+h2(#auth-component/check). Permitindo e negando acesso
+
+O @AuthComponent@ já checa sozinho quando um usuário está autenticado ou não. Ou seja, tudo o que você fazer é dizer ao Spaghetti* o que ele precisa fazer em cada caso.
+
+Sem configuração alguma, o @AuthComponent@ continua liberando acesso a todas as partes de sua aplicação. Isso significa que devemos negar acesso individualmente. A negação de acesso é feita através do método @AuthComponent::deny()@. Assim como nas "rotas":/docs/developer-guide/configuracao/rotas, usaremos uma expressão regular para isso. Essas permissões devem ser definidas em @AppController::beforeFilter()@, já que precisamos que elas sejam executadas antes da execução da própria _action_ do _controller_.
+
+Suponhamos que você queira negar acesso apenas às ações de adição, edição e exclusão de registros de sua aplicação. Como usaremos uma expressão regular, não é necessário definir, _controller_ por _controller_, essa permissão.
+
+pre. $this->AuthComponent->deny("/:fragment/(add|edit|delete)(/:any)?");
+
+Outro tipo de permissão muito comum é negar apenas a área administrativa da aplicação. Novamente, com uma expressão regular, faríamos o seguinte:
+
+pre. $this->AuthComponent->deny("/admin(/:any)?");
+
+Também é possível *permitir* acesso individualmente em vez de negá-lo. Por exemplo, se sua aplicação deve ser acessada apenas por usuários registrados, mas é necessário permitir acesso ao formulário de registro. Primeiro, devemos negar acesso à toda aplicação, através de @AuthComponent::deny()@ sem nenhum parâmetro. Depois, usamos @AuthComponent::allow()@ para permitir acesso a determinadas partes da aplicação.
+
+pre. $this->AuthComponent->deny();
+$this->AuthComponent->allow("/users/register");
+
+h2(#auth-component/erros). Mostrando erros de autenticação
+
+Quando o usuário chega a uma página onde é necessário autenticação, ou erra seu nome de usuário ou senha, é necessário mostrar uma mensagem para explicar o que aconteceu. Esse tipo de mensagem é gravado automaticamente por @AuthComponent@ em uma variável de sessão, e tudo o que você precisa fazer é mostrá-las para o usuário. Vamos alterar a _view_ que criamos anteriormente para mostrar essas mensagens.
+
+pre. <?php echo $form->create() ?>
+<?php if($message = Session::flash("Auth.error")): ?>
+<p><?php echo $message ?></p>
+<?php endif ?>
+<?php echo $form->input("username") ?>
+<?php echo $form->input("password") ?>
+<?php echo $form->close("Login") ?>
+
+Se você tentar um nome de usuário ou senha incorretos, ou tentar acessar uma página que necessita de autenticação, verá que as mensagens padrão @loginFailed@ e @notAuthorized@ não são lá muito explicativas. Isso pode ser resolvido com um pouco de configuração, através das propriedades @AuthComponent::loginError@ e @AuthComponent::authError@ (lembre-se de definí-las em @AppController::beforeFilter()@!):
+
+pre. $this->AuthComponent->loginError = "Seu nome de usuário ou senha estão incorretos";
+$this->AuthComponent->authError = "Você precisa estar autenticado para acessar essa área";
+
+h2(#auth-component/dados). Retornando dados do usuário
+
+Depois de autenticado, você precisará em algum momento retornar algum dado do usuário. Isso pode ser feito através de @AuthComponent::user()@:
+
+pre. // retornando todos os dados do usuário
+$this->set("user", $this->AuthComponent->user());
+// retornando apenas o nome do usuário
+$this->set("username", $this->AuthComponent->user("username"));

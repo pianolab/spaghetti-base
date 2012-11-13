@@ -1,0 +1,50 @@
+O Spaghetti* adota por padrão a estrutura de URLs @/controller/action/id@. Entretanto, algumas vezes você pode querer modificar esse padrão para alguma outra maneira que se encaixe melhor em sua aplicação. Em um blog, por exemplo, é muito mais interessantes acessar uma postagem por @/titulo-de-uma-postagem@ do que o nome de um _controller_, uma _action_ e o ID dessa postagem.
+
+Para essa tarefa, o Spaghetti* usa o arquivo de configuração @/app/config/routes.php@, onde as *rotas*, como esses padrões de URL são chamados, devem ser definidos.
+
+h2(#rotas/controller-padrao). Controller Padrão
+
+Quando você abrir o arquivo de configuração de rotas, você já encontrará uma chamada ao método @Mapper::root()@. Esse método define o _controller_ padrão a ser chamado quando uma URL como @/@ é chamada.
+
+pre. Mapper::root("home");
+
+Definindo @home@ como _controller_ padrão, quando a raiz de sua aplicação for acessada, será chamado o _controller_ @HomeController@ e sua _action_ @index@. O mesmo acontece quando um "prefixo":#rotas/prefixos é chamado sem definir um _controller_, evitando que você precise definir uma rota para cada prefixo definido na aplicação.
+
+h2(#rotas/definindo-rotas). Definindo novas rotas
+
+A definição de novas rotas modificará a resposta de sua aplicação de acordo com a URL acessada. As rotas devem ser definidas no mesmo arquivo @/app/config/routes.php@, pois esse arquivo é chamado antes de qualquer processamento do Spaghetti*. Caso uma rota fosse definida por um _controller_, por exemplo, ela não conseguiria ser processada.
+
+Para conectar novas rotas a determinadas URLs, utilizamos o método @Mapper::connect()@, que deve receber dois parâmetros: o padrão  a ser comparado e a rota que a URL que confere com esse padrão deve seguir. Ou seja, o padrão é uma expressão que representa URLs acessada, e a rota será o caminho que essa URL seguirá. Com a rota abaixo, por exemplo, a URL @/posts/definindo-novas-rotas@ apontará para @/posts/view/definindo-novas-rotas@:
+
+pre. Mapper::connect("/posts/:any", "/posts/view/$1");
+
+@Mapper::connect()@ tem suporte a expressões regulares, tornando a conexão de rotas ainda mais poderosa. Entretanto, para evitar que você tenha que escrever todas as expressões, o Spaghetti* já possui algumas _strings_ "mágicas" para os casos mais comuns:
+
+* @:any@ corresponde a qualquer caracter, incluindo barras
+* @:num@ corresponde a qualquer número
+* @:fragment@ corresponde a qualquer caracter, seja ele dígito ou número, exceto barras
+
+Para recuperar a ocorrência de algum grupo na expressão regular, usamos a mesma sintaxe usada por @preg_replace()@: @$1@ retorna a primeira ocorrência, @$2@ retorna a segunda ocorrência, e assim sucessivamente.
+
+p(note). *Nota*: para que valores de expressões regulares sejam retornadas depois, é necessário agrupar a expressão por parênteses. As _strings_ "mágicas" já são agrupadas pelo próprio Spaghetti*.
+
+p(note). *Nota*: rotas não funcionam em cascata. A primeira rota que conferir com a URL acessada será utilizada pelo Spaghetti*, e mesmo que outras rotas satisfaçam a nova URL reescrita, elas serão ignoradas.
+
+h2(#rotas/prefixos). Definindo prefixos
+
+Várias aplicações necessitam de áreas distintas dentro de sua estrutura. Mais do que apenas _controllers_ diferentes, às vezes se torna necessário realizar as mesmas ações, mas com diferentes efeitos e por usuários com permissões diferentes. Um caso comum dessa necessidade são interfaces de administração, por exemplo.
+
+Para esse tipo de necessidade, o Spaghetti* conta com prefixos, através do método @Mapper::prefix()@:
+
+pre. Mapper::prefix("admin");
+
+Quando um prefixo é definido, o Spaghetti* passa a chamar _actions_ diferentes. Quando a URL @/admin/users@ for chamada, será chamada a _action_ @admin_index@ de @UsersController@, em vez de apenas @index@. Isso significa que o Spaghetti* adiciona às _actions_ o mesmo prefixo usado na URL. Com essas ações distintas, é possível manter níveis de permissão, além da possibilidade de alterar o comportamento de cada ação.
+
+p(note). *Nota*: prefixos também estão sujeitos a ação de rotas, ou seja, uma rota pode redirecionar um prefixo e causar problemas em sua aplicação.
+
+Caso você queira definir vários prefixos, também é possível fazê-lo com apenas uma chamada ao método, passando vários argumentos:
+
+pre. Mapper::prefix("admin", "user");
+
+Através da criação de múltiplos prefixos você pode segmentar sua aplicação, criando várias áreas distintas, com uma estrutura flexível e bem definida.
+

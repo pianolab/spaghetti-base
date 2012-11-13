@@ -1,0 +1,94 @@
+Como uma aplicação feita com o Spaghetti* possui um ambiente um pouco diferente daquelas feitas com PHP puro, é necessária alguma intervenção do _framework_ no código HTML para que as convenções usadas funcionem corretamente. Para que você não precise criar código apenas para satisfazer o _framework_, o Spaghetti* possui o @HtmlHelper@, uma classe com vários métodos para geração de código HTML.
+
+A principal utilidade do @HtmlHelper@ é construir tags para "links":#html-helper/links, "imagens":#html/helper/imagens, "scripts":#html-helper/js e "folhas de estilo":#html-helper/css, sem que você precise se preocupar com a maneira com que o _framework_ manipula URLs e organiza diretórios, além da inclusão de outras funcionalidades úteis para manter seu código mais organizado.
+
+h2(#html-helper/links). Inserindo Links
+
+Para a criação de links, o Spaghetti* usa o método @HtmlHelper::link()@. Quando você não precisa digitar todo o caminho para a sua aplicação em uma tag @<a>@, ele é o responsável. O método precisa receber como parâmetro ao menos uma URL. Caso sejam passados dois parâmetros, o primeiro é tratado como o texto do link, e o segundo como uma URL.
+
+pre.. // apenas um parâmetro:
+echo $html->link("/home"); // => <a href="/home">/home</a>
+
+// texto do link + url:
+echo $html->link("Home", "/home"); // => <a href="/home">Home</a>
+
+p. Também é possível definir atributos para a tag. Para isso, é necessário passar um _array_ associativo como terceiro atributo do método. Cada chave do _array_ virará um nome de atributo que terá como valor o respectivo valor do _array_.
+
+pre. echo $html->link("Home", "/home", array(
+    "class" => "Title",
+    "id" => "home-link",
+    "title" => "Home"
+));
+// => <a href="/home" class="title" id="home-link" title="Home">Home</a>
+
+As URLs geradas pelo Spaghetti* geralmente são URLs relativas. Ou seja, elas são construídas a partir da raiz do servidor, e não contém o domínio onde está a aplicação. Isso siginfica que, quando uma URL é gerada, ela não será @http://spaghettiphp.org/docs/developer-guide@, mas sim apenas @/docs/developer-guide@. Se, por algum motivo, você precisar gerar uma URL completa, @HtmlHelper::link()@ recebe como quarto parâmetro um booleano indicando se a URL deve ser completa, e você deverá passar @true@.
+
+pre. echo $html->link("Home", "/home", array(), true);
+// => <a href="http://spaghettiphp.org/home">Home</a>
+
+h2(#html-helper/imagens). Inserindo Imagens
+
+Da mesma maneira que o _helper_ possui um método para a criação de links, ele também possui outro para a criação de tags de imagem, @HtmlHelper::image()@. O único parâmetro requerido desse método é o endereço da imagem. Esse endereço não precisa incluir @/images@, pois o Spaghetti* convenciona que as imagens para sua aplicação devem estar nessa pasta. Assim, para chamar uma imagem em @/app/webroot/images/image.jpg@, bastaria chamar o método com o parâmetro @image.jpg@.
+
+pre. echo $html->image("image.jpg");
+// => <img src="/images/image.jpg" alt="" title="" />
+
+Assim como os links, tags de imagem também podem receber atributos. Como segundo parâmetro, você pode passar um _array_ contendo todos os atributos necessários. Como você pode notar pela saída logo acima, você não precise passar um valor para @alt@ caso ele seja vazio, o próprio _helper_ já se encarrega disso. Se o valor de @title@ for igual a @alt@, também não é necessário se preocupar, o _helper_ também duplica o valor para que você não precise se preocupar com ele.
+
+Se você precisar uma URL completa em vez de apenas uma URL relativa, @HtmlHelper::image()@ funciona tal qual @HtmlHelper::link()@: você apenas precisa passar @true@ como terceiro parâmetro, e o Spaghetti* se encarrega de definir o endereço corretamente.
+
+h2(#html-helper/image-link). Imagens dentro de links
+
+E como fazer para inserir uma imagem *dentro* de um link? Não é necessário quebrar muito a cabeça para chegar à seguinte construção:
+
+pre. echo $html->link(
+    $html->image("logo.png", array(
+        "alt" => "Spaghetti* Framework"
+    )), "/home"
+);
+
+E sim, isso funciona perfeitamente. Entretanto, não é a coisa mais elegante possível em termos de código. Já que imagens dentro de links são coisas bem comuns, existe um método para cuidar disso, para que você não precise chamar dois métodos de uma vez de uma maneira tão deselegante.
+
+@HtmlHelper::imagelink()@ é apenas um atalho para chamar os métodos @HtmlHelper::image()@ e @HtmlHelper::link()@ de uma vez só. O método pode receber como parâmetros, em ordem, o endereço da imagem, a URL para o link, os atributos para a imagem e os atributos para o link, sendo apenas os dois primeiros obrigatórios. Caso seja necessário, também existe um quinto parâmetro, que recebendo @true@ transformará todas as URLs em URLs completas.
+
+Usando esse novo método, o link que criamos anteriormente fica com o código mais limpo e mais elegante. Muito melhor, não?
+
+pre. echo $html->imagelink("logo.png", "/home", array("alt" => "Spaghetti* Framework"));
+
+h2(#html-helper/css). Inserindo folhas de estilo
+
+Em se falando de folhas de estilo, @HtmlHelper@ não apenas resolve URLs e convenciona o diretório onde os arquivos @*.css@ devem ficar, mas também oferece algumas funcionalidades que ajudam a diminuir a repetição e organização de código.
+
+Para criar tags para folhas de estilo, usamos o método @HtmlHelper::stylesheet()@. Passando o endereço do arquivo CSS como primeiro parâmetro, já obtemos uma tag @<link>@ apontando corretamente para o arquivo. O Spaghetti* já convenciona que seus arquivos de estilo devem ficar em @/app/webroot/styles@, e você não precisa definir esse caminho todo no método, apenas o nome do arquivo.
+
+pre. echo $html->stylesheet("default.main.css");
+// => <link href="/styles/default.main.css" rel="stylesheet" type="text/css" />
+
+Se você precisa definir o _media type_ do arquivo, ou mesmo qualquer outro atributo, você pode passar como segundo parâmetro um _array_ contendo os atributos desejados, bem como você faz em outros métodos do @HtmlHelper@. E, bem como acontece em outros métodos que trabalham com URLs, um quarto parâmetro @true@ retornará a tag com uma URL completa em vez de uma URL relativa.
+
+pre. echo $html->stylesheet("default.main.css", array("media" => "screen"), true, true);
+// => <link href="http://spaghettiphp.org/styles/default.main.css" rel="stylesheet" type="text/css" media="screen" />
+
+Como duplicar código não é muito nossa praia, você pode imprimir vários links para as folhas de estilo em apenas uma chamada a @HtmlHelper::stylesheet()@, passando um _array_ como primeiro parâmetro:
+
+pre. echo $html->stylesheet(
+    array("base", "internal", "docs"),
+    array("media" => "screen")
+);
+
+Note que os itens do _array_ acima não possuem a extensão @.css@. Isso não significa que os arquivos reais também não possuam a extensão. Como arquivos CSS sempre possuem a extensão @.css@, pra que digitá-la o tempo inteiro? Por isso, o Spaghetti* se encarrega de adicionar a extensão automaticamente, tanto na notação usando _arrays_ como mostrado acima, quanto para arquivos individuais.
+
+p(note). *Nota*: embora a omissão de @.css@ funcione para arquivos dentro de sua aplicação, ela não funcionará para arquivos fora dela. Não é possível omitir @.css@ de arquivos que vivem fora de seu @webroot@.
+
+h2(#html-helper/js). Inserindo scripts
+
+A mesma funcionalidade disponível para "folhas de estilo":#html-helper/css também está disponível para scripts. Através do método @HtmlHelper::script()@, você pode incluir facilmente tags @<script>@, bastando passar o nome do arquivo como parâmetro. Os arquivos de script devem ficar em @/app/webroot/scripts@ e, por convenção, você não precisa escrever tudo isso, apenas o nome do arquivo.
+
+pre. echo $html->script("jquery.js");
+// => <script src="/scripts/jquery.js" type="text/javascript"></script>
+
+Como os outros métodos de @HtmlHelper@, é possível definir atributos através de um segundo parâmetro, e passando o quarto parâmetro como @true@, você terá URLs completas. Assim como para folhas de estilo, também é possível usar a notação de _arrays_ para incluir vários scripts de uma vez só ou omitir a extensão @.js@.
+
+pre. echo $html->script(array("jquery.core", "jquery.ui"), array(), true, true);
+
+p(note). *Nota*: Assim como para @HtmlHelper::stylesheet()@, é possível omitir a extensão de arquivo apenas se eles estiverem dentro de sua aplicação. Qualquer arquivo externo deve ter sua extensão especificada.

@@ -1,0 +1,35 @@
+Muitas vezes, alguns trechos de código aparecem em várias _views_ diferentes, mas não necessariamente no mesmo local na página. Por isso, nem sempre é possível colocar esses trechos em um _layout_. Mas não se repita! O conceito de _elements_, pequenos pedaços de apresentação reutilizáveis em qualquer lugar de sua aplicação, estão aqui para lhe salvar.
+
+Os _elements_ são conceitualmente idênticos a uma _view_. A diferença principal é que, por serem pequenas pedaços de apresentação sem vínculo com _controllers_, eles podem ser injetados dentro de outras _views_ ou _layouts_. A principal utilidade dos _elements_ é evitar a repetição de código, mas eles também podem ser usados para mover partes mais complexas de suas _views_ ou _layouts_ para outro arquivo onde você poderá ter uma visão melhor apenas daquela parte.
+
+Quer um exemplo mais concreto da utilização de _elements_? Vamos supor que você tenha um formulário de _login_ no topo de suas páginas, e queira colocar outro formulário, exatamente igual, no meio do conteúdo. Você pode pensar, então, em copiar e colar o código. Porém, ao invés de copiar e colar o código HTML deste formulário cada vez que você precisar usá-lo, você pode criar um _element_ com este código e então o importá-lo nos locais onde desejar.
+
+Supondo que algum dia você precise alterar o seu formulário de _login_, terá que fazê-lo uma única vez. Com _elements_ você ganhará na manutenção, pois cada um destes trechos de código fica centralizado em apenas um arquivo, em vez de vários trechos espalhados por várias partes de sua aplicação.
+
+h2(#elements/criando). Criando um _element_
+
+A criação de um _element_ é muito simples. Crie um arquivo com o nome desejado para seu _element_, com a extensão @.htm.php@, na raíz da pasta @/app/views@. No início do nome desse arquivo deve haver um caracter _underscore_ @_@, para sinalizar que aquele arquivo é um _element_. No caso do nosso exemplo do formulário de _login_, esse _element_ poderia estar em @/app/views/_login.htm.php@.
+
+Quando você quiser incluir o conteúdo deste _element_ em alguma outra _view_, seja ela estática, dinâmica, um _layout_ ou mesmo outro _element_, basta utilizar o método @View::element()@, passando como parâmetro o nome do elemento sem o _underscore_ nem a extensão do arquivo.
+
+pre. <?php echo $this->element("login") ?>
+
+E pronto! O conteúdo do elemento será renderizado tantas vezes quanto for chamado, e nos lugares onde for chamado, sem que você precise copiar e colar código para isso.
+
+h2(#elements/parametros). Passando parâmetros para _elements_
+
+Como _elements_ foram criados para ser pedaçoes de apresentação reusáveis, eles não compartilham das mesmas variáiveis que as _views_ e _layouts_. Entretanto, é possível passar variáveis explicitamente para eles, através do segundo parâmetro de @View::element()@.
+
+pre. <?php echo $this->element("login", array(
+     "remember_me" => true
+)) ?>
+
+Cada variável passada como parâmetro é depois lida como uma variável local dentro do _element_, como se fosse uma variável definida por @Controller::set()@ sendo acessada dentro de uma _view_.
+
+h2(#elements/organizando). Organizando _elements_
+
+Quando um _element_ é usado por várias partes da aplicação, até faz muito sentido mantê-lo na raíz de @/app/views@. Entretanto, se um _element_ pertence a apenas um _controller_, por exemplo, você pode criá-los dentro de sua respectiva pasta.
+
+O nome do arquivo mantém-se igual, e a chamada ao _element_ também. Continua valendo a regra: embora o nome do arquivo precise do _underscore_, ele não deve aparecer na chamada a @View::element()@.
+
+pre. <?php echo $this->element("users/login") // chamando o element /app/views/users/_login.htm.php ?>

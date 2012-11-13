@@ -1,0 +1,288 @@
+Os _models_ do Spaghetti* são os responsáveis por todas as tarefas de banco de dados. É através deles que você criará, atualizará, apagará e buscará registros das tabelas de seu banco de dados. Tudo isso sem escrever uma única linha de SQL, já que o Spaghetti* abstrai tudo isso em um formato simples de _arrays_, puramente em PHP, como você verá em breve.
+
+h2(#models/criando). Criando _Models_
+
+Dentro da estrutura de diretórios do Spaghetti*, os _models_ se encontram em @/app/models/@. É lá onde ficarão todos os modelos de sua aplicação que você criar. O nome de arquivo de um modelo deve seguir a convenção @nome_do_modelo.php@. Por exemplo, se você criar um modelo @UserPermissions@, por exemplo, o nome do respectivo arquivo deverá ser @user_permissions.php@.
+
+Inicialmente, um modelo é apenas uma classe vazia, que estende de @AppModel@:
+
+pre. class Users extends AppModel {
+}
+
+Quando seu modelo herda de @AppModel@, que por sua vez herda de @Model@, você terá ao seu dispor toda as funcionalidades necessárias para lidar com o banco de dados. Além disso, o Spaghetti* já relaciona por padrão um modelo com sua respectiva tabela no banco de dados, que deve ter o mesmo nome do modelo. Caso a tabela não exista, o Spaghetti* gerará um erro. No nosso caso, para que nosso _model_ funcione, você precisará ter uma tabela chamada @users@.
+
+Caso você tenha um modelo que tenha sua respectiva tabela no banco de dados com um nome diferente, ou mesmo que não possua uma tabela, é possível sobrescrever o comportamento do Spaghetti* através do atributo @table@.
+
+pre. class Users extends AppModel {
+    public $table = 'users_table';
+}
+
+Caso nosso modelo fosse usado apenas para validação de dados, e não possuísse uma tabela no banco de dados, @Users::$table@ deveria ser definido como @false@, e então o Spaghetti* ignoraria a relação do modelo com o banco de dados.
+
+h2(#model/buscando). Buscando Registros
+
+Para a busca de registros, @Model@ conta com dois métodos: @first()@ e @all()@. @Model::first()@ é o responsável por buscar apenas o primeiro registro que atende a uma determinada condição, enquanto @Model::all()@ retorna uma lista com todos eles.
+
+Ambos os métodos recebem apenas um parâmetro, um _array_ contendo todas as opções da busca. Esses parâmetros são os responsáveis pela definição de condições, ordem dos registros, limite, recursão e campos a serem retornados.
+
+Para definir as condições de uma busca, usamos @conditions@ como item de nosso array de opções.
+
+pre. $options = array(
+    "conditions" => "id = 1"
+);
+$this->Users->first($options);
+
+Com a busca acima, retornaremos o primeiro registro que corresponda à condição @id = 1@. Entretanto, dessa maneira estamos passando uma condição literal em SQL para o Spaghetti*, que não escapará valores e deixará sua aplicação vulnerável a ataques de _SQL injection_. Para que isso não aconteça, devemos passar condições de uma maneira que o Spaghetti* possa interpretar, escapando valores perigosos.
+
+pre. $options = array(
+    "conditions" => array(
+        "id" => 1
+    )
+);
+$this->Users->first($options);
+
+p(note). *Nota*: embora seja possível passar condições literalmente para o Spaghetti*, essa prática é desencorajada, pois pode abrir brechas de segurança em sua aplicação. Caso você deseje fazer isso, lembre-se de fazer o escape de valores antes de enviá-los para a consulta. Nunca considere dados vindos do usuário como seguros!
+
+Além de condições simples como essa, o Spaghetti* também suporta outros tipos de condições mais complexas. Por exemplo:
+
+pre. $options = array(
+    "conditions" => array(
+        "title LIKE" => "%Spaghetti%"
+    )
+);
+
+p(note). Você pode ver como usar outros tipos de condições em "Condições":/docs/developer-guide/models/condicoes.
+
+Para definir o limite de registros que uma consulta deve devolver, usamos o item @limit@, que pode receber apenas o número de registros a retornar ou a quantidade de registros a partir de um índice.
+
+pre. $options = array(
+    "limit" => 20
+);
+$this->Users->all($options);
+
+p(note). *Nota*: se @Model::first()@ receber @limit@ como parâmetro, ele não terá efeito algum, pois sempre será sobrescrito por @1@.
+
+Para definir a ordem dos registros a serem retornados, usamos o item @order@. Assim como definimos @ORDER BY@ em SQL, essa opção também pode receber vários campos a ordernar separados por vírgula.
+
+pre. $options = array(
+    "order" => "created DESC"
+);
+$this->Users->all($options);
+
+Para definir os campos a serem retornados pela consulta, usamos o item @fields@. Por padrão, o Spaghetti* passa uma lista com todos os campos da tabela por essa opção, mas podemos sobrescrevê-la para retornar apenas os campos necessários. Esse parâmetro pode ser passado como uma _string_ contendo os campos separados por vírgulas ou como um _array_.
+
+pre. $options = array(
+    "fields" => array("id", "name", "password")
+);
+$this->Users->all($options);
+
+O retorno desses métodos é um _array_ comum, que pode ser iterado normalmente através de @for@ ou @foreach@. A estrutura desse _array_ é semelhante à seguinte:
+
+pre.. $this->Users->all($options);
+// retornará
+Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [name] => admin,
+            [password] => spaghettiphp
+        )
+    [1] => Array
+        (
+            [id] => 2
+            [name] => root,
+            [password] => root
+        )
+    [2] => Array
+        (
+            [id] => 3
+            [name] => user
+            [password] => 123456
+        )
+)
+
+$this->Users->first($options);
+// retornará
+Array
+(
+    [id] => 1,
+    [username] => admin
+    [password] => spaghettiphp
+)
+
+h2(#model/salvando). Salvando Registros
+
+O salvamento de registros é sempre algo complicado. Primeiro é necessário saber se um registro existe, para depois podermos decidir se ele deve ser inserido ou se deve ser apenas atualizado. Com o Spaghetti*, você se preocupa apenas em enviar os dados, e o resto é gerenciado pelo _framework_.
+
+Para o salvamento de registros, usa-se apenas o método @save()@, passando como parâmetros apenas os dados a serem salvos em formato de um _array_ semelhante ao seguinte:
+
+pre. $data = array(
+    "id" => 1,
+    "username" => "admin",
+    "password" => "spaghettiphp"
+);
+
+Chamando @Model::save()@, o retorno será @true@ caso o registro tenha sido salvo, ou @false@ caso tenha havido algum erro no processo.
+
+pre. $this->Users->save($data); // => true
+
+O Spaghetti* sabe se um registro existe ou não a partir do valor da chave primária do registro que você está salvando. Caso esse valor da chave primária seja @null@ ou não exista no banco de dados, um novo registro é criado. Caso contrário, o registro existente é atualizado. Por padrão, o nome da chave primária no Spaghetti* é o mesmo valor da chave primária no banco de dados. Se o seu banco de dados não tem um campo definido como chave primária, é necessário definí-la manualmente no seu _model_ através de @Model::primaryKey@:
+
+pre. class Users extends AppModel {
+    public $primaryKey = "id_user";
+}
+
+@Model::save()@ usa, inicialmente, @$data[$this->primaryKey]@ (que se transformaria em @$data["id"]@, por padrão) como o valor da chave primária do registro a ser salvo. Caso ele não esteja definido ou seja @null@, o Spaghetti* usará o valor presente em @Model::id@. No exemplo abaixo, o registro com @id = 2@ é atualizado:
+
+pre. $this->Users->id = 2;
+$this->Users->save(array(
+    "password" => "654321"
+));
+
+p(note). *Nota*: quando você estiver salvando vários registros do mesmo _model_, como em um _loop_, lembre-se de definir @id = null@ para que os registros não sejam sobrescritos.
+
+Quando um novo registro é criado, @Model@ também altera o valor de @Model::id@ para o id da última inserção. Assim, não é necessário fazer uma chamada a outro método para recuperar esse valor.
+
+pre. $this->Users->save(array(
+    "username" => "spaghetti_framework",
+    "password" => "abcdef"
+));
+echo $this->Users->id; // => 4
+
+h2(model/created-modified). Campos _created_ e _modified_
+
+Muitas vezes é necessário manter registro das datas de criação e modificação de um registro. Para que você não precise explicitamente definir um valor para esses campos, o Spaghetti* faz isso para você automaticamente.
+
+Para usar essa funcionalidade, sua tabela precisa ter os campos @created@ (para a data de criação de um registro) e/ou @modified@ (para a data de modificação de um registro). Ambos precisam ser do tipo @DATE@ ou @DATETIME@. O campo @created@ é definido apenas uma vez, na criação do registro, e depois não é mais alterado. Já @modified@ é modificado a cada alteração do registro, contendo a data/hora da alteração mais recente.
+
+h2(#model/apagando). Apagando Registros
+
+@Model::delete()@ apaga um registro do banco de dados a partir do valor de sua chave primária, passada por primeiro parâmetro. Por exemplo, para apagarmos um usuário de @id = 3@, fazemos a seguinte chamada:
+
+pre. $this->Users->delete(3);
+
+Caso a operação tenha sido executada com sucesso, o método retorna @true@, e @false@ caso algo de errado tenha ocorrido.
+
+Por padrão, @Model::delete()@ apagará todos os "registros relacionados":/docs/developer-guide/models/relacionamentos ao registro sendo apagado. Para evitar que isso ocorra, e que os registros dependentes sejam mantidos, passe o segundo parâmetro com o valor @false@.
+
+O Spaghetti* também permite que você apague vários registros de uma só vez, a partir de determinada condição. Para isso, usamos o método @Model::deleteAll()@, recebendo como parâmetro as opções para a exclusão. As opções para a exclusão de registros funciona de maneira semelhante às "opções para busca de registros":#model/buscando. Por exemplo, o código abaixo apagará os primeiros 50 registros com data anterior a 01/12/2009:
+
+pre. $this->Users->deleteAll(array(
+    "conditions" => array(
+        "created <" => "2009-12-01"
+    ),
+    "limit" => 50,
+    "order" => "created ASC"
+));
+
+p(note). *Nota*: quando @Model::deleteAll()@ é executado, os registros dependentes não são apagados!
+
+h2(#model/metodos-personalizados). Métodos Personalizados
+
+Os modelos de dados do Spaghetti* são poderosos o suficiente para executar as tarefas mais simples na interação com o banco de dados, sem que você precise se preocupar com o tipo de banco de dados que você está se conectando e nem com SQL. Entretanto, algumas vezes é necessário realizar tarefas mais complexas, que ocupariam muito código no _controller_ que, no fim das contas, pertence mesmo aos modelos. Além disso, muito código repetitivo, como retornar os últimos @n@ registros de uma tabela, pode ser centralizado em um único lugar, deixando os _controllers_ ainda mais leves e fazendo somente aquilo que é necessário para eles.
+
+O Spaghetti* todo orientado a objetos. Então, seu _model_ não apenas herda todas os métodos e propriedades de @Model@, mas também pode implementar seus próprios métodos, como se fosse uma classe qualquer.
+
+Suponha que você possui um _model_ @News@, que é responsável por trazer a várias partes de sua aplicação a lista das @$n@ últimas notícias. Você pode implementar esse método assim:
+
+pre. class News extends AppModel {
+    public function last($n) {
+        return $this->all(array(
+            "limit" => $n
+        ));
+    }
+}
+
+Essa técnica, além de facilitar o uso e manutenção de muitas tarefas repetitivas, também pode ser usada para implementar o conceito de _fat models, skinny controllers_. Esse conceito consiste em colocar o máximo possível de lógica de negócio nos _models_, fazendo com que _controllers_ apenas acessem métodos de _models_, sem precisar se preocupar com toda a lógica envolvida no processamento dos registros. Esse conceito torna a manutenção e compreensão de suas aplicações muito mais simples, e o código passa a _dizer mais_ e a fazer mais sentido.
+
+h2(#model/count). Contando Registros
+
+Para a contagem de registros, o Spaghetti* usa o método @Model::count()@. O método recebe como parâmetro um _array_ de opções semelhante aos usados por @Model::all()@, indicando as condições da contagem e os campos a serem contados.
+
+pre. $this->Users->count(array(
+    "conditions" => array("approved" => 1)
+));
+
+A definição dos campos usados na contagem é útil quando precisamos contar registros distintos, por exemplo:
+
+pre. $this->Users->count(array(
+    "fields" => "DISTINCT state"
+));
+
+h2(#model/query-fetch). Fazendo consultas diretamente ao banco de dados
+
+Algumas vezes, em aplicações de maior porte, é necessário refinar as consultas SQL para que elas sejam realizadas mais rapidamente e ocupando menos recursos. Ou então você precisa realizar uma operação mais complexa, a qual o Spaghetti* não cobre ou leva muito tempo para executar. Nesses casos, você pode optar por escrever SQL diretamente, e fazer a consulta junto ao servidor de banco de dados.
+
+Para consultas que não exigem retorno (ou que você não deseja que o Spaghetti* processe esse retorno), existe o método @Model::query()@. Como parâmetro, você passa apenas a consulta SQL já montada e pronta para ser executada.
+
+pre. $this->Users->query("DELETE FROM users WHERE approved = 0");
+
+p(note). *Nota*: quando você executar consultas diretamente, o Spaghetti* não conseguirá escapar valores perigosos automaticamente. Por isso, sempre tome cuidado quando as consultas envolverem dados vindos do usuário.
+
+Caso a sua consulta deva trazer alguma coisa como retorno, você pode usar o método @Model::fetch()@, também recebendo como parâmetro apenas a consulta SQL. O método só difere de @Model::query()@ pois o resultado da consulta é interpretado pelo Spaghetti* e retornado na forma de um _array_, como qualquer outra consulta feita por @Model::all()@, por exemplo.
+
+pre. $users = $this->Users->fetch("SELECT id, username, password FROM users WHERE approved = 1");
+
+Vale lembrar uma coisa: evite colocar chamadas diretas ao banco de dados dentro de seus _controllers_. Lembra de "_fat models, skinny controllers_":#model/metodos-personalizados? Pois então, sempre que você precisar realizar uma consulta específica, crie um novo método em seu _model_, ajudando a manter toda a lógica possível fora dos _controllers_!
+
+
+h2(#model/transactions). _Transactions_
+
+_Transactions_ mantém a integridade dos dados em suas tabelas, evitando dados inconsistentes em caso de algum erro durante a criação ou alteração de registros. Para usar _transactions_ com o Spaghetti*, existem os métodos @Model::begin()@, @Model::commit()@ e @Model::rollback()@.
+
+@Model::begin()@ inicia uma _transaction_. Esse método fará com que todos os comandos enviados ao banco de dados tornem-se atômicos, permitindo que eles sejam desfeitos em caso de erro. Para desfazer as operações feitas durante uma transação, usa-se o método @Model::rollback()@. Se todas as operações foram realizadas com sucesso, usa-se @Model::commit()@ para confirmá-las.
+
+pre. $this->Users->begin();
+if($this->Users->save($this->data) && $this->Users->Profiles->save($this->data["profile"])):
+    $this->Users->commit();
+else:
+    $this->Users->rollback();
+endif;
+
+h2(#model/callbacks). _Callbacks_
+
+Se você deseja implementar alguma lógica antes ou depois do salvamento de registros no Spaghetti*, você pode usar alguns _callbacks_ em @Model@.
+
+_Callbacks_ são métodos que, quando definidos, podem processar dados vindos do _controller_ antes do salvamento, ou implementar alguma ação após o salvamento dos registros. Os dois _callbacks_ disponíveis atualmente são @Model::beforeSave()@, para lógica antes do salvamento, e @Model::afterSave()@, para lógica após o salvamento.
+
+@Model::beforeSave()@ recebe como parâmetro os dados vindos do _controller_. Com isso, é possível fazer todo o processamento necessário, e o retorno do método será enviado de volta para @Model::save()@. Caso o método retorne @false@, o salvamento será interrompido.
+
+pre. class Users extends AppModel {
+    public function beforeSave($data) {
+        if(!empty($data["password"])):
+            $data["password"] = Security::hash($data["password"]); // fazendo o hash da senha de um usuário
+            return $data;
+        else:
+            return false;
+        endif;
+    }
+}
+
+Já @Model::afterSave()@ recebe como parâmetro apenas um valor booleano @true@ quando um registro novo é criado, e @false@ quando um registro é atualizado.
+
+pre. class Users extends AppModel {
+    public function afterSave($created) {
+        if(!$created):
+            $this->Profiles->id = $this->id;
+        endif;
+    }
+}
+
+h2(#model/parametros). Parâmetros padrão
+
+Notícias geralmente são classificadas pela sua data de criação em ordem decrescente, um usuário sempre deve estar aprovado para poder usar um sistema, entre outros, são os tipos de parâmetros que se repetem para cada busca em sua aplicação. Portanto, não seria interessante definir um padrão para todas as buscas, e sobrescrevê-lo apenas quando necessário? O Spaghetti* permite isso.
+
+Para tal, existem 4 atributos de @Model@ que podem ser definidos como padrão para todas as buscas: @Model::conditions@, @Model::order@ e @Model::limit@ e @Model::recursion@, todos eles correspondendo aos parâmetros de @Model::all()@ e @Model::first()@.
+
+pre.. class Users extends AppModel {
+    public $conditions = array(
+        "approved" => 1
+    );
+}
+
+class News extends AppModel {
+    public $order = "created DESC";
+}
+
+p(note). *Nota*: em todas as buscas, os parâmetros padrão serão usados, a menos que sejam sobrescritos. Por exemplo, uma condição @approved = 1@ só não será usada caso seja sobrescrita por outra condição como @approved <> 1@.

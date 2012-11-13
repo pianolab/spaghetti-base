@@ -1,0 +1,25 @@
+O Spaghetti* utiliza-se do _design pattern_ MVC(Model-View-Controller), separando as camadas da sua aplicação, tornando o desenvolvimento e manutenção muito mais fáceis e rápidos. Toda a camada de lógica e dados fica separada da camada de apresentação de sua aplicação, mantendo a lógica em PHP longe do código HTML. Na prática, isso acaba com a guerra entre desenvolvedores e designers, que agora podem trabalhar simultaneamente de maneira harmoniosa e eficiente, sem quebrarem o trabalho um do outro.
+
+h2(#mvc/models). Modelos de Dados
+
+Os modelos de dados, ou _Models_, representam os dados de sua aplicação. Ou seja, é através do _Model_ que sua aplicação se conectará com o banco de dados, fazendo consultas e retornando e inserindo dados.
+
+As classes do Spaghetti* irão auxiliá-lo na manipulação desses dados, sem que você precise escrever uma única linha de SQL. Todas as condições e dados a serem enviados ao banco são montados através de _arrays_ simples, e o Spaghetti* fará o trabalho sujo enquanto você se preocupa com o que realmente interessa.
+
+Embora o Spaghetti* só venha com um _datasource_ para MySQL no momento, é possível que você crie _datasources_ para qualquer banco de dados existente, além de poder criar _datasources_ para outros tipos de fontes de dados, como documentos XML, por exemplo.
+
+h2(#mvc/controllers). Controladores
+
+É nos controladores, ou _Controllers_, que a mágica da sua aplicação realmente acontece. É aqui onde você irá tratar as respostas do usuário, buscar e processar dados e retorná-los para as _Views_. Nada de código HTML, nada de CSS, nada de JavaScript. Única e puramente código PHP, sem misturar as coisas.
+
+Dentro dos _controllers_, as funcionalidades são separadas em métodos, que são chamados _actions_. Cada _action_ corresponde a uma ação dentro de sua aplicação, e geralmente cada ação possui uma "_view_":#mvc/views relacionada. Cada _action_ é responsável por uma pequena funcionalidade de sua aplicação, fazendo com que ela seja modular, e cada ação não se misture com as outras.
+
+Mesmo você estando no comando dos _controllers_, o Spaghetti* irá lhe auxiliar dando acesso aos seus _Models_ e facilitando o envio de dados para as _Views_. Você se diverte programando, e o Spaghetti* o ajuda com o resto. Além disso, já existem vários componentes que o ajudarão a resolver problemas comuns no desenvolvimento, como upload de arquivos, redimensionamento de imagens, entre outros. Caso você encontre uma tarefa comum que ainda não possua um componente, o Spaghetti* lhe fornece uma forma extremamente simples para a criação de novos componentes.
+
+h2(#mvc/views). Visualizações
+
+As _Views_ fazem parte da camada de apresentação de sua aplicação. Nessa camada você se preocupa unicamente em mostrar os dados ao usuário, usando apenas algumas estruturas básicas em PHP, evitando aquela típica mistura de lógica e apresentação em um mesmo arquivo.
+
+Além disso, também é possível usar _helpers_ que ajudam na criação de formulários, links e inserção de imagens, formatação de texto, entre outros, sem que você precise se preocupar com detalhes chatos de implementação. Caso não exista um _helper_ já existente para sua necessidade específica, o Spaghetti* também dispõe de uma arquitetura simples para sua criação.
+
+Escolhemos o MVC por ser um _pattern_ que faz bastante sentido no desenvolvimento Web, além de aumentar a produtividade, diminuir a repetição de código, facilitar a correção de bugs e tornar a vida dos desenvolvedores um pouco menos conflitante, especialmente quando se trabalha em conjunto com designers. E você, está pronto para entrar brincadeira, e se unir a nós por um desenvolvimento melhor?

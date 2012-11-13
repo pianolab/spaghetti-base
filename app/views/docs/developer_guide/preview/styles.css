@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #3A3431;
+    color: #fff;
+	font-family: Helvetica, Arial, Verdana, Tahoma, sans-serif;
+	font-size: 13px;
+    padding: 12px 24px;
+}
+
+h1 {
+    color: #9c0;
+    font-size: 56px;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+}
+ 
+h2, h3, h4 {
+    margin: 16px 0;
+}
+    h2 {
+        color: #9c0;
+        font-size: 24pt;
+    }
+
+p {
+    line-height: 22px;
+    margin: 20px 0;
+}
+    p code,
+    li code {
+        background: #222;
+        font: 9pt Monaco, Consolas, 'Courier New', monospace;
+        padding: 1px 3px;
+    }
+
+pre {
+    background: #222;
+    font: 9pt Monaco, Consolas, 'Courier New', monospace;
+    padding: 24px;
+}
+
+ul {
+    line-height: 1.6em;
+    margin-left: 12px;
+}
+
+li {
+    margin: 2px 0;
+}
+
+a {
+    color: #9c0;
+}
