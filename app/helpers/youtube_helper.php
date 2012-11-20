@@ -73,7 +73,7 @@ class YoutubeHelper extends Helper {
       $strings = explode("/",$arr[1]);
       foreach ($strings as $key => $string) {
         if ($string == 'v') {
-          $return = $strings[$key + 1];
+          $return = current(explode('&', $strings[$key + 1]));
           break;
         } # endif;
       } # endforeach;
