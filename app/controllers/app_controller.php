@@ -15,6 +15,12 @@ class AppController extends Controller {
    * @author Djalma Araújo
    */
   public function beforeFilter() {
+
+    // set the history url
+    $this->setUrlHistory();
+
+    // Histórico da última URL
+    $this->urlHistory = Session::read('urlHistory');
     
     // Document Root para UPLOADS
     $this->document_root = $_SERVER['DOCUMENT_ROOT'] . '/';
@@ -28,15 +34,10 @@ class AppController extends Controller {
    * @author Djalma Araújo
    */
   public function beforeRender() {
-    // Histórico da última URL
-    $this->urlHistory = Session::read('urlHistory');
-    
+        
     // Page title default
     if (!$this->arrView['page_title'])  $this->pageTitle('');
-    
-    // set the history url
-    $this->setUrlHistory();
-    
+        
     // To we don't have to repeat the set function with arrView variable.
     $this->set($this->arrView);
   }
@@ -62,10 +63,18 @@ class AppController extends Controller {
    * @author Djalma Araújo
    */
   private function setUrlHistory() {
-    $explode = explode('/', Mapper::here());
-    if (Mapper::here() != $this->urlHistory) {
-      Session::write('urlHistory', Mapper::here());
-    }
+    
+    $urlHistory = Session::read('urlHistory');
+    
+    empty($urlHistory) ? $urlHistory = array() : '' ; 
+
+    if($urlHistory[0] !== Mapper::here())
+      array_unshift( $urlHistory , Mapper::here());
+
+    (count($urlHistory) > 5) ?  array_pop($urlHistory) : '' ;
+     
+    Session::write('urlHistory', $urlHistory);
+   
   }
   
   /**

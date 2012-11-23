@@ -1,3 +1,7 @@
+
+<?php var_dump(Session::read('urlHistory'));die(); ?>
+
+
 <!-- Example row of columns -->
 <div class="row">
   <div class="span6">
