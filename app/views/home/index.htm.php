@@ -18,4 +18,15 @@
       <li>Lot of snippets (Facebook tags, Analytics, mobile favicons, pagination example)</li>
     </ul>
   </div>
+
+  <div class="span12">
+  <h2>languages</h2>
+  <?php echo $html->link('Português', '/lang/change/pt-br') ?> | 
+  <?php echo $html->link('English', '/lang/change/en-us') ?><br>
+  
+  function t: <?php echo t('wtf') ?> <br />
+  $lang->_: <?php echo $lang->_('wtf') ?> <br />
+  function t: <?php echo t('wtf') ?> <br />
+  $lang->_: <?php echo $lang->_('wtf') ?> <br />
+  </div>
 </div>
