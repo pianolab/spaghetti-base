@@ -10,7 +10,7 @@
 /**
  * Alterando error_reporting: Ocultando notices
  */
-error_reporting(E_ALL ^ E_NOTICE ^ E_STRICT);
+error_reporting(E_ALL ^ E_NOTICE);
 /**
  *  O Spaghetti suporta apenas a versão 5 do PHP. Um erro é gerado caso a versão
  *  seja anterior a 5.0.
