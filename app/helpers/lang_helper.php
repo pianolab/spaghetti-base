@@ -1,71 +1,82 @@
 <?php
+
+App::import('Helper', 'html_helper');
+App::import('Core', array('view'));
+
+include_once APP . DS . 'languages' . DS . 'alias.php';
+
 /**
- *  LangHelper provê conversão de texto em multilínguas
- *  por DjalmaAraújo
- *  @license   http://www.opensource.org/licenses/mit-license.php The MIT License
- *
+ * LangHelper provê conversão de texto em multilínguas
+ * por wfsneto
+ * @license http://www.opensource.org/licenses/mit-license.php The MIT License
  */
-class LangHelper extends Helper {
+class LangHelper extends HtmlHelper {
 
-    public $lang;
-    public $default_lang = 'br';
-    public $json;
-    public $json_path;
+  /**
+   * Attributes public
+   */
+  public $array;
+  public $lang;
+  public $file;
+  public $files = array('default');
+  public $langs = array('pt-br', 'en-us');
+  /**
+   * Attributes private
+   */
+  private $lang_default = 'pt-br';
+  private $file_default = 'default';
+
+  public function __construct()
+  {
+    $this->lang = Session::read('language') ? Session::read('language') : $this->lang_default;
     
-    /**
-     * Construtor
-     */
-    public function __construct()
-    {
-      if (Session::read('language')) {
-        $this->lang = Session::read('language');
-      } else {
-        $this->lang = $this->default_lang;
-      }
-      $this->json_path = APP . '/webroot/locale/';
-      $this->json = $this->getTranslate();
-    }
-    
-    /**
-     * Utilização da conversão na view
-     */
-    public function _($string)
-    {
-      return $this->output($this->translate($string));
-    }
-    
-    /**
-     * Tradução da string procurada no json
-     */
-    private function translate($string)
-    {
-      $translate = $this->json[$this->lang][$string];
-      if (!isset($translate)) {
-        return $string;
-      } else {
-        if (is_array($translate)) {
-          $return = array();
-          foreach ($translate['itens'] as $item) {
-            $return[] = "<{$translate['tag']}>" . $item . "</{$translate['tag']}>";
-          }
-          $translate = implode(null, $return);
+    $this->file = !empty($this->file) ? $this->file : $this->file_default;
+
+    $this->array = Session::read('array_lang') ? Session::read('array_lang') : array();
+  }
+  
+  /**
+   * Utilização da conversão na view
+   */
+  public function _($string, $file_name = false)
+  {
+    return $this->output($this->translate($string, $file_name));
+  }
+  
+  /**
+   * Tradução da string procurada no array
+   */
+  private function translate($string, $file_name)
+  {
+    $current_file = !empty($file_name) ? $file_name : $this->file;
+    $translate = $this->array[$this->lang . '/' . $current_file][$string];
+
+    if (!isset($translate)) {
+      return $string;
+    } else {
+      if (is_array($translate)) {
+        $return = array();
+        foreach ($translate['itens'] as $item) {
+          $return[] = $this->html($translate['tag'], $item);
         }
-        return $translate;
+        $translate = implode(null, $return);
       }
-    }
-    /**
-     * Captura o json da língua
-     */
-    private function getTranslate()
-    {
-      $file = $this->json_path . $this->lang . '.json';
-      if (file_exists($file)) {
-        $json = file_get_contents($file);
-      } else {
-        $file = $this->json_path . $this->default_lang . '.json';
-        $json = file_exists($file) ? file_get_contents($file) : '{}';
-      }
-      return json_decode($json, true);
-    }
-}
 
+      return $translate;
+    }
+  }
+  
+  /**
+   *  Renderiza um elemento.
+   *
+   *  @param string $element Elemento a ser renderizado
+   *  @param array $params Dados as serem extraídos na renderização
+   *  @return string Resultado da renderização
+   */
+  public function element($element, $params = array()) {
+    $view = new View();    
+    $element = dirname($element) . DS . basename($element) . '.' . $this->lang;
+
+    return $view->renderView(App::path('View', $element), $params);
+  }
+}

@@ -1,7 +1,3 @@
-
-<?php var_dump(Session::read('urlHistory'));die(); ?>
-
-
 <!-- Example row of columns -->
 <div class="row">
   <div class="span6">
@@ -24,13 +20,11 @@
   </div>
 
   <div class="span12">
-  <h2>languages</h2>
-  <?php echo $html->link('Português', '/lang/change/pt-br') ?> | 
-  <?php echo $html->link('English', '/lang/change/en-us') ?><br>
-  
-  function t: <?php echo t('wtf') ?> <br />
-  $lang->_: <?php echo $lang->_('wtf') ?> <br />
-  function t: <?php echo t('wtf') ?> <br />
-  $lang->_: <?php echo $lang->_('wtf') ?> <br />
+    <h2>languages</h2>
+    <pre>Arquivo em: <?php echo APP . DS . 'languages' ?></pre>
+    <?php echo $html->link(t('Português'), '/lang/change/pt-br') ?> | 
+    <?php echo $html->link(t('Inglês'), '/lang/change/en-us') ?><br>
+    
+    <?php echo t('wtf') ?> | <?php echo t('test') ?><br />
   </div>
 </div>

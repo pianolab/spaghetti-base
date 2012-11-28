@@ -19,6 +19,9 @@ class AppController extends Controller {
 
     // set the history url
     $this->setUrlHistory();
+
+    // set the array lang
+    $this->arrayLang();
     
     // Document Root para UPLOADS
     $this->document_root = $_SERVER['DOCUMENT_ROOT'] . '/';
@@ -57,7 +60,7 @@ class AppController extends Controller {
    * na sessão
    *
    * @return void
-   * @author Djalma Araújo
+   * @author Diogo Caetano
    */
   private function setUrlHistory() {
     Session::write('uri.history.current', Mapper::here());
@@ -78,6 +81,37 @@ class AppController extends Controller {
     $this->uri['previous'] = Session::read('uri.history.previous');   
 
     $this->arrView['uri'] = $this->uri;
+  }
+
+  /**
+   * Seta a array de tradução
+   * na sessão
+   *
+   * @return void
+   * @author Walmir Neto
+   */
+  private function arrayLang() {
+
+    $path = APP . DS . 'languages';
+
+    $list = new RecursiveDirectoryIterator($path);
+    $recursive = new RecursiveIteratorIterator($list);
+
+    foreach($recursive as $folder){
+      if (!in_array($folder->getFilename(), array('.', '..', 'alias.php'))) {
+        $key = str_replace($path . DS, '', $folder->getPathname());
+        $key = str_replace('.php', '', $key);
+
+        include_once $folder->getPathname();
+        
+        if (isset($language)) {
+          $array_lang[$key] = $language;
+        }
+        unset($language);
+      }
+    }
+
+    Session::write('array_lang', $array_lang);
   }
   
   /**
