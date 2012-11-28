@@ -3,6 +3,7 @@ class AppController extends Controller {
 
   public $layout = 'default';
   public $arrView = array();
+  public $uri = array();
   public $components = array('ImageResize');
   public $logged = null;
   public $helpers = array('Html', 'Form', 'Date', 'Pagination', 'Text', 'Flash', 'Lang', 'Textile');
@@ -18,9 +19,6 @@ class AppController extends Controller {
 
     // set the history url
     $this->setUrlHistory();
-
-    // Histórico da última URL
-    $this->urlHistory = Session::read('urlHistory');
     
     // Document Root para UPLOADS
     $this->document_root = $_SERVER['DOCUMENT_ROOT'] . '/';
@@ -52,8 +50,7 @@ class AppController extends Controller {
   private function pageTitle($title = null) {
     $compl = ($title) ? ' » ' . $title : '';
     $this->set('page_title', Config::read('app.name') . $compl);
-  }  
-  
+  }
   
   /**
    * Seta a última URL acessada
@@ -63,18 +60,24 @@ class AppController extends Controller {
    * @author Djalma Araújo
    */
   private function setUrlHistory() {
+    Session::write('uri.history.current', Mapper::here());
     
-    $urlHistory = Session::read('urlHistory');
-    
-    empty($urlHistory) ? $urlHistory = array() : '' ; 
+    $uri = Session::read('uri.history');
+    $uri = is_array($uri) ? $uri : array($uri);
 
-    if($urlHistory[0] !== Mapper::here())
-      array_unshift( $urlHistory , Mapper::here());
-
-    (count($urlHistory) > 5) ?  array_pop($urlHistory) : '' ;
+    if($uri[0] !== Mapper::here()) {
+      array_unshift($uri , Mapper::here());
+      Session::write('uri.history.previous', $uri[1]);
+    }
+    if(count($uri) > 2) array_pop($uri);
      
-    Session::write('urlHistory', $urlHistory);
-   
+    Session::write('uri.history', $uri);
+
+    // Histórico da última URL
+    $this->uri['current'] = Session::read('uri.history.current');
+    $this->uri['previous'] = Session::read('uri.history.previous');   
+
+    $this->arrView['uri'] = $this->uri;
   }
   
   /**
