@@ -19,9 +19,13 @@ class YoutubeHelper extends Helper {
 
   public $viewCount = false;
 
-  function thumb($url)
+/**
+ * @var String $url Link do youtube (http://www.youtube.com/watch?v=<id-do-video>, http://youtu.be/<id-do-video>)
+ * @var String $format (0, 1, 2, 3, default, hqdefault, mqdefault, maxresdefault)
+ */
+  function thumb($url, $format = 0)
   {
-    return "http://img.youtube.com/vi/" .$this->returnId($url) . "/3.jpg";
+    return 'http://img.youtube.com/vi/' .$this->returnId($url) . '/' . $format . '.jpg';
   }
   
   function getId($url)
