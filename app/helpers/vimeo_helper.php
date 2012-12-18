@@ -15,4 +15,9 @@ class VimeoHelper extends Helper {
     
     return $id;
   }
+
+  function getUrl($url)
+  {
+    return 'http://player.vimeo.com/video/' . $this->getId($url);
+  }
 }
