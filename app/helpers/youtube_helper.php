@@ -4,18 +4,16 @@
  *  Criado por Agência Pianolab - http://www.pianolab.com.br
  *  @license http://www.opensource.org/licenses/mit-license.php
  *  @copyright Copyright 2008-2009, Spaghetti* Framework http://spaghettiphp.org/
- *
- * Usage on views
- *  <?php 
- *  echo $this->element('shared/youtube', array(
- *    'width' => '970', 
- *    'height' => '475', 
- *    'url_video' => $youtube->getUrl($url_video)
- *  )); 
- *  ?>
- *
  */
-class YoutubeHelper extends Helper {
+
+/*
+ * Usage on views
+  <?php echo $this->element('shared/youtube', array(
+    'width' => '970', 'height' => '475',
+    'url_video' => $youtube->getUrl($url_video)
+  )); ?>
+*/
+class YoutubeHelper extends HtmlHelper {
 
   public $viewCount = false;
 
@@ -26,6 +24,11 @@ class YoutubeHelper extends Helper {
   function thumb($url, $format = 0)
   {
     return 'http://img.youtube.com/vi/' .$this->returnId($url) . '/' . $format . '.jpg';
+  }
+
+  function image($url, $format = 0, $options = array())
+  {
+    return parent::image($this->thumb($url, $format), $options);
   }
   
   function getId($url)

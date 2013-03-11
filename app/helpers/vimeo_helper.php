@@ -1,11 +1,17 @@
 <?php
-class VimeoHelper extends Helper {
+class VimeoHelper extends HtmlHelper {
   function thumb($url, $size = 'medium'){
     
     $id = $this->getId($url);
-    
-    $request = json_decode(file_get_contents("http://vimeo.com/api/v2/video/" . $id . ".json"), true);
+    if (isset($id)) {
+      $request = json_decode(file_get_contents("http://vimeo.com/api/v2/video/" . $id . ".json"), true);
+    }
     return (String) $request[0]['thumbnail_' . $size];
+  }
+
+  function image($url, $format = 'medium', $options = array())
+  {
+    return parent::image($this->thumb($url, $format), $options);
   }
 
   function getId($url){
