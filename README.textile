@@ -1,5 +1,21 @@
-h1. pianolab.base (SpaghettiPHP framework + Bootstrap, from Twitter (v2.0.2))
+= pianolab.base (SpaghettiPHP framework + Bootstrap, from Twitter (v2.0.2))
 
+Spaghetti* is a framework written in PHP to help make your day-to-day life more productive and fun.
 
-bq. piano.base @pianolabweb. It's released under the MIT license.
+== Contains
+
+Full MVC Structure (Spaghetti Framework)
+Full bootstrap + JS plugins + GRID system (Bootstrap, from Twitter)
+E-mail Component (Swift Mailer)
+Text, Date, Currency, Youtube.. Helpers
+Lot of snippets (Facebook tags, Analytics, mobile favicons, pagination example)
+
+== HtmlHelper
+  
+  <?php echo $html->tag('p','content for tag', array('class' => 'class-name')) ?>
+  <p class="class-name">content for tag</p>
+
+== Copyright
+
+piano.base @pianolabweb. It's released under the MIT license
 

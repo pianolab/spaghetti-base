@@ -9,6 +9,8 @@
   </div>
 
   <div class="span6">
+    <?php echo $html->tag('p','content for tag', array('class' => 'class-name')) ?>
+
     <h2>Contains</h2>
     <ul>
       <li>Full MVC Structure (Spaghetti Framework)</li>
