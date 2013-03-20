@@ -21,8 +21,8 @@ Creates HTML tags for opening and closing containing some content.
 * @param +boolean+ $empty True to create an empty tag
 * @return +string+ HTML tag with its contents
 
-  $html->tag('p','content for tag', array('class' => 'class-name'));
-  # <p class="class-name">content for tag</p>
+    $html->tag('p','content for tag', array('class' => 'class-name'));
+    # <p class="class-name">content for tag</p>
 
 Create image
 
