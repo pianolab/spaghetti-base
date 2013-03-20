@@ -14,11 +14,11 @@ Lot of snippets (Facebook tags, Analytics, mobile favicons, pagination example)
 
 <b>Creating tags in general</b>
 
-- @param +string+ $tag Tag to be created <br />
-- @param +string+ $content Content between the tags inserted <br />
-- @param +array+ $attr Tag's attributes <br />
-- @param +boolean+ $empty True to create an empty tag <br />
-- @return +string+ HTML tag with its contents <br />
+@param +string+ $tag Tag to be created <br />
+@param +string+ $content Content between the tags inserted <br />
+@param +array+ $attr Tag's attributes <br />
+@param +boolean+ $empty True to create an empty tag <br />
+@return +string+ HTML tag with its contents <br />
 <tt>tag($tag, $content, $attr, $empty)</tt>
 
 Creates HTML tags for opening and closing containing some content.
