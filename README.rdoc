@@ -21,8 +21,7 @@ Lot of snippets (Facebook tags, Analytics, mobile favicons, pagination example)
 
 Creates HTML tags for opening and closing containing some content.
 
-  $html->tag('p','content for tag', array('class' => 'class-name'));
-  # <p class="class-name">content for tag</p>
+  $html->tag('p','content for tag', array('class' => 'class-name')); # <p class="class-name">content for tag</p>
 
 Create image
 
