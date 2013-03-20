@@ -29,6 +29,8 @@ Creates HTML tags for opening and closing containing some content.
 
 <b>Creating link</b>
 
+<tt>function link($text, $url = null, $attr = array(), $full = false)</tt>
+
 - <b>@params</b>
   - <tt>String $text</tt> Content link
   - <tt>String $url</tt> URL relative to the application root
@@ -37,7 +39,6 @@ Creates HTML tags for opening and closing containing some content.
 - <b>@return</b>
   - <tt>String</tt> HTML Link
 
-<tt>function link($text, $url = null, $attr = array(), $full = false)</tt>
 
 Creates a link to be used in the application.
 
