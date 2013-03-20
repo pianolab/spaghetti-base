@@ -9,7 +9,7 @@
   </div>
 
   <div class="span6">
-    <?php echo $html->link('Google','http://google.com', array('target' => '_blank')) ?>
+    <?php echo $html->image('http://google.com/logo.png', array('title' => 'Sample picture')) ?>
 
     <h2>Contains</h2>
     <ul>

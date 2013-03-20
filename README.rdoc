@@ -14,13 +14,14 @@ Lot of snippets (Facebook tags, Analytics, mobile favicons, pagination example)
 
 <b>Creating tags in general</b>
 
-- @param +String+ $tag Tag to be created;
-- @param +String+ $content Content between the tags inserted;
-- @param +Array+ $attr Tag's attributes;
-- @param +Boolean+ $empty True to create an empty tag;
-- @return +String+ HTML tag with its contents.
-
 <tt>tag($tag, $content, $attr, $empty)</tt>
+
+- <b>@params</b>
+  - <tt>String $tag</tt> Tag to be created;
+  - <tt>String $content</tt> Content between the tags inserted;
+  - <tt>Array $attr</tt> Tag's attributes;
+  - <tt>Boolean $empty</tt> True to create an empty tag;
+- <b>@return</b>: <tt>String</tt> HTML tag with its contents.
 
 Creates HTML tags for opening and closing containing some content.
 
@@ -29,7 +30,7 @@ Creates HTML tags for opening and closing containing some content.
 
 <b>Creating link</b>
 
-<tt>function link($text, $url = null, $attr = array(), $full = false)</tt>
+<tt>link($text, $url = null, $attr = array(), $full = false)</tt>
 
 - <b>@params</b>
   - <tt>String $text</tt> Content link
@@ -52,6 +53,31 @@ Creates HTML tags for opening and closing containing some content.
 
     $html->link('Google','http://google.com', array('target' => '_blank'));
     # return <a target="_blank" href="http://google.com">Google</a>
+
+<b>Creating image</b>
+
+<tt>image($src, $attr = array(), $full = false)</tt>
+
+- <b>@params</b>
+  - <tt>String $url</tt> Path image
+  - <tt>Array $attr</tt> Tag attributes
+  - <tt>Boolean $full</tt> True to generate a complete URL
+- <b>@return</b>: <tt>String</tt> HTML image to be inserted
+
+- With complete URL
+
+    $html->image('/picture.png', array('title' => 'Sample picture'), true);
+    # return <img alt="" title="Sample picture" src="http://domain.com/images/picture.png">
+
+- With incomplete URL
+
+    $html->image('/picture.png', array('title' => 'Sample picture'));
+    # return <img alt="" title="Sample picture" src="/images/picture.png">
+
+- With remote URL
+
+    $html->image('http://google.com/logo.png', array('title' => 'Google picture'));
+    # return <img alt="" title="Google picture" src="http://google.com/logo.png">
 
 == Copyright
 
