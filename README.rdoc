@@ -12,6 +12,8 @@ Lot of snippets (Facebook tags, Analytics, mobile favicons, pagination example)
 
 == HtmlHelper
 
+*Create tags in generals*
+
 * @param +string+ $tag Tag to be created
 * @param +string+ $content Content between the tags inserted
 * @param +array+ $attr Tag's attributes
@@ -21,9 +23,10 @@ Lot of snippets (Facebook tags, Analytics, mobile favicons, pagination example)
 
 Creates HTML tags for opening and closing containing some content.
 
-  $html->tag('p','content for tag', array('class' => 'class-name')); # <p class="class-name">content for tag</p>
+  $html->tag('p','content for tag', array('class' => 'class-name')); 
+  # return <p class="class-name">content for tag</p>
 
-Create image
+*Create image*
 
 == Copyright
 
