@@ -79,6 +79,24 @@ Creates HTML tags for opening and closing containing some content.
     $html->image('http://google.com/logo.png', array('title' => 'Google picture'));
     # return <img alt="" title="Google picture" src="http://google.com/logo.png">
 
+<b>Insert stylesheet</b>
+
+<tt>stylesheet($href, $attr, $inline, $full)</tt>
+
+- <b>@params</b>
+  - <tt>String $href</tt> path of the style sheet to be inserted into the HTML
+  - <tt>Array $attr</tt> Attributes tag
+  - <tt>Boolean $inline</tt> True to print stylesheet inline
+  - <tt>Boolean $empty</tt> True to generate a complete URL
+- <b>@return</b>: <tt>String</tt> element stylesheet to be used.
+
+Creates sheet elements style for use in HTML.
+
+  $html->stylesheet(array('screen'), array(), false); 
+  # return <link href="/styles/screen.css" rel="stylesheet" type="text/css" />
+
+Obs: <i>only use the echo <tt>if $inline == true</tt></i>
+
 == Copyright
 
 piano.base @pianolabweb. It's released under the MIT license
