@@ -9,7 +9,7 @@
   </div>
 
   <div class="span6">
-    <?php echo $html->tag('p','content for tag', array('class' => 'class-name')) ?>
+    <?php echo $html->link('Home','/home', array('title' => 'Go to the home'), true) ?>
 
     <h2>Contains</h2>
     <ul>

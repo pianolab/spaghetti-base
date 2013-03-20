@@ -14,11 +14,12 @@ Lot of snippets (Facebook tags, Analytics, mobile favicons, pagination example)
 
 <b>Creating tags in general</b>
 
-@param +string+ $tag Tag to be created <br />
-@param +string+ $content Content between the tags inserted <br />
-@param +array+ $attr Tag's attributes <br />
-@param +boolean+ $empty True to create an empty tag <br />
-@return +string+ HTML tag with its contents <br />
+- @param +string+ $tag Tag to be created;
+- @param +string+ $content Content between the tags inserted;
+- @param +array+ $attr Tag's attributes;
+- @param +boolean+ $empty True to create an empty tag;
+- @return +string+ HTML tag with its contents.
+
 <tt>tag($tag, $content, $attr, $empty)</tt>
 
 Creates HTML tags for opening and closing containing some content.
@@ -26,7 +27,25 @@ Creates HTML tags for opening and closing containing some content.
   $html->tag('p','content for tag', array('class' => 'class-name')); 
   # return <p class="class-name">content for tag</p>
 
-<b>Creating image</b>
+<b>Creating link</b>
+
+@ param string $ text Content link
+@ param string $ url URL relative to the application root
+@ param array $ attr Attributes tag
+@ param boolean $ full True to generate a complete URL
+@ return string HTML Link
+
+<tt>function link($text, $url = null, $attr = array(), $full = false)</tt>
+
+Creates a link to be used in the application.
+
+1. With complete URL
+  $html->link('Home','/home', array('title' => 'Go to the home'), true);
+  # return <a title="Go to the home" href="http://domain.com/home">Home</a>
+
+2. With incomplete URL
+  $html->link('Home','/home', array('title' => 'Go to the home'));
+  # return <a title="Go to the home" href="/home">Home</a>
 
 == Copyright
 
