@@ -43,8 +43,8 @@ Creates a link to be used in the application.
 
 - With complete URL
 
-  $html->link('Home','/home', array('title' => 'Go to the home'), true);
-  # return <a title="Go to the home" href="http://domain.com/home">Home</a>
+    $html->link('Home','/home', array('title' => 'Go to the home'), true);
+    # return <a title="Go to the home" href="http://domain.com/home">Home</a>
 
 - With incomplete URL
 
