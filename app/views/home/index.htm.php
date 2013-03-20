@@ -9,7 +9,7 @@
   </div>
 
   <div class="span6">
-    <?php echo $html->link('Home','/home', array('title' => 'Go to the home'), true) ?>
+    <?php echo $html->link('Google','http://google.com', array('target' => '_blank')) ?>
 
     <h2>Contains</h2>
     <ul>
