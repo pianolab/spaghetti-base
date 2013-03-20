@@ -95,7 +95,25 @@ Creates sheet elements style for use in HTML.
   $html->stylesheet(array('screen'), array(), false); 
   # return <link href="/styles/screen.css" rel="stylesheet" type="text/css" />
 
-Obs: <i>only use the echo <tt>if $inline == true</tt></i>
+<b>Obs</b>: <i>only use the echo <tt>if $inline == true</tt></i>
+
+<b>Insert javascript</b>
+
+<tt>script($src, $attr, $inline, $full)</tt>
+
+- <b>@params</b>
+  - <tt>String $src</tt> Path to the script in HTML inseido
+  - <tt>Array $attr</tt> Attributes tag
+  - <tt>Boolean $inline</tt> True to print the inline script
+  - <tt>Boolean $empty</tt> True to generate a complete URL
+- <b>@return</b>: <tt>String</tt> Element script to be used
+
+Creates a script element to be used in HTML.
+
+  $html->script(array('jquery'), array(), false); 
+  # return <script src="/scripts/jquery.js" type="text/javascript"></script>
+
+<b>Obs</b>:<i> only use the echo <tt>if $inline == true</tt></i>
 
 == Copyright
 

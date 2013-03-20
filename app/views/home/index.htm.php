@@ -10,7 +10,7 @@
 
   <div class="span6">
     <?php echo $html->image('http://google.com/logo.png', array('title' => 'Sample picture')) ?>
-    <?php $html->stylesheet(array('src'), array(), true); ?>
+    <?php $html->script(array('screen'), array(), false); ?>
 
     <h2>Contains</h2>
     <ul>
