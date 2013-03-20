@@ -11,15 +11,15 @@ Text, Date, Currency, Youtube.. Helpers
 Lot of snippets (Facebook tags, Analytics, mobile favicons, pagination example)
 
 == HtmlHelper
-+tag($tag, $content, $attr, $empty)+
+<tt>tag($tag, $content, $attr, $empty)</tt>
 
 Creates HTML tags for opening and closing containing some content.
 
-@param +string+ $tag Tag to be created
-@param +string+ $content Content between the tags inserted
-@param +array+ $attr Tag's attributes
-@param +boolean+ $empty True to create an empty tag
-@return +string+ HTML tag with its contents
+* @param +string+ $tag Tag to be created
+* @param +string+ $content Content between the tags inserted
+* @param +array+ $attr Tag's attributes
+* @param +boolean+ $empty True to create an empty tag
+* @return +string+ HTML tag with its contents
 
   $html->tag('p','content for tag', array('class' => 'class-name'));
   # <p class="class-name">content for tag</p>
