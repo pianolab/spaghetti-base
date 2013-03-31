@@ -4,7 +4,8 @@
 * @copyright Copyright 2008-2009, Spaghetti* Framework (http://spaghettiphp.org/)
 */ 
 
-require_once 'lib/utils/m2brimagem.class.php';
+require_once APP . DS . 'vendor' . DS . 'image_resize' . DS . 'm2brimagem.class.php';
+
 class ImageResizeComponent extends Component
 {
   // Allowed extensions

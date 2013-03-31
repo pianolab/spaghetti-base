@@ -1,7 +1,7 @@
 <?php
 
-require_once 'lib/utils/Mailer.php';
-  
+require_once APP . DS . 'vendor' . DS . 'mailer' . DS . 'Mailer.php';
+
 class ContactController extends AppController {
   
   /**

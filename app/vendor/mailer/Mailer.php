@@ -1,6 +1,6 @@
 <?php
 
-require_once 'lib/utils/Swift/swift_required.php';
+require_once APP . DS . 'vendor' . DS . 'mailer' . DS . 'Swift' . DS . 'swift_required.php';
 
 class Mailer {
     protected $from;
