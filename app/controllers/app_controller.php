@@ -35,10 +35,12 @@ class AppController extends Controller {
    * @author Djalma Araújo
    */
   public function beforeRender() {
-        
+
     // Page title default
-    if (!$this->arrView['page_title'])  $this->pageTitle('');
-        
+    if ($this->arrView['page_title']) { 
+      $this->pageTitle($this->arrView['page_title']); 
+    }
+
     // To we don't have to repeat the set function with arrView variable.
     $this->set($this->arrView);
   }
@@ -50,9 +52,9 @@ class AppController extends Controller {
    * @return void
    * @author Djalma Araújo
    */
-  private function pageTitle($title = null) {
-    $compl = ($title) ? ' » ' . $title : '';
-    $this->set('page_title', Config::read('app.name') . $compl);
+  protected function pageTitle($title = null) {
+    $compl = ($title) ? $title . ' » ' : '';
+    $this->set('page_title', $compl . Config::read('app.name'));
   }
   
   /**
