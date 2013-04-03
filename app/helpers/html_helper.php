@@ -103,6 +103,12 @@ class HtmlHelper extends Helper {
      *  @return string HTML da imagem a ser inserida
      */
     public function image($src, $attr = array(), $full = false) {
+        $figure = is_array($attr['figure']) ? $attr['figure'] : array();
+        $before = $attr['before'];
+        $after = $attr['after'];
+        unset($attr['figure'], $attr['before'], $attr['after']);
+
+
         $attr = array_merge(
             array(
                 "alt" => "",
@@ -110,11 +116,22 @@ class HtmlHelper extends Helper {
             ),
             $attr
         );
-        if(!$this->external($src)):
-            $src = Mapper::url("/images/" . $src, $full);
-        endif;
+        
+        if (!$this->external($src)) $src = Mapper::url("/images/" . $src, $full);
+
         $attr["src"] = $src;
-        return $this->output($this->tag("img", null, $attr, true));
+
+        $before = !empty($before) ? $this->tag("div", $before) : null;
+
+        $image = $this->tag("img", null, $attr, true);
+
+        $after = !empty($after) ? $this->tag("div", $after) : null;
+
+        $content = $this->output($before . $image . $after);
+
+        $return = $figure === false ? $content : $this->tag("figure", $content, $figure);
+
+        return $this->output($return);
     }
     /**
       *  Short description.
