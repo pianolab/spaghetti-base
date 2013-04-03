@@ -50,7 +50,7 @@ class AppController extends Controller {
    *
    * @param string $title 
    * @return void
-   * @author Djalma Araújo
+   * @author Walmir Neto
    */
   protected function pageTitle($title = null) {
     $compl = ($title) ? $title . ' » ' : '';
@@ -64,7 +64,7 @@ class AppController extends Controller {
    * @return void
    * @author Diogo Caetano
    */
-  private function setUrlHistory() {
+  protected function setUrlHistory() {
     Session::write('uri.history.current', Mapper::here());
     
     $uri = Session::read('uri.history');
@@ -92,7 +92,7 @@ class AppController extends Controller {
    * @return void
    * @author Walmir Neto
    */
-  private function arrayLang() {
+  protected function arrayLang() {
 
     $path = APP . DS . 'languages';
 
