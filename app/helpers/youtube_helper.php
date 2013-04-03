@@ -8,10 +8,7 @@
 
 /*
  * Usage on views
-  <?php echo $this->element('shared/youtube', array(
-    'width' => '970', 'height' => '475',
-    'url_video' => $youtube->getUrl($url_video)
-  )); ?>
+  <?php echo $youtube->show($video["url"], array('width' => '537', 'height' => '361')) ?>
 */
 class YoutubeHelper extends HtmlHelper {
 
@@ -21,31 +18,51 @@ class YoutubeHelper extends HtmlHelper {
  * @var String $url Link do youtube (http://www.youtube.com/watch?v=<id-do-video>, http://youtu.be/<id-do-video>)
  * @var String $format (0, 1, 2, 3, default, hqdefault, mqdefault, maxresdefault)
  */
-  function thumb($url, $format = 0)
+  public function thumb($url, $format = 0)
   {
-    return 'http://img.youtube.com/vi/' .$this->returnId($url) . '/' . $format . '.jpg';
+    return "http://img.youtube.com/vi/" .$this->returnId($url) . "/" . $format . ".jpg";
   }
 
-  function image($url, $format = 0, $options = array())
+  public function show($url, $params = array())
   {
-    return parent::image($this->thumb($url, $format), $options);
+    $params = array_merge(array(
+      "width" => "537", 
+      "height" => "361",
+      "src" => $url, 
+      "frameborder" => 0, 
+      "allowfullscreen" => "allowfullscreen"
+    ), $params);
+
+    return $this->tag("iframe", null, $params);
+  }
+
+  public function image($video, $attr = array(), $full = false)
+  {
+    $video_url = is_array($video) ? $this->thumb($video["url"], $video["format"]) : $this->thumb($video, 0);
+    return parent::image($video_url, $attr, $full);
+  }
+
+  public function imageLink($video, $link_url, $img_attr = array(), $attr = array(), $full = false)
+  {
+    $video_url = is_array($video) ? $this->thumb($video["url"], $video["format"]) : $this->thumb($video, 0);
+    return parent::imageLink($video_url, $link_url, $img_attr, $attr, $full);
   }
   
-  function getId($url)
+  public function getId($url)
   {
     return $this->returnId($url);
   }
 
-  function getUrl($url)
+  public function getUrl($url)
   {
-    return 'http://www.youtube.com/v/' . $this->returnId($url) . '?version=3&amp;hl=pt_BR';
+    return "http://www.youtube.com/v/" . $this->returnId($url) . "?version=3&amp;hl=pt_BR";
   }
 
-  function getViewCount($url)
+  public function getViewCount($url)
   {
-    $json = file_get_contents('https://gdata.youtube.com/feeds/api/videos?q=' . $this->returnId($url) . '&alt=json');
+    $json = file_get_contents("https://gdata.youtube.com/feeds/api/videos?q=" . $this->returnId($url) . "&alt=json");
     $json = json_decode($json);
-    $this->viewCount = $json->{'feed'}->{'entry'}[0]->{'yt$statistics'}->{'viewCount'};
+    $this->viewCount = $json->{"feed"}->{"entry"}[0]->{"yt$statistics"}->{"viewCount"};
 
     return $this->viewCount;
   }
@@ -56,10 +73,10 @@ class YoutubeHelper extends HtmlHelper {
     $strings = explode("&",$arr[1]);
     $return = false;
     foreach ($strings as $key => $string) {
-      $aux = explode('=', $string);
+      $aux = explode("=", $string);
       $return[$aux[0]] = $aux[1];
     } # endforeach;
-    $return = $return['v'];
+    $return = $return["v"];
 
     if ($return) {
       return $return;
@@ -79,8 +96,8 @@ class YoutubeHelper extends HtmlHelper {
       $arr = explode("/www.youtube.com/", $url);
       $strings = explode("/",$arr[1]);
       foreach ($strings as $key => $string) {
-        if ($string == 'v') {
-          $return = current(explode('&', $strings[$key + 1]));
+        if ($string == "v") {
+          $return = current(explode("&", $strings[$key + 1]));
           break;
         } # endif;
       } # endforeach;
