@@ -1,0 +1,11 @@
+/* ------------------------------------
+  CSS Desenvolvido pela
+  Pianolab | www.pianolab.com.br
+    Author: Luiz Paulo Valença| luizpaulo165@gmail.com
+    Author: Walmir Neto| wfsneto@gmail.com
+  Ultima Atualização:
+  Alterado Por:
+    Favor usar a mesma semântica.
+------------------------------------ */
+::-moz-selection{background:#fe57a1;color:#fff;text-shadow:none}::-webkit-selection{background:#fe57a1;color:#fff;text-shadow:none}::-o-selection{background:#fe57a1;color:#fff;text-shadow:none}::-ms-selection{background:#fe57a1;color:#fff;text-shadow:none}::selection{background:#fe57a1;color:#fff;text-shadow:none}.radius{border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;-o-border-radius:8px;-ms-border-radius:8px}.shadow{box-shadow:4px 5px 0 #F1F1F1;-moz-box-shadow:4px 5px 0 #F1F1F1;-webkit-box-shadow:4px 5px 0 #F1F1F1;-o-box-shadow:4px 5px 0 #F1F1F1;-ms-box-shadow:4px 5px 0 #F1F1F1}.transition{transition:.2s;-moz-transition:.2s;-webkit-transition:.2s;-o-transition:.2s;-ms-transition:.2s}.noMarginTop{margin-top:0!important}.noMarginRight{margin-right:0!important}.noMarginBottom{margin-bottom:0!important}.noMarginLeft{margin-left:0!important}.noPaddingTop{padding-top:0!important}.noPaddingRight{padding-right:0!important}.noPaddingBottom{padding-bottom:0!important}.noPaddingLeft{padding-left:0!important}.noBg{background:none!important}.noBorderTop{border-top:0!important}.noBorderRight{border-right:0!important}.noBorderBottom{border-bottom:0!important}.noBorderLeft{border-left:0!important}footer{display:block}
+/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */

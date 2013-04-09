@@ -8,15 +8,107 @@
     Favor usar a mesma semântica.
 ------------------------------------ */ 
 /* =============================================================================
+  Geral
+========================================================================== */
+::-moz-selection {background:#fe57a1;color:#fff;text-shadow:none}
+::-webkit-selection {background:#fe57a1;color:#fff;text-shadow:none}
+::-o-selection {background:#fe57a1;color:#fff;text-shadow:none}
+::-ms-selection {background:#fe57a1;color:#fff;text-shadow:none}
+::selection {background:#fe57a1;color:#fff;text-shadow:none}
+/* =============================================================================
+   Variaveis
+========================================================================== */
+  // variaveis para efeitos visuais
+  @gRadius: 8px;
+  @gShadow: 4px 5px 0px #F1F1F1;
+  @gBg: #fff;
+  @gTransiton:0.2s;
+  @gRotation:0.2s;
+  //variaveis para funcoes gerais
+  @hidden: hidden;
+  @clear: clear;
+  @block: block;
+  @inline: inline;
+  @inlineBlock: inline-block;
+    //bordas
+    @border: hidden;
+/* =============================================================================
+   Geral
+========================================================================== */
+.radius (@radius: 8px){
+  border-radius:@radius;
+  -moz-border-radius:@radius;
+  -webkit-border-radius:@radius;
+  -o-border-radius:@radius;
+  -ms-border-radius:@radius;
+}
+.shadow (@shadow: 4px 5px 0px #F1F1F1){
+  box-shadow:@shadow;
+  -moz-box-shadow:@shadow;
+  -webkit-box-shadow:@shadow;
+  -o-box-shadow:@shadow;
+  -ms-box-shadow:@shadow;
+}
+.textShadow (@textShadow: 0px 1px 0px #000000){
+  text-shadow:@textShadow;
+  -moz-text-shadow:@textShadow;
+  -webkit-text-shadow:@textShadow;
+  -o-text-shadow:@textShadow;
+  -ms-text-shadow:@textShadow;
+}
+.transition (@transiton:0.2s){
+  transition:@transiton;
+  -moz-transition:@transiton;
+  -webkit-transition:@transiton;
+  -o-transition:@transiton;
+  -ms-transition:@transiton;
+}
+.rotation (@rotation:0.2s){
+  transform:rotate(valuedeg);
+  -moz-transform:rotate(valuedeg);
+  -webkit-transform:rotate(valuedeg);
+  -o-transform:rotate(valuedeg);
+  -ms-transform:rotate(valuedeg);
+}
+/* margins */
+.noMarginTop{margin-top:0px!important;}
+.noMarginRight{margin-right:0px!important;}
+.noMarginBottom{margin-bottom:0px!important;}
+.noMarginLeft{margin-left:0px!important;}
+/* padding */
+.noPaddingTop{padding-top:0px!important;}
+.noPaddingRight{padding-right:0px!important;}
+.noPaddingBottom{padding-bottom:0px!important;}
+.noPaddingLeft{padding-left:0px!important;}
+/* noBg */
+.noBg{background:none!important;}
+/* border */
+.noBorderTop{border-top:0px!important;}
+.noBorderRight{border-right:0px!important;}
+.noBorderBottom{border-bottom:0px!important;}
+.noBorderLeft{border-left:0px!important;}
+
+/* =============================================================================
   Typography
 ========================================================================== */
+// variaveis para fontes
+  @fontItalic:/*exemplo:font-family"ArialItalic" */;
+  @fontBold:/*exemplo:font-family"ArialBold" */;
+  @fontLight:/*exemplo:font-family"ArialLight" */;
+  @fontExtraBold:/*exemplo:font-family"ArialBold" */;
 
 /* =============================================================================
   Container
 ========================================================================== */
-.container{}
+body{
+  background:@gBg;
+}
+#container{
+  display:@block;
+  overflow:@hidden;
+}
 
 /* =============================================================================
   footer
 ========================================================================== */
-footer{display:block;}
+footer{display:@block;}
