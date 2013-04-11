@@ -49,7 +49,7 @@ class LangHelper extends HtmlHelper {
   private function translate($string, $file_name)
   {
     $current_file = !empty($file_name) ? $file_name : $this->file;
-    $translate = $this->array[$this->lang . '/' . $current_file][$string];
+    $translate = $this->array[$this->lang . DS . $current_file][$string];
 
     if (!isset($translate)) {
       return $string;
