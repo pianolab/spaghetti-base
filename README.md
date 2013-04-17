@@ -217,9 +217,9 @@ $html->script(array('jquery'), array(), false);
 
 <tt>create($action, $options)</tt>
 - <b>@params</b>
-  - <tt>string $action</tt> Path to the script in HTML inseido
+  - <tt>string $action</tt> Current action model
   - <tt>array $options</tt> Attributes tag
-- <b>@return</b>: <tt>string</tt> Element script to be used
+- <b>@return</b>: <tt>string</tt> FORM tag open and formatted
 
 Returns an HTML element of the form formatted.
 
@@ -228,6 +228,31 @@ $form->create('/action', array('id' => 'form-id'));
 ```
 ```html
 <form method="post" action="http://domain.com/action" id="form-id">
+```
+
+<b>Close form</b>
+
+<tt>close($submit, $attributes)</tt>
+- <b>@params</b>
+  - <tt>string $submit</tt> Button and send the form
+  - <tt>array $attributes</tt> Attributes of button
+- <b>@return</b>: <tt>string</tt> Tag FORM fechada and button if exist
+
+Closes an HTML form element according to the attributes passed.
+
+```php
+$form->close('Send', array('class' => 'btn'));
+```
+```html
+  <button type="submit" class="btn">Send</button>
+</form>
+```
+or
+```php
+$form->close();
+```
+```html
+</form>
 ```
 
 ###Copyright

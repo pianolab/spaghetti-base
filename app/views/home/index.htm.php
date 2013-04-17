@@ -29,7 +29,7 @@ $form->create('/action', array('id' => 'form-id'));
 -->
 
 <hr>
-
+<?php echo $form->close('Send', array('class' => 'btn')); ?>
 <hr>
 
   
