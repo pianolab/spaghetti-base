@@ -112,25 +112,18 @@ $html->image('http://google.com/logo.png', array('alt' => 'Google picture'));
 </figure>
 ```
 
-- With text before
+- With text before or after
 
 ```php
-$html->image('http://google.com/logo.png', array('alt' => 'Google picture', 'before' => 'something before...'));
+$html->image('http://google.com/logo.png', array(
+  'alt' => 'Google picture', 
+  'before' => 'something before...', 
+  'after' => 'something after...'
+));
 ```
 ```html 
 <figure>
   <div>something before...</div>
-  <img alt="Google picture" title="Google picture" src="http://google.com/logo.png">
-</figure>
-```
-
-- With text after
-
-```php
-$html->image('http://google.com/logo.png', array('alt' => 'Google picture', 'after' => 'something after...'));
-```
-```html
-<figure>
   <img alt="Google picture" title="Google picture" src="http://google.com/logo.png">
   <div>something after...</div>
 </figure>
