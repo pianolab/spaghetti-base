@@ -4,7 +4,7 @@ class AppController extends Controller {
   public $layout = 'default';
   public $arrView = array();
   public $uri = array();
-  public $components = array('ImageResize');
+  public $components = array('ImageResize', 'Flash');
   public $logged = null;
   public $helpers = array('Html', 'Form', 'Date', 'Pagination', 'Text', 'Flash', 'Lang', 'Textile');
 

@@ -35,6 +35,7 @@
  */
 
 App::import("Helper", "html_helper");
+
 class FlashHelper extends HtmlHelper
 {
   public function flash($message = null)
@@ -49,9 +50,7 @@ class FlashHelper extends HtmlHelper
       $flash = $alert;
     endif;
     
-    if ($flash):
-      return $this->output($this->show($flash));
-    endif;
+    if ($flash) return $this->output($this->show($flash));
   }
   
   private function show($message)
@@ -65,19 +64,13 @@ class FlashHelper extends HtmlHelper
       $html_message = $message[1];
     endif;
     
-    $message[0] = (empty($message[0])) ? 'warning' : $message[0];
+    $message[0] = empty($message[0]) ? 'warning' : $message[0];
     $title = str_replace(array(
-      'warning',
-      'success',
-      'error',
-      'info',
-      'danger'
+      'warning', 'success', 'error',
+      'info','danger'
     ), array(
-      'Atenção!',
-      'Sucesso!',
-      'Erro!',
-      'Informação!',
-      'Erro!'
+      'Atenção!', 'Sucesso!', 'Erro!',
+      'Informação!', 'Erro!'
     ), $message[0]);
 
     $base_html .= $this->tag('script', "Prompts.openAlert('" . $message[0] . "','" . $html_message . "', '" . $title . "');", array('type' => 'text/javascript'));
@@ -87,9 +80,8 @@ class FlashHelper extends HtmlHelper
   /**
    * Shortcuts
    */
-  public function information($message = null, $title = null) { return $this->flash(array('info', $message, $title));  }
-  public function success($message = null, $title = null) { return $this->flash(array('success', $message, $title)); }
-  public function error($message = null, $title = null) { return $this->flash(array('error', $message, $title));  }
+  public function info($message = null, $title = null) { return $this->flash(array('info', $message, $title));  }
+  public function danger($message = null, $title = null) { return $this->flash(array('danger', $message, $title));  }
   public function warning($message = null, $title = null) { return $this->flash(array('warning', $message, $title)); }
-  
+  public function success($message = null, $title = null) { return $this->flash(array('success', $message, $title)); }
 }
