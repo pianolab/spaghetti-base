@@ -144,3 +144,75 @@ $html->image('http://google.com/logo.png', array('alt' => 'Google picture', 'fig
 ```html
 <img alt="Google picture" title="Google picture" src="http://google.com/logo.png">
 ```
+
+<b>Creating image with link</b>
+
+<tt>imagelink($src, $url, $img_attr, $attr, $full)</tt>
+
+- <b>@params</b>
+  - <tt>String $src</tt> path of the style sheet to be inserted into the HTML
+  - <tt>String $url</tt> URL relative to the application root
+  - <tt>Array $img_attr</tt> Attributes tag
+  - <tt>Array $attr</tt> True to print stylesheet inline
+  - <tt>Boolean $full</tt> True to generate a complete URL
+- <b>@return</b>: <tt>String</tt> element stylesheet to be used.
+
+```php
+$html->imagelink('http://google.com/logo.png', 'http://google.com', array('alt' => 'Google picture'));
+```
+```html
+<a href="http://google.com">
+  <figure>
+    <img alt="Google picture" title="Google picture" src="http://google.com/logo.png">
+  </figure>
+</a>
+```
+<b>Obs</b>: <i>All examples used in the method <code>image</code> can be used in the method <code>imagelink</code></i>
+
+<b>Insert stylesheet</b>
+
+<tt>stylesheet($href, $attr, $inline, $full)</tt>
+
+- <b>@params</b>
+  - <tt>String $href</tt> path of the style sheet to be inserted into the HTML
+  - <tt>Array $attr</tt> Attributes tag
+  - <tt>Boolean $inline</tt> True to print stylesheet inline
+  - <tt>Boolean $empty</tt> True to generate a complete URL
+- <b>@return</b>: <tt>String</tt> element stylesheet to be used.
+
+Creates sheet elements style for use in HTML.
+
+```php
+$html->stylesheet(array('screen'), array(), false); 
+```
+```html
+<link href="/styles/screen.css" rel="stylesheet" type="text/css" />
+```
+
+<b>Obs</b>: <i>only use the echo <tt>if $inline == true</tt></i>
+
+<b>Insert javascript</b>
+
+<tt>script($src, $attr, $inline, $full)</tt>
+
+- <b>@params</b>
+  - <tt>String $src</tt> Path to the script in HTML inseido
+  - <tt>Array $attr</tt> Attributes tag
+  - <tt>Boolean $inline</tt> True to print the inline script
+  - <tt>Boolean $empty</tt> True to generate a complete URL
+- <b>@return</b>: <tt>String</tt> Element script to be used
+
+Creates a script element to be used in HTML.
+
+```php
+$html->script(array('jquery'), array(), false); 
+```
+```html
+<script src="/scripts/jquery.js" type="text/javascript"></script>
+```
+
+<b>Obs</b>:<i> only use the echo <tt>if $inline == true</tt></i>
+
+###Copyright
+
+piano.base @pianolabweb. It's released under the MIT license
