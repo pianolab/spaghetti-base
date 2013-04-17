@@ -18,6 +18,20 @@
       <li>Lot of snippets (Facebook tags, Analytics, mobile favicons, pagination example)</li>
     </ul>
   </div>
+
+<!--
+```php
+$form->create('/action', array('id' => 'form-id'));
+```
+```html
+<form method="post" action="http://domain.com/action" id="form-id">
+```
+-->
+
+<hr>
+
+<hr>
+
   
   <div class="span12">
     <h2>languages</h2>

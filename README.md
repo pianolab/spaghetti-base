@@ -213,6 +213,26 @@ $html->script(array('jquery'), array(), false);
 
 <b>Obs</b>:<i> only use the echo <tt>if $inline == true</tt></i>
 
+### FormHelper
+
+<b>Create form</b>
+
+/**
+ *  Retorna um elemento HTML do formulário formatado.
+ * 
+ *  @param string $action Ação atual do modelo
+ *  @param array $options Atributos e opções da tag HTML
+ *  @return string Tag FORM aberto e formatado
+ */
+<tt>create($action, $options)</tt>
+
+```php
+$form->create('/action', array('id' => 'form-id'));
+```
+```html
+<form method="post" action="http://domain.com/action" id="form-id">
+```
+
 ###Copyright
 
 piano.base @pianolabweb. It's released under the MIT license
