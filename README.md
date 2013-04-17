@@ -45,7 +45,7 @@ Creates HTML tags for opening and closing containing some content.
 - With complete URL 
 
 ```php
-<?php echo $html->link('Home','/home', array('title' => 'Go to the home'), true); ?>
+echo $html->link('Home','/home', array('title' => 'Go to the home'), true);
 ```
 ```html
 <a title="Go to the home" href="http://domain.com/home">Home</a>
@@ -54,15 +54,16 @@ Creates HTML tags for opening and closing containing some content.
 - With incomplete URL
 
 ```php
-<?php echo $html->link('Home','/home', array('title' => 'Go to the home')); ?>
+$html->link('Home','/home', array('title' => 'Go to the home'));
 ```
 ```html
 <a title="Go to the home" href="/home">Home</a>
 ```
+
 - With remote URL
 
 ```php
-<?php echo $html->link('Google','http://google.com', array('target' => '_blank')); ?>
+$html->link('Google','http://google.com', array('target' => '_blank'));
 ```
 ```html
 <a target="_blank" href="http://google.com">Google</a>
