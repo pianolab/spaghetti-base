@@ -67,12 +67,18 @@ Creates HTML tags for opening and closing containing some content.
 - With complete URL
 
     $html->image('/picture.png', array('alt' => 'Sample picture'), true);
-    # return <figure><img alt="Google picture" title="Google picture" src="http://google.com/logo.png"></figure>
+    # return 
+    <figure>
+      <img alt="Google picture" title="Google picture" src="http://google.com/logo.png">
+    </figure>
 
 - With incomplete URL
 
     $html->image('/picture.png', array('alt' => 'Sample picture'));
-    # return <figure><img alt="Sample picture" title="Sample picture" src="/images/picture.png"></figure>
+    # return 
+    <figure>
+      <img alt="Sample picture" title="Sample picture" src="/images/picture.png">
+    </figure>
 
 - With remote URL
 
@@ -84,7 +90,7 @@ Creates HTML tags for opening and closing containing some content.
 
 - With text before
 
-    $html->image('http://google.com/logo.png', array('alt' => 'Google picture', 'before' => 'something before...'))
+    $html->image('http://google.com/logo.png', array('alt' => 'Google picture', 'before' => 'something before...'));
     # return 
     <figure>
       <div>something before...</div>
@@ -93,7 +99,7 @@ Creates HTML tags for opening and closing containing some content.
 
 - With text after
 
-    $html->image('http://google.com/logo.png', array('alt' => 'Google picture', 'after' => 'something after...'))
+    $html->image('http://google.com/logo.png', array('alt' => 'Google picture', 'after' => 'something after...'));
     # return 
     <figure>
       <img alt="Google picture" title="Google picture" src="http://google.com/logo.png">
@@ -102,7 +108,7 @@ Creates HTML tags for opening and closing containing some content.
 
 - Without figure
 
-    $html->image('http://google.com/logo.png', array('alt' => 'Google picture', 'figure' => false))
+    $html->image('http://google.com/logo.png', array('alt' => 'Google picture', 'figure' => false));
     # return <img alt="Google picture" title="Google picture" src="http://google.com/logo.png">
 
 <b>Insert stylesheet</b>
