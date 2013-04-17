@@ -32,3 +32,28 @@ Return
 ```html
 <p class="class-name">content for tag</p>
 ```
+<b>Creating link</b>
+
+<tt>link($text, $url = null, $attr = array(), $full = false)</tt>
+
+- <b>@params</b>
+  - <tt>String $text</tt> Content link
+  - <tt>String $url</tt> URL relative to the application root
+  - <tt>Array $attr</tt> Attributes tag
+  - <tt>Boolean $full</tt> True to generate a complete URL
+- <b>@return</b>: <tt>String</tt> HTML Link
+
+- With complete URL
+
+    $html->link('Home','/home', array('title' => 'Go to the home'), true);
+    # return <a title="Go to the home" href="http://domain.com/home">Home</a>
+
+- With incomplete URL
+
+    $html->link('Home','/home', array('title' => 'Go to the home'));
+    # return <a title="Go to the home" href="/home">Home</a>
+
+- With remote URL
+
+    $html->link('Google','http://google.com', array('target' => '_blank'));
+    # return <a target="_blank" href="http://google.com">Google</a>
