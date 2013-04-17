@@ -111,6 +111,29 @@ Creates HTML tags for opening and closing containing some content.
     $html->image('http://google.com/logo.png', array('alt' => 'Google picture', 'figure' => false));
     # return <img alt="Google picture" title="Google picture" src="http://google.com/logo.png">
 
+<b>Creating image with link</b>
+
+<tt>imagelink($src, $url, $img_attr, $attr, $full)</tt>
+
+- <b>@params</b>
+  - <tt>String $src</tt> path of the style sheet to be inserted into the HTML
+  - <tt>String $url</tt> URL relative to the application root
+  - <tt>Array $img_attr</tt> Attributes tag
+  - <tt>Array $attr</tt> True to print stylesheet inline
+  - <tt>Boolean $full</tt> True to generate a complete URL
+- <b>@return</b>: <tt>String</tt> element stylesheet to be used.
+
+
+  echo $html->imagelink('http://google.com/logo.png', 'http://google.com', array('alt' => 'Google picture'));
+  # return 
+  <a href="http://google.com">
+    <figure>
+      <img alt="Google picture" title="Google picture" src="http://google.com/logo.png">
+    </figure>
+  </a>
+
+<b>Obs</b>: <i>All examples used in the method <code>image</code> can be used in the method <code>imagelink</code></i>
+
 <b>Insert stylesheet</b>
 
 <tt>stylesheet($href, $attr, $inline, $full)</tt>

@@ -128,7 +128,7 @@ class HtmlHelper extends Helper {
 
         $content = $this->output($before . $image . $after);
 
-        $return = $figure == false ? $content : $this->tag("figure", $content, $figure);
+        $return = !isset($figure) ? $content : $this->tag("figure", $content, $figure);
 
         return $this->output($return);
     }
@@ -143,7 +143,6 @@ class HtmlHelper extends Helper {
       *  @return string
       */
     public function imagelink($src, $url, $img_attr = array(), $attr = array(), $full = false) {
-        
         return $this->link($this->image($src, $img_attr, $full), $url, $attr, $full);
     }
     /**
