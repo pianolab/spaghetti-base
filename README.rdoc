@@ -124,7 +124,7 @@ Creates HTML tags for opening and closing containing some content.
 - <b>@return</b>: <tt>String</tt> element stylesheet to be used.
 
 
-  $html->imagelink('http://google.com/logo.png', 'http://google.com', array('alt' => 'Google picture'));
+    $html->imagelink('http://google.com/logo.png', 'http://google.com', array('alt' => 'Google picture'));
   # return 
   <a href="http://google.com">
     <figure>
