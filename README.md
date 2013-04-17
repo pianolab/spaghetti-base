@@ -45,7 +45,7 @@ $html->tag('p','content for tag', array('class' => 'class-name'));
 - With complete URL 
 
 ```php
-echo $html->link('Home','/home', array('title' => 'Go to the home'), true);
+$html->link('Home','/home', array('title' => 'Go to the home'), true);
 ```
 ```html
 <a title="Go to the home" href="http://domain.com/home">Home</a>
