@@ -28,7 +28,6 @@ Creates HTML tags for opening and closing containing some content.
 ```php
 <?php echo $html->tag('p','content for tag', array('class' => 'class-name')); ?>
 ```
-Return
 ```html
 <p class="class-name">content for tag</p>
 ```
@@ -43,17 +42,28 @@ Return
   - <tt>Boolean $full</tt> True to generate a complete URL
 - <b>@return</b>: <tt>String</tt> HTML Link
 
-- With complete URL
+- With complete URL 
 
-    $html->link('Home','/home', array('title' => 'Go to the home'), true);
-    # return <a title="Go to the home" href="http://domain.com/home">Home</a>
+```php
+<?php echo $html->link('Home','/home', array('title' => 'Go to the home'), true); ?>
+```
+```html
+<a title="Go to the home" href="http://domain.com/home">Home</a>
+```
 
 - With incomplete URL
 
-    $html->link('Home','/home', array('title' => 'Go to the home'));
-    # return <a title="Go to the home" href="/home">Home</a>
-
+```php
+<?php echo $html->link('Home','/home', array('title' => 'Go to the home')); ?>
+```
+```html
+<a title="Go to the home" href="/home">Home</a>
+```
 - With remote URL
 
-    $html->link('Google','http://google.com', array('target' => '_blank'));
-    # return <a target="_blank" href="http://google.com">Google</a>
+```php
+<?php echo $html->link('Google','http://google.com', array('target' => '_blank')); ?>
+```
+```html
+<a target="_blank" href="http://google.com">Google</a>
+```
