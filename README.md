@@ -17,11 +17,11 @@ Lot of snippets (Facebook tags, Analytics, mobile favicons, pagination example)
 <tt>tag($tag, $content, $attr, $empty)</tt>
 
 - <b>@params</b>
-  - <tt>String $tag</tt> Tag to be created;
-  - <tt>String $content</tt> Content between the tags inserted;
-  - <tt>Array $attr</tt> Tag's attributes;
-  - <tt>Boolean $empty</tt> True to create an empty tag;
-- <b>@return</b>: <tt>String</tt> HTML tag with its contents.
+  - <tt>string $tag</tt> Tag to be created;
+  - <tt>string $content</tt> Content between the tags inserted;
+  - <tt>array $attr</tt> Tag's attributes;
+  - <tt>boolean $empty</tt> True to create an empty tag;
+- <b>@return</b>: <tt>string</tt> HTML tag with its contents.
 
 Creates HTML tags for opening and closing containing some content.
 
@@ -36,11 +36,11 @@ $html->tag('p','content for tag', array('class' => 'class-name'));
 <tt>link($text, $url = null, $attr = array(), $full = false)</tt>
 
 - <b>@params</b>
-  - <tt>String $text</tt> Content link
-  - <tt>String $url</tt> URL relative to the application root
-  - <tt>Array $attr</tt> Attributes tag
-  - <tt>Boolean $full</tt> True to generate a complete URL
-- <b>@return</b>: <tt>String</tt> HTML Link
+  - <tt>string $text</tt> Content link
+  - <tt>string $url</tt> URL relative to the application root
+  - <tt>array $attr</tt> Attributes tag
+  - <tt>boolean $full</tt> True to generate a complete URL
+- <b>@return</b>: <tt>string</tt> HTML Link
 
 - With complete URL 
 
@@ -74,10 +74,10 @@ $html->link('Google','http://google.com', array('target' => '_blank'));
 <tt>image($src, $attr = array(), $full = false)</tt>
 
 - <b>@params</b>
-  - <tt>String $url</tt> Path image
-  - <tt>Array $attr</tt> Tag attributes
-  - <tt>Boolean $full</tt> True to generate a complete URL
-- <b>@return</b>: <tt>String</tt> HTML image to be inserted
+  - <tt>string $url</tt> Path image
+  - <tt>array $attr</tt> Tag attributes
+  - <tt>boolean $full</tt> True to generate a complete URL
+- <b>@return</b>: <tt>string</tt> HTML image to be inserted
 
 - With complete URL
 
@@ -150,12 +150,12 @@ $html->image('http://google.com/logo.png', array('alt' => 'Google picture', 'fig
 <tt>imagelink($src, $url, $img_attr, $attr, $full)</tt>
 
 - <b>@params</b>
-  - <tt>String $src</tt> path of the style sheet to be inserted into the HTML
-  - <tt>String $url</tt> URL relative to the application root
-  - <tt>Array $img_attr</tt> Attributes tag
-  - <tt>Array $attr</tt> True to print stylesheet inline
-  - <tt>Boolean $full</tt> True to generate a complete URL
-- <b>@return</b>: <tt>String</tt> element stylesheet to be used.
+  - <tt>string $src</tt> path of the style sheet to be inserted into the HTML
+  - <tt>string $url</tt> URL relative to the application root
+  - <tt>array $img_attr</tt> Attributes tag
+  - <tt>array $attr</tt> True to print stylesheet inline
+  - <tt>boolean $full</tt> True to generate a complete URL
+- <b>@return</b>: <tt>string</tt> element stylesheet to be used.
 
 ```php
 $html->imagelink('http://google.com/logo.png', 'http://google.com', array('alt' => 'Google picture'));
@@ -174,11 +174,11 @@ $html->imagelink('http://google.com/logo.png', 'http://google.com', array('alt' 
 <tt>stylesheet($href, $attr, $inline, $full)</tt>
 
 - <b>@params</b>
-  - <tt>String $href</tt> path of the style sheet to be inserted into the HTML
-  - <tt>Array $attr</tt> Attributes tag
-  - <tt>Boolean $inline</tt> True to print stylesheet inline
-  - <tt>Boolean $empty</tt> True to generate a complete URL
-- <b>@return</b>: <tt>String</tt> element stylesheet to be used.
+  - <tt>string $href</tt> path of the style sheet to be inserted into the HTML
+  - <tt>array $attr</tt> Attributes tag
+  - <tt>boolean $inline</tt> True to print stylesheet inline
+  - <tt>boolean $empty</tt> True to generate a complete URL
+- <b>@return</b>: <tt>string</tt> element stylesheet to be used.
 
 Creates sheet elements style for use in HTML.
 
@@ -196,35 +196,32 @@ $html->stylesheet(array('screen'), array(), false);
 <tt>script($src, $attr, $inline, $full)</tt>
 
 - <b>@params</b>
-  - <tt>String $src</tt> Path to the script in HTML inseido
-  - <tt>Array $attr</tt> Attributes tag
-  - <tt>Boolean $inline</tt> True to print the inline script
-  - <tt>Boolean $empty</tt> True to generate a complete URL
-- <b>@return</b>: <tt>String</tt> Element script to be used
+  - <tt>string $src</tt> Path to the script in HTML inseido
+  - <tt>array $attr</tt> Attributes tag
+  - <tt>boolean $inline</tt> True to print the inline script
+  - <tt>boolean $empty</tt> True to generate a complete URL
+- <b>@return</b>: <tt>string</tt> Element script to be used
 
 Creates a script element to be used in HTML.
-
 ```php
 $html->script(array('jquery'), array(), false); 
 ```
 ```html
 <script src="/scripts/jquery.js" type="text/javascript"></script>
 ```
-
 <b>Obs</b>:<i> only use the echo <tt>if $inline == true</tt></i>
 
 ### FormHelper
 
 <b>Create form</b>
 
-/**
- *  Retorna um elemento HTML do formulário formatado.
- * 
- *  @param string $action Ação atual do modelo
- *  @param array $options Atributos e opções da tag HTML
- *  @return string Tag FORM aberto e formatado
- */
 <tt>create($action, $options)</tt>
+- <b>@params</b>
+  - <tt>string $action</tt> Path to the script in HTML inseido
+  - <tt>array $options</tt> Attributes tag
+- <b>@return</b>: <tt>string</tt> Element script to be used
+
+Returns an HTML element of the form formatted.
 
 ```php
 $form->create('/action', array('id' => 'form-id'));
