@@ -106,9 +106,8 @@ class AppController extends Controller {
 
         include_once $folder->getPathname();
         
-        if (isset($language)) {
-          $array_lang[$key] = $language;
-        }
+        if (isset($language)) $array_lang[$key] = $language;
+        
         unset($language);
       }
     }

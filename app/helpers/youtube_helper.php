@@ -20,7 +20,7 @@ class YoutubeHelper extends HtmlHelper {
  */
   public function thumb($url, $format = 0)
   {
-    return "http://img.youtube.com/vi/" .$this->returnId($url) . "/" . $format . ".jpg";
+    return "http://img.youtube.com/vi/" . $this->returnId($url) . "/" . $format . ".jpg";
   }
 
   public function show($url, $params = array())
