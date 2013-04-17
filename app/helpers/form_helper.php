@@ -90,6 +90,7 @@ class FormHelper extends HtmlHelper {
       "value" => null,
       "empty" => false
     ), $options);
+
     $selectOptions = array_unset($options, "options");
     if(($empty = array_unset($options, "empty")) !== false):
       $keys = array_keys($selectOptions);
@@ -98,7 +99,6 @@ class FormHelper extends HtmlHelper {
         $key = $emptyKeys[0];
         $values = array_merge($empty, $selectOptions);
       else:
-        $key = $empty;
         $values = array_merge(array($empty), $selectOptions);
       endif;
       array_unshift($keys, $key);
@@ -204,10 +204,19 @@ class FormHelper extends HtmlHelper {
       "type" => "text",
       "id" => Inflector::camelize("form_" . Inflector::slug($name)),
       "label" => Inflector::humanize($name),
-      "div" => true
+      "div" => true,
+      "before" => null,
+      "label" => null,
+      "between" => null,
+      "after" => null,
     ), $options);
-    $label = array_unset($options, "label");
+
     $div = array_unset($options, "div");
+    $before = array_unset($options, "before");
+    $label = array_unset($options, "label");
+    $between = array_unset($options, "between");
+    $after = array_unset($options, "after");
+
     switch($options["type"]):
       case "select":
         $selectOptions = $options;
@@ -231,24 +240,23 @@ class FormHelper extends HtmlHelper {
         elseif($name == "password"):
           $options["type"] = "password";
         endif;
-        $input = $this->tag("input", null, $options, false);
+        $input = $this->tag("input", null, $options, true);
     endswitch;
-    if($label):
-      $input = $this->tag("label", $label, array("for" => $options["id"])) . $input;
-    endif;
 
-    if(is_array($div)):
-      $div_class = $div['class'] ? $div['class'] : 'input ' . $options['type'];
+    # label
+    $label = empty($label) ? null : $this->tag("label", $label, array("for" => $options["id"]));
 
-      if ($options['error']) { 
-        $div_class .= ' error';
-        $input .= '<span class="help-inline">' . $options['error'] . '</span>';
-      }
-    endif;
+    $after .= empty($options['error']) ? null : $this->tag("span", $label, array("class" => "error"));
+
+    # mount content
+    $content = $before . $label . $between . $input . $after;
     
-    $input = $this->div($input, $div_class);
+    if (empty($div)) return $content;
 
-    return $this->output($input);
+    $div_attr = is_array($div) ? $div : array("class" => "input " . $options['type']);
+    if (!empty($options['error'])) $div_attr["class"] = $div_attr["class"] . " error";
+
+    return $this->output($this->div($content, $div_attr));
   }
 }
 

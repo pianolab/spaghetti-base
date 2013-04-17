@@ -255,6 +255,113 @@ $form->close();
 </form>
 ```
 
+<b>Create fields</b>
+
+<tt>input($name, $options)</tt>
+- <b>@params</b>
+  - <tt>string $name</tt> Name of the input field
+  - <tt>array $options</tt> Tag attributes
+- <b>@return</b>: <tt>string</tt> Input field of the form
+
+- Default
+
+```php
+$form->input('title');
+```
+```html
+<div class="input text">
+  <label for="FormTitle">Title</label>
+  <input name="title" type="text" id="FormTitle" />
+</div>
+```
+
+- Without div
+
+```php
+$form->input('title', array('div' => false));
+```
+```html
+<label for="FormTitle">Title</label>
+<input name="title" type="text" id="FormTitle" />
+```
+
+- Other tags
+
+```php
+$form->input('title', array(
+  "before" => "Something before...",
+  "label" => "Something label...",
+  "between" => "Something between...",
+  "after" => "Something after...",
+));
+```
+```html
+<div class="input text">
+  Something before...
+  <label for="FormTitle">Something label...</label>
+  Something between...
+  <input name="title" type="text" id="FormTitle" />
+  Something after...
+</div>
+```
+
+- Set id, class or another attribute
+
+```php
+$form->input('title', array(
+  "class" => "class-name",
+  "id" => "id-name",
+  "data-field" => "content",
+  "something-attr" => "something-content",
+));
+```
+```html
+<div class="input text">
+  <input name="title" type="text" id="id-name" class="class-name" data-field="content" something-attr="something-content" />
+</div>
+```
+
+- Set id, class attribute of div
+
+```php
+$form->input('title', array(
+  "div" => array(
+    "class" => "class-name",
+    "id" => "id-name",
+    "something-attr" => "something-content",
+  )
+));
+```
+```html
+<div class="class-name" id="id-name" something-attr="something-content">
+  <input name="title" type="text" id="FormTitle" />
+</div>
+```
+
+- Create select
+
+```php
+$form->input('title', array(
+  "type" => "select",
+  "empty" => "Choose your option",
+  "options" => array(
+    1 => "yes",
+    2 => "no",
+    "maybe" => "maybe",
+  ),
+));
+```
+```html
+<div class="input select">
+  <select name="title" value="" id="FormTitle">
+    <option value="">Choose your option</option>
+    <option value="1">yes</option>
+    <option value="2">no</option>
+    <option value="maybe">maybe</option>
+  </select>
+</div>
+```
+
 ###Copyright
 
 piano.base @pianolabweb. It's released under the MIT license

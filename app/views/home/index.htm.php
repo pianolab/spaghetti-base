@@ -19,20 +19,6 @@
     </ul>
   </div>
 
-<!--
-```php
-$form->create('/action', array('id' => 'form-id'));
-```
-```html
-<form method="post" action="http://domain.com/action" id="form-id">
-```
--->
-
-<hr>
-<?php echo $form->close('Send', array('class' => 'btn')); ?>
-<hr>
-
-  
   <div class="span12">
     <h2>languages</h2>
     <pre>Arquivo em: <?php echo APP . DS . 'languages' ?></pre>
