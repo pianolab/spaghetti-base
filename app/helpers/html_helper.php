@@ -108,7 +108,6 @@ class HtmlHelper extends Helper {
         $after = $attr['after'];
         unset($attr['figure'], $attr['before'], $attr['after']);
 
-
         $attr = array_merge(
             array(
                 "alt" => "",
@@ -129,7 +128,7 @@ class HtmlHelper extends Helper {
 
         $content = $this->output($before . $image . $after);
 
-        $return = $figure === false ? $content : $this->tag("figure", $content, $figure);
+        $return = $figure == false ? $content : $this->tag("figure", $content, $figure);
 
         return $this->output($return);
     }

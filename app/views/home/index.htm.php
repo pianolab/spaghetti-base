@@ -18,7 +18,7 @@
       <li>Lot of snippets (Facebook tags, Analytics, mobile favicons, pagination example)</li>
     </ul>
   </div>
-
+  
   <div class="span12">
     <h2>languages</h2>
     <pre>Arquivo em: <?php echo APP . DS . 'languages' ?></pre>
