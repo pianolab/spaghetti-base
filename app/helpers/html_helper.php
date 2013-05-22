@@ -92,7 +92,7 @@ class HtmlHelper extends Helper {
             $url = $text;
         endif;
         $attr["href"] = Mapper::url($url, $full);
-        return $this->output($this->tag("a", $text, $attr));
+        return $this->output($this->tag("a", t($text), $attr));
     }
     /**
      *  Cria um elemento de imagem para ser na aplicação.
