@@ -10,22 +10,22 @@
 
 class CurrencyHelper extends Helper
 {
-  public $currency;
   public $name;
+  public $currency;
   public $decimals;
-  public $decPoint;
-  public $thousandsSep;
+  public $decimalSeparator;
+  public $thousandsSeparator;
   
   public function __construct() {
-    $this->currency     = Config::read('app.currency');
-    $this->name       = Config::read('app.currency_name');
-    $this->decimals     = Config::read('app.currency_format_decimals');
-    $this->decPoint     = Config::read('app.currency_format_dec_point');
-    $this->thousandsSep   = Config::read('app.currency_format_thousands_sep');
+    $this->name = CURRENCY_NAME;
+    $this->currency = CURRENCY;
+    $this->decimals = CURRENCY_DECIMAL_PLACE;
+    $this->decimalSeparator = CURRENCY_DECIMAL_SEPARATOR;
+    $this->thousandsSeparator = CURRENCY_THOUSANDS_SEPARATOR;
   }
   
   public function show($value = null, $with_currency = true) {
-    $formated_number = number_format($value, $this->decimals, $this->decPoint, $this->thousandsSep);
+    $formated_number = number_format($value, $this->decimals, $this->decimalSeparator, $this->thousandsSeparator);
     return ($with_currency) ? $this->currency . $formated_number : $formated_number;
   }
 }

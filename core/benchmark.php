@@ -23,7 +23,7 @@ class Benchmark extends View {
   public static function resume() {
     $return['DEBUG'] = (Config::read('debug')) ? 'ON' : 'OFF';
     $return['SECURITY_SALT'] = (Config::read('securitySalt') == '5a65as56d4a65s4d6a5a654892') ? '[WARNING] You need to change the security salt KEY to prevent security' : 'OK';
-    $return['ANALYTICS'] = (Config::read('analytics')) ? 'OK' : '[WARNING] Your need to put the analytics client CODE.';
+    $return['ANALYTICS'] = ANALYTICS ? 'OK' : '[WARNING] Your need to put the analytics client CODE.';
     $return['404_page'] = (Config::read('404_page')) ? 'OK' : '[WARNING] Your need to CREATE a 404 PAGE personalized. Request to DESIGNER and then put 404_page as TRUE on app/config/settings.php';
     
     # Signature
@@ -33,7 +33,7 @@ class Benchmark extends View {
     
     $return['CNPJ_CLIENT'] = (Config::read('cnpj_client')) ? 'OK' : '[WARNING] All websites needs a CNPJ by the LAW. Check in your JOB for this information or contact your superior';
     $return['MAIL_SETTINGS'] = (!Config::read('Mailer.smtp.username') || !Config::read('Mailer.smtp.password') || !Config::read('Mailer.smtp.port') || !Config::read('Mailer.smtp.host') || !Config::read('Mailer.transport')) ? '[ERROR] You need to SET UP mail settings to your application' : 'OK';
-    $return['APP_DEFAULT_SETTINGS_PAGE_TITLE'] = (Config::read('app.name')) ? 'OK' : '[WARNING] Insert a PAGE_TITLE setting in app/config/settings.php';
+    $return['APP_DEFAULT_SETTINGS_PAGE_TITLE'] = APP_NAME ? 'OK' : '[WARNING] Insert a PAGE_TITLE setting in app/config/contants.php';
     $return['APP_DEFAULT_SETTINGS_UPLOAD_PATH'] = (Config::read('app.upload_url') != 'http://upload.projeto.com.br/') ? 'OK' : '[WARNING] Insert a app.upload_url setting in app/config/settings.php';
     $return['APP_DEFAULT_SETTINGS_UPLOAD_PATH'] = (Config::read('app.url_base') != 'http://www.projeto.com.br/') ? 'OK' : '[WARNING] Insert a app.base_url setting in app/config/settings.php';
     

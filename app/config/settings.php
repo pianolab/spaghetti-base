@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * Definições geral do site e do email
+ */
+App::import("App", array("config/constants", "config/mail"));
+
+/**
  * Definições de seguranção da aplicação
  */
 Config::write('securitySalt', '5a65as56d4a65s4d6a5a654892');
@@ -10,11 +15,6 @@ Config::write('app.hash', 'md5');
  * Extension default
  */
 Config::write('defaultExtension', 'htm');
-
-/**
- * Definições geral do site
- */
-include_once 'other.php';
 
 /**
  * Definições de internacionalização (i18n)
@@ -37,8 +37,3 @@ if (Config::read('environment') == 'production') {
 } else {
 	Config::write('debug', true);
 }
-
-/**
- * Definições email
- */
-include_once 'mail.php';

@@ -10,7 +10,7 @@
       <li><strong>Mensagem: </strong><?php echo $data['message']; ?></li>
     </ul>
     <hr />
-    <p><small>Mensagem enviada ás: <?php echo date('d/m/Y H:i:s'); ?> diretamente do website <?php echo Config::read('app.name'); ?>.</small></p>
+    <p><small>Mensagem enviada ás: <?php echo date('d/m/Y H:i:s'); ?> diretamente do website <?php echo APP_NAME; ?>.</small></p>
     
   </div>
 </div>

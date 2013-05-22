@@ -6,7 +6,7 @@ class AppController extends Controller {
   public $uri = array();
   public $components = array('ImageResize', 'Flash');
   public $logged = null;
-  public $helpers = array('Html', 'Form', 'Date', 'Pagination', 'Text', 'Flash', 'Lang', 'Textile');
+  public $helpers = array('Html', 'Form', 'Pagination', 'Textile', 'Flash', 'Lang');
 
   /**
    * Filtro antes de executar
@@ -54,7 +54,7 @@ class AppController extends Controller {
    */
   protected function pageTitle($title = null) {
     $compl = ($title) ? $title . ' » ' : '';
-    $this->set('page_title', $compl . Config::read('app.name'));
+    $this->set('page_title', $compl . APP_NAME);
   }
   
   /**
