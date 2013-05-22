@@ -249,7 +249,7 @@ class FormHelper extends HtmlHelper {
     $after .= empty($options['error']) ? null : $this->tag("span", $label, array("class" => "error"));
 
     # mount content
-    $content = $before . $label . $between . $input . $after;
+    $content = $before . t($label) . $between . $input . $after;
     
     if (empty($div)) return $content;
 
