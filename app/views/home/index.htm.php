@@ -3,9 +3,11 @@
   <div class="span6">
   <h2>Instructions</h2>
   <pre>
-1. git clone https://pianolab@github.com/pianolab/spaghetti-base.git
-2. remove .git folder
-3. work!</pre>
+1. git clone git://github.com/pianolab/spaghetti-base.git
+2. git remote rm origin
+3. git remote add origin ssh://git@[ DOMAIN-DO-REPO ]/[ USERNAME ]/[ REPO-NAME ].git
+4. git push -u origin --all
+5. work!</pre>
   </div>
 
   <div class="span6">
