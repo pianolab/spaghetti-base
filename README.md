@@ -12,12 +12,12 @@ Lot of snippets (Facebook tags, Analytics, mobile favicons, pagination example)
 
 ### Instructions
 ```
-1. git clone git://github.com/pianolab/spaghetti-base.git
-2. git remote rm origin
-3. git remote add origin ssh://git@[ DOMAIN-DO-REPO ]/[ USERNAME ]/[ REPO-NAME ].git
-4. git push -u origin --all
-5. that is it!
+git clone git://github.com/pianolab/spaghetti-base.git
+git remote rm origin
+git remote add origin ssh://git@[ DOMAIN-DO-REPO ]/[ USERNAME ]/[ REPO-NAME ].git
+git push -u origin --all
 ```
+That's it!
 
 ### HtmlHelper
 
