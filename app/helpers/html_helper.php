@@ -103,10 +103,10 @@ class HtmlHelper extends Helper {
      *  @return string HTML da imagem a ser inserida
      */
     public function image($src, $attr = array(), $full = false) {
-        $figure = is_array($attr['figure']) ? $attr['figure'] : array();
-        $before = $attr['before'];
-        $after = $attr['after'];
-        unset($attr['figure'], $attr['before'], $attr['after']);
+        $figure = array_unset($attr, 'figure');
+        $attr_figure = is_array($figure) ? $figure : array();
+        $before = array_unset($attr, 'before');
+        $after = array_unset($attr, 'after');
 
         $attr = array_merge(
             array(
@@ -128,7 +128,7 @@ class HtmlHelper extends Helper {
 
         $content = $this->output($before . $image . $after);
 
-        $return = !isset($figure) ? $content : $this->tag("figure", $content, $figure);
+        $return = empty($figure) ? $content : $this->tag("figure", $content, $attr_figure);
 
         return $this->output($return);
     }
