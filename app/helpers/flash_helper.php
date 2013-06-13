@@ -80,8 +80,8 @@ class FlashHelper extends HtmlHelper
   /**
    * Shortcuts
    */
-  public function info($message = null, $title = null) { return $this->flash(array('info', $message, $title));  }
-  public function danger($message = null, $title = null) { return $this->flash(array('danger', $message, $title));  }
-  public function warning($message = null, $title = null) { return $this->flash(array('warning', $message, $title)); }
-  public function success($message = null, $title = null) { return $this->flash(array('success', $message, $title)); }
+  public function info($message, $title = null) { return $this->flash(array('info', $message, $title));  }
+  public function danger($message, $title = null) { return $this->flash(array('danger', $message, $title));  }
+  public function warning($message, $title = null) { return $this->flash(array('warning', $message, $title)); }
+  public function success($message, $title = null) { return $this->flash(array('success', $message, $title)); }
 }

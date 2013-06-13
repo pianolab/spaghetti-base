@@ -24,8 +24,8 @@ class CurrencyHelper extends Helper
     $this->thousandsSeparator = CURRENCY_THOUSANDS_SEPARATOR;
   }
   
-  public function show($value = null, $with_currency = true) {
+  public function show($value, $with_currency = true) {
     $formated_number = number_format($value, $this->decimals, $this->decimalSeparator, $this->thousandsSeparator);
-    return ($with_currency) ? $this->currency . $formated_number : $formated_number;
+    return $with_currency ? $this->currency . ' ' . $formated_number : $formated_number;
   }
 }

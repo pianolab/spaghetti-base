@@ -44,8 +44,7 @@ class YoutubeHelper extends HtmlHelper {
 
   public function imageLink($video, $link_url, $img_attr = array(), $attr = array(), $full = false)
   {
-    $video_url = is_array($video) ? $this->thumb($video["url"], $video["format"]) : $this->thumb($video, 0);
-    return parent::imageLink($video_url, $link_url, $img_attr, $attr, $full);
+    return parent::link($this->image($video), $link_url, $img_attr, $attr, $full);
   }
   
   public function getId($url)
