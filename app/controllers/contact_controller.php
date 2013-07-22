@@ -16,7 +16,7 @@ class ContactController extends AppController {
       if ($this->Contact->Validate($this->data)) {
         $mailer = new Mailer(array(
           'from' => array($this->data['email'] => $this->data['name']),
-          'to' => Config::read('Mailer.send.default'),
+          'to' => MAILER_SEND_DEFAULT,
           'subject' => 'Formulário de Contato [ ' . APP_NAME . ' ]',
           'views' => array(
             'text/plain' => 'contact/mail_contact.txt',
