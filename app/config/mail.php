@@ -5,25 +5,25 @@
  */
 if (Config::read('environment') == 'production') {
   # email default
-  Config::write('Mailer.send.default', 'agencia@pianolab.com.br');
+  define('MAILER_SEND_DEFAULT', 'agencia@pianolab.com.br');
 
   # config send
-  Config::write('Mailer.transport', 'smtp'); 
-  Config::write('Mailer.smtp.host', 'mail.domain.com'); 
-  Config::write('Mailer.smtp.port', '25');
-  Config::write('Mailer.smtp.encryption', '');
-  Config::write('Mailer.smtp.username', 'email@domain.com'); 
-  Config::write('Mailer.smtp.password', 'mailpassword'); 
+  define('MAILER_TRANSPORT', 'smtp'); 
+  define('MAILER_SMTP_HOST', 'mail.domain.com'); 
+  define('MAILER_SMTP_PORT', '587');
+  define('MAILER_SMTP_ENCRYPTION', '');
+  define('MAILER_SMTP_USERNAME', 'email@domain.com'); 
+  define('MAILER_SMTP_PASSWORD', 'mailpassword'); 
 } # endif
 elseif (Config::read('environment') == 'development') {
   # email default
-  Config::write('Mailer.send.default', 'agencia@pianolab.com.br');
+  define('MAILER_SEND_DEFAULT', 'agencia@pianolab.com.br');
 
   # config send
-  Config::write('Mailer.transport', 'smtp'); 
-  Config::write('Mailer.smtp.host', 'mail.domain.com'); 
-  Config::write('Mailer.smtp.port', '25');
-  Config::write('Mailer.smtp.encryption', '');
-  Config::write('Mailer.smtp.username', 'email@domain.com'); 
-  Config::write('Mailer.smtp.password', 'mailpassword'); 
+  define('MAILER_TRANSPORT', 'smtp'); 
+  define('MAILER_SMTP_HOST', 'mail.domain.com'); 
+  define('MAILER_SMTP_PORT', '587');
+  define('MAILER_SMTP_ENCRYPTION', '');
+  define('MAILER_SMTP_USERNAME', 'email@domain.com'); 
+  define('MAILER_SMTP_PASSWORD', 'mailpassword'); 
 } # endelseif
