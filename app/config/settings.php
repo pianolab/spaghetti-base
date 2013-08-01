@@ -3,7 +3,7 @@
 /**
  * Definições geral do site e do email
  */
-App::import("App", array("config/constants", "config/mail"));
+App::import("App", array("config/constants"));
 
 /**
  * Definições de seguranção da aplicação
