@@ -1,11 +1,21 @@
-/* ------------------------------------
-  CSS Desenvolvido pela
-  Pianolab | www.pianolab.com.br
-    Author: Luiz Paulo Valença| luizpaulo165@gmail.com
-    Author: Walmir Neto| wfsneto@gmail.com
-  Ultima Atualização:
-  Alterado Por:
-    Favor usar a mesma semântica.
------------------------------------- */
-::-moz-selection{background:#fe57a1;color:#fff;text-shadow:none;}::-webkit-selection{background:#fe57a1;color:#fff;text-shadow:none;}::-o-selection{background:#fe57a1;color:#fff;text-shadow:none;}::-ms-selection{background:#fe57a1;color:#fff;text-shadow:none;}::selection{background:#fe57a1;color:#fff;text-shadow:none;}.noMarginTop{margin-top:0 !important;}.noMarginRight{margin-right:0 !important;}.noMarginBottom{margin-bottom:0 !important;}.noMarginLeft{margin-left:0 !important;}.noPaddingTop{padding-top:0 !important;}.noPaddingRight{padding-right:0 !important;}.noPaddingBottom{padding-bottom:0 !important;}.noPaddingLeft{padding-left:0 !important;}.noBg{background:none !important;}.noBorderTop{border-top:0 !important;}.noBorderRight{border-right:0 !important;}.noBorderBottom{border-bottom:0 !important;}.noBorderLeft{border-left:0 !important;}body{background:#fff;}#container{display:block;overflow:hidden;}footer{display:block;}
-/* This beautiful CSS-File has been crafted with LESS (lesscss.org) and compiled by simpLESS (wearekiss.com/simpless) */
+::-moz-selection{background:#fe57a1;color:#fff;text-shadow:none;}
+::-webkit-selection{background:#fe57a1;color:#fff;text-shadow:none;}
+::-o-selection{background:#fe57a1;color:#fff;text-shadow:none;}
+::-ms-selection{background:#fe57a1;color:#fff;text-shadow:none;}
+::selection{background:#fe57a1;color:#fff;text-shadow:none;}
+.noMarginTop{margin-top:0px!important;}
+.noMarginRight{margin-right:0px!important;}
+.noMarginBottom{margin-bottom:0px!important;}
+.noMarginLeft{margin-left:0px!important;}
+.noPaddingTop{padding-top:0px!important;}
+.noPaddingRight{padding-right:0px!important;}
+.noPaddingBottom{padding-bottom:0px!important;}
+.noPaddingLeft{padding-left:0px!important;}
+.noBg{background:none!important;}
+.noBorderTop{border-top:0px!important;}
+.noBorderRight{border-right:0px!important;}
+.noBorderBottom{border-bottom:0px!important;}
+.noBorderLeft{border-left:0px!important;}
+body{background:#ffffff;}
+#container{display:block;overflow:hidden;}
+footer{display:block;}
