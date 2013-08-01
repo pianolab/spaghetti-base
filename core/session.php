@@ -15,6 +15,9 @@ class Session extends Object
    *  @return boolean Verdadeiro para sessão criada
    */
   public static function start() {
+    if(SESSION_PATH){
+      session_save_path(SESSION_PATH); 
+    }
     return session_start();
   }
   /**
