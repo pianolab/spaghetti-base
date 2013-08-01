@@ -11,9 +11,8 @@ define('APP_NAME', 'piano.base');
 define('PERPAGE_DEFAULT', 10);
 
 /**
-* Configurações para session
-*/
-
+ * Configurações para session
+ */
 define('SESSION_PATH', false);
 
 /**
@@ -40,7 +39,6 @@ define('CURRENCY_THOUSANDS_SEPARATOR', '.');
 /**
  * Configurações para o e-mail
  */
-
 define('MAILER_SEND_DEFAULT', 'agencia@pianolab.com.br');
 
 # config send
@@ -60,5 +58,3 @@ define('FACE_DESCRIPTION', false); // Alguma descrição do site
 define('FACE_URL', false); // http://www.meusite.com.br/
 define('FACE_IMAGE', false); // http://www.temqueporaurlcompleta.com.br/images/facebook.jpg
 define('FACE_SITE_NAME', false); // Nome do site
-
-

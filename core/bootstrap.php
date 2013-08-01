@@ -17,12 +17,10 @@ App::import("Core", array("class_registry", "component", "connection", "controll
 /**
  *  Inclusão dos arquivos de configuração da aplicação.
  */
-App::import("App", array("config/settings", "config/routes", "config/database"));
+App::import("App", array("config/settings", "config/settings", "config/routes", "config/database"));
 
 /**
  *  Inclusão das classes da biblioteca do Spaghetti ou das classes as sobrescrevem;
  */
 App::import("Controller", "app_controller");
 App::import("Model", "app_model");
-
-?>
