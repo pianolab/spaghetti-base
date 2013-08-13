@@ -1,11 +1,6 @@
 <?php
 
 /**
- * Definições geral do site e do email
- */
-App::import("App", array("config/constants"));
-
-/**
  * Definições de seguranção da aplicação
  */
 Config::write('securitySalt', '5a65as56d4a65s4d6a5a654892');
@@ -25,11 +20,20 @@ Config::write('default_language', 'br');
 
 /**
  * Definições de AMBIENTE de desenvolvimento
- */ 
+ */
+$all_domains = array(
+  'development' => array('0.0.0.0', '127.0.0.1', 'localhost', 'lvh.me'),
+  'production' => array('production.com'),
+  'staging' => array('staging.com'),
+);
 Config::write('environment', 'development'); # development, production
-if (in_array($_SERVER['SERVER_NAME'], array('domain.com'))):
-	Config::write('environment', 'production');
-endif;
+foreach ($all_domains as $key => $domains) {
+  foreach ($domains as $k => $domain) {
+    if (strpos($_SERVER['SERVER_NAME'], $domain) !== false) {
+      Config::write('environment', $key);
+    }
+  }
+}
 
 # Debug
 if (Config::read('environment') == 'production') {
