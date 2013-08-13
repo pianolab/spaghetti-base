@@ -14,7 +14,7 @@ define('PERPAGE_DEFAULT', 10);
 * Configurações para session
 */
 
-define('SESSION_PATH', false);
+define('SESSION_PATH', false); // / home/USUARIO_DO_HOST/tmp
 
 /**
  * upload dir and path

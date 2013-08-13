@@ -27,7 +27,7 @@ class ContactController extends AppController {
         ));
 
         if ($mailer->send()) {
-          Session::writeFlash('site.alert', array('success', 'Sua mensagem foi enviada com sucesso. <br /> Entreremos em contato com você o mais breve possível. Obrigado.'));
+          Session::writeFlash('site.alert', array('success', 'Sua mensagem foi enviada com sucesso. <br /> Entraremos em contato com você o mais breve possível. Obrigado.'));
           $this->redirect('/');
         } else {
           Session::writeFlash('site.alert', array('warning', 'Preencha os campos corretamente.'));
