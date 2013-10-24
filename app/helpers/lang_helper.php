@@ -1,9 +1,7 @@
 <?php
 
-App::import('Helper', 'html_helper');
 App::import('Core', array('view'));
-
-include_once APP . DS . 'languages' . DS . 'alias.php';
+App::import('Lang', 'alias');
 
 /**
  * LangHelper provê conversão de texto em multilínguas

@@ -4,7 +4,7 @@
 * @copyright Copyright 2008-2009, Spaghetti* Framework (http://spaghettiphp.org/)
 */ 
 
-require_once APP . DS . 'vendor' . DS . 'image_resize' . DS . 'm2brimagem.class.php';
+App::import('Vendor', 'image_resize' . DS . 'm2brimagem.class');
 
 class ImageResizeComponent extends Component
 {

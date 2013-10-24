@@ -3,7 +3,7 @@
 /**
  * Title of application
  */
-define('APP_NAME', 'piano.base');
+define('APP_NAME', 'PianoLab Base');
 
 /**
  * records per page

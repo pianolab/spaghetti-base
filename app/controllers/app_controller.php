@@ -1,4 +1,7 @@
 <?php
+
+// App::import('Model', 'active_record_model');
+
 class AppController extends Controller {
 
   public $layout = 'default';
@@ -6,7 +9,7 @@ class AppController extends Controller {
   public $uri = array();
   public $components = array('ImageResize', 'Flash');
   public $logged = null;
-  public $helpers = array('Html', 'Form', 'Pagination', 'Flash', 'Youtube');
+  public $helpers = array('Html', 'Form', 'Lang', 'Flash', 'Pagination', 'Youtube');
 
   /**
    * Filtro antes de executar
@@ -15,10 +18,13 @@ class AppController extends Controller {
    * @return void
    * @author Djalma Araújo
    */
-  public function beforeFilter() {
-
+  public function beforeFilter() 
+  {
     // set the history url
     $this->setUrlHistory();
+
+    // config PHP active record
+    $this->activeRecordConfig();
 
     // set the array lang
     $this->arrayLang();
@@ -37,12 +43,22 @@ class AppController extends Controller {
   public function beforeRender() {
 
     // Page title default
-    if ($this->arrView['page_title']) { 
-      $this->pageTitle($this->arrView['page_title']); 
-    }
+    $this->pageTitle(empty($this->arrView['page_title']) ? '' : $this->arrView['page_title']); 
 
     // To we don't have to repeat the set function with arrView variable.
     $this->set($this->arrView);
+  }
+
+  public function activeRecordConfig()
+  {
+    // ActiveRecord\Config::initialize( function($cfg)
+    // {
+    //   require_once APP . 'Config' . DS . 'database.php';
+    //   $dbConfig = new DATABASE_CONFIG();
+      
+    //   $cfg->set_model_directory(APP . 'Model');
+    //   $cfg->set_connections(array('development' => 'mysql://' . $dbConfig->default['login'] . ':' . $dbConfig->default['password'] . '@' . $dbConfig->default['host'] . '/' . $dbConfig->default['database'] . ';charset=utf8'));
+    // });
   }
   
   /**

@@ -1,6 +1,6 @@
 <?php
 
-require_once APP . DS . 'vendor' . DS . 'mailer' . DS . 'Swift' . DS . 'swift_required.php';
+App::import('Vendor', 'mailer' . DS . 'Swift' . DS . 'swift_required');
 
 class Mailer {
     protected $from;

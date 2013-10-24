@@ -1,6 +1,6 @@
 <?php
 
-require_once APP . DS . 'vendor' . DS . 'mailer' . DS . 'Mailer.php';
+App::import('Vendor', 'mailer' . DS . 'Mailer');
 
 class ContactController extends AppController {
   

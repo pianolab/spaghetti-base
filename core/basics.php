@@ -83,6 +83,8 @@ class App extends Object {
             "Controller" => array(APP . DS . "controllers", LIB . DS . "controllers"),
             "Model" => array(APP . DS . "models", LIB . DS . "models"),
             "View" => array(APP . DS . "views", LIB . DS . "views"),
+            "Vendor" => array(APP . DS . "vendors", LIB . DS . "vendors"),
+            "Lang" => array(APP . DS . "languages", LIB . DS . "languages"),
             "Layout" => array(APP . DS . "layouts", LIB . DS . "layouts"),
             "Component" => array(APP . DS . "components", LIB . DS . "components"),
             "Helper" => array(APP . DS . "helpers", LIB . DS . "helpers"),
