@@ -1,6 +1,6 @@
 <!-- Example row of columns -->
 
-<?php $html->script(array('jcheck/contact'), array(), false, true); ?>
+<?php $html->script(array('modules/contact'), array(), false, true); ?>
 <div class="row">
   <div class="span12">
   <h2>Contato</h2>

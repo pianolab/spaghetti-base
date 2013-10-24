@@ -5,19 +5,14 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <?php echo $html->script(array(
 	# jquery
-  'jquery/jquery-1.8.2.min',
+  'vendors/jquery/jquery-1.8.2.min',
 	# bootstrap
-  'bootstrap/bootstrap.min', 
-  'bootstrap/prompt.modal',
+  'vendors/bootstrap/bootstrap.min', 
+  'vendors/bootstrap/prompt.modal',
 	# modernizr
-  'modernizr-2.5.3-respond-1.1.0.min',
+  'vendors/modernizr-2.6.2.min',
 	# meio.mask
-  'meio.mask/jquery.meio.mask',
-  'meio.mask/init.meio.mask',
-	# jcheck
-  'jcheck/jcheck-0.7.1.min',
-  'jcheck/jcheck.pt-br',
-	# general appliction
-  // 'application',
+  'vendors/meio.mask/jquery.meio.mask',
+  'vendors/meio.mask/init.meio.mask',
 )); ?>
 <?php echo $this->scriptsForLayout; ?>

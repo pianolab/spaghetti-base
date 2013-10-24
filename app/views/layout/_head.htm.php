@@ -20,7 +20,7 @@
 
 <!-- Le styles 
 ================================================== -->
-<?php echo $html->stylesheet(array('reset', 'bootstrap/bootstrap.min', 'screen', 'jcheck/jcheck')); ?>
+<?php echo $html->stylesheet(array('reset', 'bootstrap/bootstrap.min', 'screen')); ?>
 <?php echo $this->stylesForLayout; ?>
 
 <!-- Le favicons 
