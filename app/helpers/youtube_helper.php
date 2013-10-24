@@ -28,12 +28,18 @@ class YoutubeHelper extends HtmlHelper {
     $params = array_merge(array(
       "width" => "537", 
       "height" => "361",
-      "src" => $url, 
+      "src" => $this->getUrl($url), 
       "frameborder" => 0, 
       "allowfullscreen" => "allowfullscreen"
     ), $params);
 
     return $this->tag("iframe", null, $params);
+  }
+
+  public function title($url)
+  {
+    $youtube = simplexml_load_file('http://gdata.youtube.com/feeds/api/videos/' . $this->returnId($url) . '?v=2');
+    return $youtube->title;
   }
 
   public function image($video, $attr = array(), $full = false)
@@ -44,7 +50,8 @@ class YoutubeHelper extends HtmlHelper {
 
   public function imageLink($video, $link_url, $img_attr = array(), $attr = array(), $full = false)
   {
-    return parent::link($this->image($video), $link_url, $img_attr, $attr, $full);
+    $video_url = is_array($video) ? $this->thumb($video["url"], $video["format"]) : $this->thumb($video, 0);
+    return parent::imageLink($video_url, $link_url, $img_attr, $attr, $full);
   }
   
   public function getId($url)
