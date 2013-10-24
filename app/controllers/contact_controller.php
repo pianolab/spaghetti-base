@@ -2,16 +2,10 @@
 
 App::import('Vendor', 'mailer' . DS . 'Mailer');
 
-class ContactController extends AppController {
-  
-  /**
-   * Método de envio de e-mail padrão
-   *
-   * @return void
-   * @author Djalma Araújo
-   */
-  public function index() {
-
+class ContactController extends AppController
+{
+  public function index()
+  {
     if(!empty($this->data)) {
       if ($this->Contact->Validate($this->data)) {
         $mailer = new Mailer(array(
@@ -29,12 +23,14 @@ class ContactController extends AppController {
         if ($mailer->send()) {
           Session::writeFlash('site.alert', array('success', 'Sua mensagem foi enviada com sucesso. <br /> Entraremos em contato com você o mais breve possível. Obrigado.'));
           $this->redirect('/');
-        } else {
+        }
+        else {
           Session::writeFlash('site.alert', array('warning', 'Preencha os campos corretamente.'));
           Session::writeFlash('form.data', $this->data);
           $this->redirect('/contato');
         }
-      } else {
+      }
+      else {
         Session::writeFlash('site.alert', array('error', $this->Contact->errors));
         Session::writeFlash('form.data', $this->data);
         $this->redirect('/contato');

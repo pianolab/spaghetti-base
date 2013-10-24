@@ -1,6 +1,6 @@
 <?php
 
-// App::import('Model', 'active_record_model');
+App::import('Model', 'active_record_model');
 
 class AppController extends Controller {
 
@@ -18,7 +18,7 @@ class AppController extends Controller {
    * @return void
    * @author Djalma Araújo
    */
-  public function beforeFilter() 
+  public function beforeFilter()
   {
     // set the history url
     $this->setUrlHistory();
@@ -43,7 +43,7 @@ class AppController extends Controller {
   public function beforeRender() {
 
     // Page title default
-    $this->pageTitle(empty($this->arrView['page_title']) ? '' : $this->arrView['page_title']); 
+    $this->pageTitle( empty($this->arrView['page_title']) ? null : $this->arrView['page_title'] ); 
 
     // To we don't have to repeat the set function with arrView variable.
     $this->set($this->arrView);
@@ -51,14 +51,14 @@ class AppController extends Controller {
 
   public function activeRecordConfig()
   {
-    // ActiveRecord\Config::initialize( function($cfg)
-    // {
-    //   require_once APP . 'Config' . DS . 'database.php';
-    //   $dbConfig = new DATABASE_CONFIG();
+    ActiveRecord\Config::initialize( function($cfg)
+    {
+      $database = Config::read('database');
+      $db = $database[ Config::read('environment') ];
       
-    //   $cfg->set_model_directory(APP . 'Model');
-    //   $cfg->set_connections(array('development' => 'mysql://' . $dbConfig->default['login'] . ':' . $dbConfig->default['password'] . '@' . $dbConfig->default['host'] . '/' . $dbConfig->default['database'] . ';charset=utf8'));
-    // });
+      $cfg->set_model_directory(APP . DS . 'models');
+      $cfg->set_connections(array('development' => 'mysql://' . $db['user'] . ':' . $db['password'] . '@' . $db['host'] . '/' . $db['prefix'] . $db['database'] . ';charset=utf8'));
+    });
   }
   
   /**
@@ -69,7 +69,7 @@ class AppController extends Controller {
    * @author Walmir Neto
    */
   protected function pageTitle($title = null) {
-    $compl = ($title) ? $title . ' » ' : '';
+    $compl = empty($title) ? null : $title . ' » ';
     $this->set('page_title', $compl . APP_NAME);
   }
   
