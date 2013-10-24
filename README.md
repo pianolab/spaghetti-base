@@ -1,4 +1,4 @@
-pianolab.base (SpaghettiPHP framework + Bootstrap, from Twitter (v2.0.2))
+pianolab.base (SpaghettiPHP framework + php.activeRecord + Bootstrap, from Twitter (v2.0.2))
 =========
 
 Spaghetti* is a framework written in PHP to help make your day-to-day life more productive and fun.
