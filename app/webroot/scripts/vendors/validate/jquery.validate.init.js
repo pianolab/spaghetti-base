@@ -1,14 +1,18 @@
 $.validator.setDefaults({
   errorElement: 'span',
+
+  ignore: [],
+
   highlight: function(element) {
     $(element).closest('.control-group')
       .removeClass('success').addClass('error');
   },
+  
   success: function(element) {
     var icon;
-    icon = $('<i>').addClass('icon-ok');
+    icon = $('<i>').addClass('icon-ok').text('ok');
     element.html(icon).addClass('valid').closest('.control-group')
-      .removeClass('error').addClass('success').text('ok');
+      .removeClass('error').addClass('success');
   }
 });
 

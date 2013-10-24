@@ -20,7 +20,7 @@
 
 <!-- Le styles 
 ================================================== -->
-<?php echo $html->stylesheet('bootstrap/bootstrap.min'); ?>
+<?php echo $html->stylesheet('application'); ?>
 <?php echo $this->stylesForLayout; ?>
 
 <!-- Le favicons 
