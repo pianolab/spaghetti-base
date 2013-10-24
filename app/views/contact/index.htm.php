@@ -1,6 +1,5 @@
-<!-- Example row of columns -->
+<?php $html->script('modules/contact', array(), false, true); ?>
 
-<?php $html->script(array('modules/contact'), array(), false, true); ?>
 <div class="row">
   <div class="span12">
   <h2>Contato</h2>
@@ -27,6 +26,12 @@
     'label' => 'Mensagem', 
     'placeholder' => 'Escreva sua mensagem',
     'type' => 'textarea', 
+  )); ?>
+
+  <?php echo $form->input('born_in', array(
+    'label' => 'Mensagem', 
+    'placeholder' => 'dd/mm/aaaa',
+    'alt' => 'date', 
   )); ?>
 
   <?php echo $form->input(null, array(

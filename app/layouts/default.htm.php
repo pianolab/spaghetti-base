@@ -6,30 +6,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
   <?php echo $this->element('layout/head'); ?>
-</head>
 
+  <?php echo $this->element('layout/analytics'); ?>
+</head>
 <body>
-  <!-- header 
-  ================================================== -->
   <?php echo $this->element('layout/header'); ?>
 
-  <section class="container">
+  <section class="container"> 
     <?php echo $this->contentForLayout; ?>
-  </section> <!-- /container -->
+  </section>
 
-  <!-- footer 
-  ================================================== -->
-  <?php echo $this->element('layout/footer'); ?>
+  <?php echo $this->element('layout/footer'); ?> 
+  <?php echo $this->element('layout/scripts'); ?> 
 </body>
-<!-- Le javascript
-================================================== -->
-<?php echo $this->element('layout/scripts'); ?>
-
-<!-- Le alert modal
-================================================== -->
-<?php echo $this->element('layout/alert_modal'); ?>
-
-<!-- Le analytics
-================================================== -->
-<?php echo $this->element('layout/analytics'); ?>
 </html>
