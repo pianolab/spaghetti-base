@@ -6,7 +6,7 @@ class AppController extends Controller {
   public $uri = array();
   public $components = array('ImageResize', 'Flash');
   public $logged = null;
-  public $helpers = array('Html', 'Form', 'Pagination', 'Textile', 'Flash', 'Lang');
+  public $helpers = array('Html', 'Form', 'Pagination', 'Flash', 'Youtube');
 
   /**
    * Filtro antes de executar
