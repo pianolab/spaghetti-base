@@ -1,13 +1,12 @@
-pianolab.base (SpaghettiPHP framework + php.activeRecord + Bootstrap, from Twitter (v2.0.2))
+pianolab.base (SpaghettiPHP + php.activeRecord v1.0 + Bootstrap v3.0.0)
 =========
 
 Spaghetti* is a framework written in PHP to help make your day-to-day life more productive and fun.
 ### Contains
-
 Full MVC Structure (Spaghetti Framework)
-Full bootstrap + JS plugins + GRID system (Bootstrap, from Twitter)
+Bootstrap v3.0.0
 E-mail Component (Swift Mailer)
-Text, Date, Currency, Youtube.. Helpers
+Text, Date, Currency, Youtube, Vimeo.. Helpers
 Lot of snippets (Facebook tags, Analytics, mobile favicons, pagination example)
 
 ### Instructions
