@@ -8,8 +8,8 @@ App::import('Lang', 'alias');
  * por wfsneto
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
  */
-class LangHelper extends HtmlHelper {
-
+class LangHelper extends HtmlHelper 
+{
   /**
    * Attributes public
    */
