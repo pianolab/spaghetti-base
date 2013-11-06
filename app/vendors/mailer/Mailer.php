@@ -18,19 +18,19 @@ class Mailer {
         endforeach;
     }
     public function transport() {
-        switch(Config::read('Mailer.transport')):
+        switch(MAILER_TRANSPORT):
             case 'mail':
                 $transport = Swift_MailTransport::newInstance();
                 break;
             case 'smtp':
-                $host = Config::read('Mailer.smtp.host');
-                $port = Config::read('Mailer.smtp.port');
-                $encryption = Config::read('Mailer.smtp.encryption');
+                $host = MAILER_SMTP_HOST;
+                $port = MAILER_SMTP_PORT;
+                $encryption = MAILER_SMTP_ENCRYPTION;
                 $transport = Swift_SmtpTransport::newInstance($host, $port, $encryption);
                 
                 if(Config::read('Mailer.smtp.username')):
-                    $username = Config::read('Mailer.smtp.username');
-                    $password = Config::read('Mailer.smtp.password');
+                    $username = MAILER_SMTP_USERNAME;
+                    $password = MAILER_SMTP_PASSWORD;
                     $transport->setUsername($username)->setPassword($password);
                 endif;
         endswitch;
