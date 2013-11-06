@@ -87,32 +87,36 @@ class FormHelper extends HtmlHelper {
     $options = array_merge(array(
       "name" => $name,
       "options" => array(),
+      "selected" => array(),
       "value" => null,
-      "empty" => false
+      "empty" => false,
+      "multiple" => false
     ), $options);
-
+    
+    $selected = is_array($options["selected"]) ? $options["selected"] : array();
     $selectOptions = array_unset($options, "options");
-    if(($empty = array_unset($options, "empty")) !== false):
+    if (($empty = array_unset($options, "empty")) !== false) {
       $keys = array_keys($selectOptions);
-      if(is_array($empty)):
+      if (is_array($empty)) {
         $emptyKeys = array_keys($empty);
         $key = $emptyKeys[0];
         $values = array_merge($empty, $selectOptions);
-      else:
+      }
+      else {
         $values = array_merge(array($empty), $selectOptions);
-      endif;
+      } #endif;
       array_unshift($keys, $key);
       $selectOptions = array_combine($keys, $values);
-    endif;
+    } #endif;
     $content = "";
-    foreach($selectOptions as $key => $value):
+    foreach ($selectOptions as $key => $value) {
       $optionAttr = array("value" => $key);
-      if((string) $key === (string) $options["value"]):
+      if((string) $key === (string) $options["value"] || in_array($key, $selected)) {
         $optionAttr["selected"] = true;
         unset($options["value"]);
-      endif;
+      }
       $content .= $this->tag("option", $value, $optionAttr);
-    endforeach;
+    } #endforeach;
     return $this->output($this->tag("select", $content, $options));
   }
   /**
@@ -244,7 +248,21 @@ class FormHelper extends HtmlHelper {
     endswitch;
 
     # label
-    $label = empty($label) ? null : $this->tag("label", $label, array("for" => $options["id"]));
+    if (empty($label)) {
+      $label = null;
+    }
+    else {
+      if (is_array($label)) {
+        $label_text = $label["text"];
+      }
+      else {
+        $label_text = $label;
+        $label = array();
+      }
+      unset($label["text"]);
+      $label["for"] = $options["id"];
+      $label = $this->tag("label", $label_text, $label);
+    }
 
     $after .= empty($options['error']) ? null : $this->tag("span", $label, array("class" => "error"));
 
@@ -259,5 +277,3 @@ class FormHelper extends HtmlHelper {
     return $this->output($this->div($content, $div_attr));
   }
 }
-
-?>
