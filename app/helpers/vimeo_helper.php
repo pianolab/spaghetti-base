@@ -46,6 +46,17 @@ class VimeoHelper extends HtmlHelper {
     return (String) $request[0]['title'];
   }
 
+  public function description($url)
+  {
+    $id = $this->getId($url);
+
+    if (isset($id)) {
+      $request = json_decode(file_get_contents("http://vimeo.com/api/v2/video/" . $id . ".json"), true);
+    }
+    
+    return (String) $request[0]['description'];
+  }
+
   public function getId($url){
     $exp = explode("/", $url);
     $id = end($exp);
