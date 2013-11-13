@@ -5,11 +5,11 @@ App::import('Model', 'active_record_model');
 class AppController extends Controller {
 
   public $layout = 'default';
+  public $logged = null;
   public $uri = array();
   public $uses = array();
   public $arrView = array();
-  public $components = array('ImageResize', 'Flash');
-  public $logged = null;
+  public $components = array('ImageResize', 'Flash', 'Upload', 'Uploadify');
   public $helpers = array('Html', 'Form', 'Lang', 'Flash', 'Pagination', 'Youtube', 'Textile');
 
   /**

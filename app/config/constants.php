@@ -59,3 +59,8 @@ define('FACE_DESCRIPTION', false); // Alguma descrição do site
 define('FACE_URL', false); // http://www.meusite.com.br/
 define('FACE_IMAGE', false); // http://www.temqueporaurlcompleta.com.br/images/facebook.jpg
 define('FACE_SITE_NAME', false); // Nome do site
+
+/**
+ * Configurações para o helper de TAGS do FACEBOOK
+ */
+define('UPLOADIFY_UNIQUE_SALT', '5asd5gvmds4d6afoya65as56d4a646wq55a654892'); // Nome do site

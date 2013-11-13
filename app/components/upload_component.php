@@ -9,11 +9,12 @@
  *
  */
 
-class UploadComponent extends Component {
+class UploadComponent extends Component
+{
   /**
    * Tipos de arquivo permitidos.
    */
-  public $allowedTypes = array("doc", "docx", "xls", "xlsx");
+  public $allowedTypes = array("jpg", "png", "gif", "jpeg");
   /**
    * Tamanho máximo permitido (em MB).
    */
@@ -35,7 +36,7 @@ class UploadComponent extends Component {
    *
    * @return void
    */
-  public function initialize() {
+  public function initialize(&$controller) {
     foreach($_FILES as $file => $content):
       if(is_array($content["name"])):
         foreach($content["name"] as $name => $value):
@@ -120,6 +121,29 @@ class UploadComponent extends Component {
       return $this->error("CantFindFile");
     endif;
   }
+
+  /**
+   * Generate a unique name for the file
+   *
+   * @param string $filename Nome do arquivo
+   * @return string Extensão do arquivo
+   */
+  public function uniqueName($filename) {
+    $this->extension = $this->ext($filename);
+    return $this->filename = uuid() . '.' . $this->extension;
+  }
+
+    /**
+   * Setting name for the folder
+   *
+   * @param string $folder Name of the folder
+   * @return string Extensão do arquivo
+   */
+  public function setPath($folder) {
+    $this->path = UPLOAD_PATH . DS;
+    $this->path .= isset($folder) ? $folder : null;
+  }
+
   /**
    * Retorna a extensão de um arquivo.
    *
@@ -135,8 +159,8 @@ class UploadComponent extends Component {
    * @param string $message Mensagem de erro
    * @return false
    */
-  public function error($message = "") {
-    $this->errors []= $message;
+  public function error($message = "", $details = array()) {
+    $this->errors[] = $message;
     return false;
   }
   /**
