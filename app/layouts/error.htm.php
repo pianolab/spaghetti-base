@@ -14,7 +14,7 @@
   <section class="hero-unit container">
     <h1>Error.page.404</h1>
     <?php echo $this->contentForLayout; ?>
-    <p><a href="<?php echo Mapper::url('/', true); ?>" class="btn btn-inverse btn-large">Go to HOME</a></p>
+    <p><a href="<?php echo Mapper::url('/', true); ?>" class="btn btn-default btn-large">Go to HOME</a></p>
   </section> <!-- /container -->
   <!-- footer 
   ================================================== -->
