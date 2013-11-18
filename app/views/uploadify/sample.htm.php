@@ -1,4 +1,4 @@
-<?php $html->script(array('vendors/uploadify/jquery.uploadify.min','modules/uploadify'), array(), false); ?>
+<?php $html->script(array('vendors/uploadify/jquery.uploadify','modules/uploadify'), array(), false); ?>
 
 <div class="row">
   <div class="col-md-12">
