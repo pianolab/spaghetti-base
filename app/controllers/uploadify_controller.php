@@ -9,11 +9,13 @@ class UploadifyController extends AppController
     else {
       $this->layout = false;
 
+      $attachment = new Attachment(array('parent_id' => $this->data['parent_id'], 
+        'parent_name' => $this->data['parent_name']));
+
       $response = $this->UploadifyComponent->uploadify(array('path' => 'folder-name'));
       if ($response['success'] && !empty($response['data'])) {
-        $attachment = new Attachment($response['data']);
+        $attachment->set_attributes($response['data']);
 
-        $attachment->parent_id = 0;
         $attachment->save();
 
         $this->arrView['attachment'] = $attachment;

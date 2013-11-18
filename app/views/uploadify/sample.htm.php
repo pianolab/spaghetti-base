@@ -8,7 +8,7 @@
 
   <?php echo $form->input('files', array(
     'label' => 'Arquivos', 
-    'class' => 'form-control uploadify', 
+    'class' => 'uploadify', 
     'type' => 'file',
   )); ?>
 

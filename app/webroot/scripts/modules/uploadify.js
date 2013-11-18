@@ -9,6 +9,10 @@ var Uploadify = {
 
     $('.uploadify').uploadify({
       debug: false,
+      formData: {
+        parent_id: 0,
+        parent_name: '' // modelName
+      },
       buttonText: 'Escolher imagens',
       buttonClass: 'btn btn-success',
       upload_url: base_url + '/uploadify',
