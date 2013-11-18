@@ -190,7 +190,7 @@ class JSMinPlus
 		'arguments', 'eval', 'true', 'false', 'Infinity', 'NaN', 'null', 'undefined'
 	);
 
-	private function __construct()
+	public function __construct()
 	{
 		$this->parser = new JSParser($this);
 	}

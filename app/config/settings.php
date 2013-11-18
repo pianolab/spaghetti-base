@@ -21,19 +21,13 @@ Config::write('default_language', 'br');
 /**
  * Definições de AMBIENTE de desenvolvimento
  */
-$all_domains = array(
+Config::write('all_domains', array(
   'development' => array('0.0.0.0', '127.0.0.1', 'localhost', 'lvh.me'),
-  'production' => array('production.com'),
+  'production' => array('production.com', 'dsavh.me'),
   'staging' => array('staging.com'),
-);
-Config::write('environment', 'development'); # development, production
-foreach ($all_domains as $key => $domains) {
-  foreach ($domains as $k => $domain) {
-    if (strpos($_SERVER['SERVER_NAME'], $domain) !== false) {
-      Config::write('environment', $key);
-    }
-  }
-}
+)); # development, production
+
+Config::write('environment', get_current_env());
 
 # Debug
 if (Config::read('environment') == 'production') {

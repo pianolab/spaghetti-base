@@ -1,3 +1,4 @@
 /app/config/database.php
 /sftp-config.json
 /upload
+/app/webroot/scripts/application-*

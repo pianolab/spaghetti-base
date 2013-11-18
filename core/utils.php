@@ -8,6 +8,21 @@
  *
  */
 
+function get_current_env() 
+{
+  $all_domains = Config::read('all_domains');
+
+  $environment = 'development';
+
+  foreach ($all_domains as $key => $domains) {
+    foreach ($domains as $k => $domain) {
+      if (strpos($_SERVER['SERVER_NAME'], $domain) !== false) { $environment = $key; }
+    }
+  }
+
+  return $environment;
+}
+
 function uuid() {
     list($timeMid, $timeLow) = explode(' ', microtime());
     return sprintf(
