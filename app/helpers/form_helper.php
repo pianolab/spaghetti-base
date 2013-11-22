@@ -202,8 +202,8 @@ class FormHelper extends HtmlHelper {
    *  @param array $options Atributos da tag
    *  @return string Campo de entrada do formulário
    */
-  public function hidden($name, $options = array()) {
-    return $this->input($name, $options);
+  public function hidden($name, array $options = array()) {
+    return $this->input($name, array_merge($options, array('type' => 'hidden')));
   }
   /**
    *  Cria caixa de entrada formatada e com label.
