@@ -159,4 +159,21 @@ class AppController extends Controller {
     if (strtolower($method) == 'post') return $is_post;
     if (strtolower($method) == 'get') return !$is_post;
   }
+
+  protected function authConfig()
+  {
+    $this->AuthComponent->loginAction = '/login';
+    $this->AuthComponent->logoutAction = '/logout';
+    $this->AuthComponent->userModel = 'Admin';
+    $this->AuthComponent->prefixCrypt = "gruposucesso_site_admin_";
+    $this->AuthComponent->loginError = "Seu nome de usuário ou senha estão incorretos";
+    $this->AuthComponent->authError = "Você precisa estar autenticado para acessar essa área";
+    $this->AuthComponent->hash = 'md5';
+
+    $this->AuthComponent->deny();
+
+    if ($this->AuthComponent->loggedIn()) {
+      $this->arrView['logged'] = $this->AuthComponent->user();
+    } # endif;
+  }
 }

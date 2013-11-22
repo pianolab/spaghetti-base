@@ -4,12 +4,7 @@ var SampleUploadify = {
   },
 
   uploadify: function () {
-    Uploadify.upload({ 
-      formData: {
-        parent_id: $('#sampleId').val(), 
-        parent_name: 'sample'
-      }
-    });
+    Uploadify.upload($('#sampleId').val(), 'sample', {})
   }
 };
 

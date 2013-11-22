@@ -62,4 +62,4 @@ define('FACE_SITE_NAME', false); // Nome do site
 /**
  * Configurações para o helper de TAGS do FACEBOOK
  */
-define('UPLOADIFY_UNIQUE_SALT', '5asd5gvmds4d6afoya65as56d4a646wq55a654892'); // Nome do site
+define('UPLOADIFY_UNIQUE_SALT', 'dasd55a654asdvmds4d6afoya65as56d4a646wq8925a5gas'); 

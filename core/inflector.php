@@ -202,5 +202,3 @@ class Inflector extends Object
         return str_replace("-", "_", $string);
     }
 }
-
-?>

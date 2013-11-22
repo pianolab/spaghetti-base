@@ -1,10 +1,10 @@
 var Uploadify = {
-  upload: function (params) {
+  upload: function (parent_id, parent_name, params) {
     paramsDefault = {
       debug: this.valid(params.debug) ? params.debug :false,
       formData: {
-        parent_id: this.valid(params.formData.parent_id) ? params.formData.parent_id : 0, 
-        parent_name: this.valid(params.formData.parent_name) ? params.formData.parent_name : 'attachment'
+        parent_id: parent_id, 
+        parent_name: parent_name
       },
       buttonText: this.valid(params.buttonText) ? params.buttonText : 'Escolher imagens',
       buttonClass: this.valid(params.buttonClass) ? params.buttonClass : 'btn btn-success',
@@ -13,9 +13,11 @@ var Uploadify = {
       onUploadSuccess: function(file, data, response) {
         $('#newAttachments').append(data);
       },
-      onUploadError: function(file, errorCode, errorMsg, errorString) {}
-    };
+      onUploadError: function(file, errorCode, errorMsg, errorString) {
 
+      }
+    };
+    
     $('.uploadify').uploadify(paramsDefault);
 
     $('.uploadify-button').removeAttr('style');

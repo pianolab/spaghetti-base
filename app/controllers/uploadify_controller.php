@@ -1,14 +1,13 @@
 <?php
-
 class UploadifyController extends AppController
 {
-  // public $components = array('Upload', 'Uploadify');
+  public $components = array('Upload', 'Uploadify');
   
   public function multiple() 
   {
-    $this->layout = false;
-
     if ($this->is('post')) {
+      $this->layout = false;
+
       $attachment = new Attachment(array('parent_id' => $this->data['parent_id'], 
         'parent_name' => $this->data['parent_name']));
 
@@ -24,13 +23,10 @@ class UploadifyController extends AppController
         $this->arrView['folder'] = $folder;
         $this->arrView['attachment'] = $attachment;
       }
+
     }
     else {
       $this->autoRender = false;
     }
-  }
-  public function sample()
-  {
-    $this->pageTitle('Uploadify - upload multiplos de arquivos');
   }
 }
