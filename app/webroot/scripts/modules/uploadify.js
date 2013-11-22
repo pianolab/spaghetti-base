@@ -9,6 +9,7 @@ var Uploadify = {
 
     $('.uploadify').uploadify({
       debug: false,
+      multi: false,
       formData: {
         parent_id: 0,
         parent_name: '' // modelName

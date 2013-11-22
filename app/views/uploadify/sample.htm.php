@@ -1,8 +1,8 @@
-<?php $html->script(array('vendors/uploadify/jquery.uploadify','modules/uploadify'), array(), false); ?>
+<?php $minify->jsAddExtraUrl(array('vendors/uploadify/jquery.uploadify','modules/uploadify')); ?>
 
 <div class="row">
   <div class="col-md-12">
-  <h2>Upload multiplo</h2>
+  <h2>Upload multiploasd</h2>
   
   <?php echo $form->create('/uploadify', array('id' => 'form-upload', 'class' => 'form-horizontal')); ?>
 

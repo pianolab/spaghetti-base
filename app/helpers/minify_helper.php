@@ -30,6 +30,17 @@ class MinifyHelper extends HtmlHelper
       $this->js->urls[] = $url;
     }
   }
+
+  public function jsAddExtraUrl($url)
+  {
+    $urls = is_array($url) ? $url : array($url);
+
+    foreach ($urls as $key => $url) {
+      $content = file_get_contents($this->jsPrepareUrl($url));
+      $this->jsAddString($content);
+      $this->js->extra_urls[] = $url;
+    }
+  }
   
   public function jsAddString($string)
   {
@@ -68,7 +79,7 @@ class MinifyHelper extends HtmlHelper
       }
     }
     else {
-      $output_name = $this->js->urls;
+      $output_name = array_merge($this->js->urls, $this->js->extra_urls);
     }
 
     return $this->script($output_name);
