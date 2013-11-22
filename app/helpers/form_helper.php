@@ -196,6 +196,16 @@ class FormHelper extends HtmlHelper {
     return $this->output($selectDay . $selectMonth . $selectYear);
   }
   /**
+   *  Cria um ipunt oculto.
+   * 
+   *  @param string $name Nome do campo de entrada
+   *  @param array $options Atributos da tag
+   *  @return string Campo de entrada do formulário
+   */
+  public function hidden($name, $options = array()) {
+    return $this->input($name, $options);
+  }
+  /**
    *  Cria caixa de entrada formatada e com label.
    * 
    *  @param string $name Nome do campo de entrada
