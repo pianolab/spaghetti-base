@@ -1,4 +1,8 @@
-<?php $minify->jsAddExtraUrl(array('vendors/uploadify/jquery.uploadify','modules/uploadify')); ?>
+<?php $minify->jsAddExtraUrl(array(
+  'vendors/uploadify/jquery.uploadify',
+  'vendors/uploadify/jquery.uploadify.init',
+  'modules/sample_uploadify'
+)); ?>
 
 <div class="row">
   <div class="col-md-12">
@@ -13,7 +17,7 @@
   )); ?>
 
   <table class="table table-striped">
-    <tbody id="new-attachments"></tbody>
+    <tbody id="newAttachments"></tbody>
   </table>
   
   <?php echo $form->close(); ?>

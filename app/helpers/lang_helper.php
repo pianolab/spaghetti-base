@@ -1,7 +1,6 @@
 <?php
 
 App::import('Core', array('view'));
-App::import('Lang', 'alias');
 
 /**
  * LangHelper provê conversão de texto em multilínguas

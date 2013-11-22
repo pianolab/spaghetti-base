@@ -11,9 +11,8 @@ define('APP_NAME', 'PianoLab Base');
 define('PERPAGE_DEFAULT', 10);
 
 /*
- Configurações para session
-*/
-
+ * Configurações para session
+ */
 define('SESSION_PATH', false); // / home/USUARIO_DO_HOST/tmp
 
 /**
@@ -29,8 +28,8 @@ define('UPLOAD_PATH', ROOT . DS . UPLOAD_FOLDER);
 define('ANALYTICS', false);
 
 /**
-* Configurações para o HELPER de formato de moedas
-*/
+ * Configurações para o HELPER de formato de moedas
+ */
 define('CURRENCY', 'R$');
 define('CURRENCY_NAME', 'Real');
 define('CURRENCY_DECIMAL_PLACE', 2);

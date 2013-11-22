@@ -117,7 +117,7 @@ class AppController extends Controller {
     $recursive = new RecursiveIteratorIterator($list);
 
     foreach($recursive as $folder){
-      if (!in_array($folder->getFilename(), array('.', '..', 'alias.php'))) {
+      if (!in_array($folder->getFilename(), array('.', '..'))) {
         $key = str_replace($path . DS, '', $folder->getPathname());
         $key = str_replace('.php', '', $key);
 
@@ -147,36 +147,16 @@ class AppController extends Controller {
   }
 
   /**
-   * Configura e faz upload de aquivos
+   * Checa se o request é post ou get
    *
-   * @param string $response 
+   * @param string $method 
    * @return void
    * @author Walmir Neto
    */
-  protected function uploadFiles($params = array()) {
-    $this->components[] = 'Upload';
-
-    /**
-     * Upload Settings
-     */
-    $this->UploadComponent->allowedTypes = $params['allowed_types'] ? $params['allowed_types'] : array("jpg", "png", "gif", "jpeg");
-    $this->UploadComponent->maxSize = $params['max_size'] ? $params['max_size'] : 1;
-    $this->UploadComponent->path = $_SERVER["DOCUMENT_ROOT"] . DS;
-    if (isset($params['path'])) $this->UploadComponent->setPath($params['path']);  
-    
-    /**
-     * Upload
-     */
-    $files = $this->UploadComponent->files;
-    
-    foreach ($files as $key => $file) {
-      unset($this->data[$key]);
-      if ($file['error'] == 0) {
-        $filename = isset($file['new_name']) ? $file['new_name'] . '.' . $this->UploadComponent->ext($file['name']) : $this->UploadComponent->uniqueName($file['name']);
-        $is_upload = $this->UploadComponent->upload($file, null, $filename);
-        $this->data[$key] = $is_upload ? $filename : null;
-      } # endif;
-    } # endforeach;
-    return true;
+  protected function is($method)
+  {
+    $is_post = has_data($this->data);
+    if (strtolower($method) == 'post') return $is_post;
+    if (strtolower($method) == 'get') return !$is_post;
   }
 }

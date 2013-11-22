@@ -23,6 +23,26 @@ function get_current_env()
   return $environment;
 }
 
+function t($string, $file_name = false)
+{
+  App::import('Helper', 'lang_helper');
+  $lang = new LangHelper();
+  return $lang->_($string, $file_name);
+}
+
+function has_data($var)
+{
+  if (is_numeric($var) && $var == 0) return true;
+  if (empty($var)) return false;
+  if (isset($var)) return true;
+  if ($var == false) return false;
+}
+
+function is_odd($number)
+{
+  return $number % 2 == 0;
+}
+
 function uuid() {
     list($timeMid, $timeLow) = explode(' ', microtime());
     return sprintf(
@@ -93,5 +113,3 @@ function array_range($min, $max) {
     endfor;
     return $result;
 }
-
-?>

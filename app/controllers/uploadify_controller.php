@@ -1,25 +1,32 @@
 <?php
+
 class UploadifyController extends AppController
 {
-  public function index() 
+  // public $components = array('Upload', 'Uploadify');
+  
+  public function multiple() 
   {
-    if (empty($this->data)) {
-      $this->autoRender = false;
-    }
-    else {
-      $this->layout = false;
+    $this->layout = false;
 
+    if ($this->is('post')) {
       $attachment = new Attachment(array('parent_id' => $this->data['parent_id'], 
         'parent_name' => $this->data['parent_name']));
 
-      $response = $this->UploadifyComponent->uploadify(array('path' => 'folder-name'));
-      if ($response['success'] && !empty($response['data'])) {
+      $folder = Inflector::pluralize($this->data['parent_name']);
+
+      $response = $this->UploadifyComponent->multiple(array('path' => $folder));
+
+      if ($response['success'] && has_data($response['data'])) {
         $attachment->set_attributes($response['data']);
 
         $attachment->save();
 
+        $this->arrView['folder'] = $folder;
         $this->arrView['attachment'] = $attachment;
       }
+    }
+    else {
+      $this->autoRender = false;
     }
   }
   public function sample()

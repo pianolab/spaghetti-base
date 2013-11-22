@@ -79,7 +79,9 @@ class MinifyHelper extends HtmlHelper
       }
     }
     else {
-      $output_name = array_merge($this->js->urls, $this->js->extra_urls);
+      $urls = is_array($this->js->urls) ? $this->js->urls : array();
+      $extra_urls = is_array($this->js->extra_urls) ? $this->js->extra_urls : array();
+      $output_name = array_merge($urls, $extra_urls);
     }
 
     return $this->script($output_name);

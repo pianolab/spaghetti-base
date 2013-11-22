@@ -128,7 +128,9 @@ class UploadComponent extends Component
    * @param string $filename Nome do arquivo
    * @return string Extensão do arquivo
    */
-  public function uniqueName($filename) {
+  public function uniqueName($filename, $folder = null) {
+    if (has_data($folder)) $this->setPath( Inflector::pluralize($folder) );
+
     $this->extension = $this->ext($filename);
     return $this->filename = uuid() . '.' . $this->extension;
   }
@@ -141,7 +143,7 @@ class UploadComponent extends Component
    */
   public function setPath($folder) {
     $this->path = UPLOAD_PATH . DS;
-    $this->path .= isset($folder) ? $folder : null;
+    $this->path .= has_data($folder) ? $folder : null;
   }
 
   /**
