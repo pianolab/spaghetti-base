@@ -1,14 +1,31 @@
-@validate-error-color: #b94a48;
-@validate-valid-color: #7aba7b;
+@validate-error-bg: #b94a48;
+@validate-error-color: #fff;
+@validate-valid-bg: #7aba7b;
+@validate-valid-color: #fff;
+@validate-border-radius: 2px;
 
 form {
-  span.error {
-    font-style: italic;
-    color: @validate-error-color;
-    padding: 2px 8px;
-  }
-  span.valid {
-    display: inline-block;
-    color: @validate-valid-color;
+  span {
+    &.error, &.valid {
+      position: absolute;
+      right: 41px;
+      top: 5.5px;
+      font-style: italic;
+      padding: 2px 8px;
+      -webkit-border-radius: @validate-border-radius;
+      -moz-border-radius: @validate-border-radius;
+      border-radius: @validate-border-radius;
+      z-index: 9999;
+      cursor:pointer;
+    }
+    &.error {
+      background: @validate-error-bg;
+      color: @validate-error-color;
+    }
+    &.valid {
+      display: inline-block;
+      background: @validate-valid-bg;
+      color: @validate-valid-color;
+    }
   }
 }
