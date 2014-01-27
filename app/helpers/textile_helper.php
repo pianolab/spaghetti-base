@@ -951,6 +951,15 @@ class TextileHelper extends Helper {
     }
 
 
+  /**
+   * Delimita um texto
+   * @author Rayann Nayran
+   */
+    function crop($text, $limit = 0, $offset)
+    {
+        return substr($text, 0, strrpos(substr($text, $limit, $offset), ' ')) . '...';
+    }
+
 } // end class
 
 ?>
