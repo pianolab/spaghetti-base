@@ -78,7 +78,7 @@ class AuthComponent extends Component {
     /**
       * Define o prefixo da sessão do usuário logado
       */
-    public $prefixCrypt = 'skjHASJKh';
+    public $prefixCrypt = SESSION_PREFIX;
     /**
       *  Define o nível de recursão do modelo.
       */
@@ -91,7 +91,7 @@ class AuthComponent extends Component {
       *  Mensagem de erro para acesso não autorizado.
       */
     public $authError = "notAuthorized";
-    
+
     public $authenticate = false;
 
     /**
@@ -199,10 +199,10 @@ class AuthComponent extends Component {
      *  @return boolean Verdadeiro caso o usuário esteja autenticado
      */
     public function loggedIn() {
-      
-      $user_session = Session::read($this->prefixCrypt . 'user_logged');
+
+      $user_session = Session::read($this->prefixCrypt . "user_logged");
         if(is_null($this->loggedIn)):
-            $user = $user_session['user_id'];
+            $user = $user_session["user_id"];
             $password = $user_session["password"];
             if(!is_null($user) && !is_null($password)):
                 $user = $this->identify(array(
@@ -213,7 +213,7 @@ class AuthComponent extends Component {
             else:
                 return $this->loggedIn = false;
             endif;
-            
+
         else:
           return $this->loggedIn;
         endif;
@@ -267,7 +267,7 @@ class AuthComponent extends Component {
             endif;
         endif;
     }
-    
+
     public function loginRedirect() {
         if($this->authenticate):
             $this->authenticate($this->user["id"], $this->user["password"]);
@@ -285,7 +285,7 @@ class AuthComponent extends Component {
       *  @return void
       */
     public function authenticate($id, $password) {
-      Session::write($this->prefixCrypt . 'user_logged', array('user_id' => $id,'password' => $password));  
+      Session::write($this->prefixCrypt . "user_logged", array("user_id" => $id,"password" => $password));
     }
     /**
       *  Efetua o logout do usuário.
@@ -293,7 +293,7 @@ class AuthComponent extends Component {
       *  @return void
       */
     public function logout() {
-        Session::delete($this->prefixCrypt . 'user_logged');
+        Session::delete($this->prefixCrypt . "user_logged");
         $this->Controller->redirect($this->logoutRedirect);
     }
     /**

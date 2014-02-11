@@ -1,16 +1,16 @@
 <?php
 
-App::import('Model', 'active_record_model');
+App::import("Model", "active_record_model");
 
-class AppController extends Controller {
-
-  public $layout = 'default';
+class AppController extends Controller
+{
+  public $layout = "default";
   public $logged = null;
   public $uri = array();
   public $uses = array();
   public $arrView = array();
-  public $components = array('ImageResize', 'Flash', 'Upload', 'Uploadify');
-  public $helpers = array('Html', 'Form', 'Lang', 'Flash', 'Pagination', 'Youtube', 'Textile', 'Minify');
+  public $components = array("ImageResize", "Flash", "Upload", "Uploadify");
+  public $helpers = array("Html", "Form", "Lang", "Flash", "Pagination", "Minify");
 
   /**
    * Filtro antes de executar
@@ -29,11 +29,8 @@ class AppController extends Controller {
 
     // set the array lang
     $this->arrayLang();
-    
-    // Document Root para UPLOADS
-    $this->document_root = $_SERVER['DOCUMENT_ROOT'] . '/';
   }
-  
+
   /**
    * Filtro antes de renderizar
    * a view do método
@@ -41,12 +38,12 @@ class AppController extends Controller {
    * @return void
    * @author Djalma Araújo
    */
-  public function beforeRender() {
-
+  public function beforeRender()
+  {
     // Page title default
-    $this->pageTitle( empty($this->arrView['page_title']) ? null : $this->arrView['page_title'] ); 
+    $this->pageTitle( empty($this->arrView["page_title"]) ? null : $this->arrView["page_title"] );
 
-    // To we don't have to repeat the set function with arrView variable.
+    // To we don"t have to repeat the set function with arrView variable.
     $this->set($this->arrView);
   }
 
@@ -54,26 +51,26 @@ class AppController extends Controller {
   {
     ActiveRecord\Config::initialize( function($cfg)
     {
-      $database = Config::read('database');
-      $db = $database[ Config::read('environment') ];
-      
-      $cfg->set_model_directory(APP . DS . 'models');
-      $cfg->set_connections(array('development' => 'mysql://' . $db['user'] . ':' . $db['password'] . '@' . $db['host'] . '/' . $db['prefix'] . $db['database'] . ';charset=utf8'));
+      $database = Config::read("database");
+      $db = $database[ Config::read("environment") ];
+
+      $cfg->set_model_directory(APP . DS . "models");
+      $cfg->set_connections(array("development" => $db["driver"] . "://" . $db["user"] . ":" . $db["password"] . "@" . $db["host"] . "/" . $db["prefix"] . $db["database"] . ";charset=utf8"));
     });
   }
-  
+
   /**
    * Define o título da página
    *
-   * @param string $title 
+   * @param string $title
    * @return void
    * @author Walmir Neto
    */
   protected function pageTitle($title = null) {
-    $compl = empty($title) ? null : $title . ' » ';
-    $this->set('page_title', $compl . APP_NAME);
+    $compl = empty($title) ? null : $title . " » ";
+    $this->set("page_title", $compl . APP_NAME);
   }
-  
+
   /**
    * Seta a última URL acessada
    * na sessão
@@ -82,24 +79,24 @@ class AppController extends Controller {
    * @author Diogo Caetano
    */
   protected function setUrlHistory() {
-    Session::write('uri.history.current', Mapper::here());
-    
-    $uri = Session::read('uri.history');
+    Session::write("uri.history.current", Mapper::here());
+
+    $uri = Session::read("uri.history");
     $uri = is_array($uri) ? $uri : array($uri);
 
     if($uri[0] !== Mapper::here()) {
       array_unshift($uri , Mapper::here());
-      Session::write('uri.history.previous', $uri[1]);
+      Session::write("uri.history.previous", $uri[1]);
     }
     if(count($uri) > 2) array_pop($uri);
-     
-    Session::write('uri.history', $uri);
+
+    Session::write("uri.history", $uri);
 
     // Histórico da última URL
-    $this->uri['current'] = Session::read('uri.history.current');
-    $this->uri['previous'] = Session::read('uri.history.previous');   
+    $this->uri["current"] = Session::read("uri.history.current");
+    $this->uri["previous"] = Session::read("uri.history.previous");
 
-    $this->arrView['uri'] = $this->uri;
+    $this->arrView["uri"] = $this->uri;
   }
 
   /**
@@ -111,37 +108,37 @@ class AppController extends Controller {
    */
   protected function arrayLang() {
 
-    $path = APP . DS . 'languages';
+    $path = APP . DS . "languages";
 
     $list = new RecursiveDirectoryIterator($path);
     $recursive = new RecursiveIteratorIterator($list);
 
     foreach($recursive as $folder){
-      if (!in_array($folder->getFilename(), array('.', '..'))) {
-        $key = str_replace($path . DS, '', $folder->getPathname());
-        $key = str_replace('.php', '', $key);
+      if (!in_array($folder->getFilename(), array(".", ".."))) {
+        $key = str_replace($path . DS, "", $folder->getPathname());
+        $key = str_replace(".php", "", $key);
 
         include_once $folder->getPathname();
-        
+
         if (isset($language)) $array_lang[$key] = $language;
-        
+
         unset($language);
       }
     }
 
-    Session::write('array_lang', $array_lang);
+    Session::write("array_lang", $array_lang);
   }
-  
+
   /**
    * Método utilitário para retorno
    * em JSON
    *
-   * @param string $response 
+   * @param string $response
    * @return void
    * @author Djalma Araújo
    */
   protected function JSONOutput($response) {
-    header('Content-Type: application/json');
+    header("Content-Type: application/json");
     echo json_encode($response);
     exit;
   }
@@ -149,31 +146,30 @@ class AppController extends Controller {
   /**
    * Checa se o request é post ou get
    *
-   * @param string $method 
+   * @param string $method
    * @return void
    * @author Walmir Neto
    */
   protected function is($method)
   {
     $is_post = has_data($this->data);
-    if (strtolower($method) == 'post') return $is_post;
-    if (strtolower($method) == 'get') return !$is_post;
+    if (strtolower($method) == "post") return $is_post;
+    if (strtolower($method) == "get") return !$is_post;
   }
 
   protected function authConfig()
   {
-    $this->AuthComponent->loginAction = '/login';
-    $this->AuthComponent->logoutAction = '/logout';
-    $this->AuthComponent->userModel = 'Admin';
-    $this->AuthComponent->prefixCrypt = "gruposucesso_site_admin_";
+    $this->AuthComponent->loginAction = "/users/login";
+    $this->AuthComponent->logoutAction = "/users/logout";
+    $this->AuthComponent->userModel = "Users";
     $this->AuthComponent->loginError = "Seu nome de usuário ou senha estão incorretos";
     $this->AuthComponent->authError = "Você precisa estar autenticado para acessar essa área";
-    $this->AuthComponent->hash = 'md5';
+    $this->AuthComponent->hash = "md5";
 
     $this->AuthComponent->deny();
 
     if ($this->AuthComponent->loggedIn()) {
-      $this->arrView['logged'] = $this->AuthComponent->user();
+      $this->arrView["logged"] = User::find( $this->AuthComponent->user("id") );
     } # endif;
   }
 }

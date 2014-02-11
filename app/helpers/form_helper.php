@@ -9,15 +9,17 @@
 
 App::import("Helper", "html_helper");
 
-class FormHelper extends HtmlHelper {
+class FormHelper extends HtmlHelper
+{
   /**
    *  Retorna um elemento HTML do formulário formatado.
-   * 
+   *
    *  @param string $action Ação atual do modelo
    *  @param array $options Atributos e opções da tag HTML
    *  @return string Tag FORM aberto e formatado
    */
-  public function create($action = null, $options = array()) {
+  public function create($action = null, $options = array())
+  {
     $attributes = array_merge(
       array(
         "method" => "post",
@@ -38,7 +40,8 @@ class FormHelper extends HtmlHelper {
    *  @param array $attributes Atributos e opções da tag HTML
    *  @return string Tag FORM fechada
    */
-  public function close($submit = null, $attributes = array()) {
+  public function close($submit = null, $attributes = array())
+  {
     $form = $this->closeTag("form");
     if(!is_null($submit)):
       $form = $this->submit($submit, $attributes) . $form;
@@ -52,7 +55,8 @@ class FormHelper extends HtmlHelper {
    *  @param array $attributes Atributos e opções da tag
    *  @return string Botão de envio do formulário
    */
-  public function submit($text, $attributes = array()) {
+  public function submit($text, $attributes = array())
+  {
     $attributes = array_merge(
       array(
         "type" => "submit",
@@ -78,12 +82,13 @@ class FormHelper extends HtmlHelper {
   }
   /**
    *  Cria uma caixa de seleção.
-   * 
+   *
    *  @param string $name Nome da caixa de seleção
    *  @param array $options Atributos da tag
    *  @return string Caixa de seleção do formulário
    */
-  public function select($name, $options = array()) {
+  public function select($name, $options = array())
+  {
     $options = array_merge(array(
       "name" => $name,
       "options" => array(),
@@ -92,7 +97,7 @@ class FormHelper extends HtmlHelper {
       "empty" => false,
       "multiple" => false
     ), $options);
-    
+
     $selected = is_array($options["selected"]) ? $options["selected"] : array();
     $selectOptions = array_unset($options, "options");
     if (($empty = array_unset($options, "empty")) !== false) {
@@ -126,7 +131,8 @@ class FormHelper extends HtmlHelper {
    *  @param array $options Atributos da tag
    *  @return string Input do formulário
    */
-  public function radio($name, $options = array()) {
+  public function radio($name, $options = array())
+  {
     $options = array_merge(array(
       "options" => array(),
       "value" => null,
@@ -156,12 +162,13 @@ class FormHelper extends HtmlHelper {
   }
   /**
    *  Cria um conjunto de caixa de seleção para a data.
-   * 
+   *
    *  @param string $name Nome do conjunto de caixas de seleção
    *  @param array $options Opções das caixas de seleção
    *  @return string Conjunto de caixa de seleção
    */
-  public function date($name, $options = array()) {
+  public function date($name, $options = array())
+  {
     if(!is_null($options["value"])):
       $date = strtotime($options["value"]);
     else:
@@ -197,22 +204,24 @@ class FormHelper extends HtmlHelper {
   }
   /**
    *  Cria um ipunt oculto.
-   * 
+   *
    *  @param string $name Nome do campo de entrada
    *  @param array $options Atributos da tag
    *  @return string Campo de entrada do formulário
    */
-  public function hidden($name, array $options = array()) {
+  public function hidden($name, array $options = array())
+  {
     return $this->input($name, array_merge($options, array('type' => 'hidden')));
   }
   /**
    *  Cria caixa de entrada formatada e com label.
-   * 
+   *
    *  @param string $name Nome do campo de entrada
    *  @param array $options Atributos da tag
    *  @return string Campo de entrada do formulário
    */
-  public function input($name, $options = array()) {
+  public function input($name, $options = array())
+  {
     $options = array_merge(array(
       "name" => $name,
       "type" => "text",
@@ -278,7 +287,7 @@ class FormHelper extends HtmlHelper {
 
     # mount content
     $content = $before . t($label) . $between . $input . $after;
-    
+
     if (empty($div)) return $content;
 
     $div_attr = is_array($div) ? $div : array("class" => "input " . $options['type']);

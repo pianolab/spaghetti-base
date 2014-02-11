@@ -12,11 +12,13 @@
 <body>
   <?php echo $this->element('layout/header'); ?>
 
-  <section class="container"> 
+  <section class="container">
+    <?php echo $flash->flash(); ?>
+
     <?php echo $this->contentForLayout; ?>
   </section>
 
-  <?php echo $this->element('layout/footer'); ?> 
-  <?php echo $this->element('layout/scripts'); ?> 
+  <?php echo $this->element('layout/footer'); ?>
+  <?php echo $this->element('layout/scripts'); ?>
 </body>
 </html>

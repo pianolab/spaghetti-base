@@ -41,12 +41,12 @@ class MinifyHelper extends HtmlHelper
       $this->js->extra_urls[] = $url;
     }
   }
-  
+
   public function jsAddString($string)
   {
     $this->js->string .= ' ' . $string;
   }
-  
+
   public function jsAddScript($script)
   {
     if (get_current_env() == 'production') {

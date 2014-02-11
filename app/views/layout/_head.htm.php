@@ -8,9 +8,9 @@
 ================================================== -->
 <!--[if lt IE 7]>
   <p class=chromeframe>
-    Your browser is <em>ancient!</em> 
-    <a href="http://browsehappy.com/">Upgrade to a different browser</a> or 
-    <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> 
+    Your browser is <em>ancient!</em>
+    <a href="http://browsehappy.com/">Upgrade to a different browser</a> or
+    <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a>
     to experience this site.
   </p>
 <![endif]-->
@@ -18,24 +18,24 @@
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 <!--[if lt IE 9]><?php echo $html->script('html5'); ?><![endif]-->
 
-<!-- Le styles 
+<!-- Le styles
 ================================================== -->
 <?php echo $html->stylesheet('application'); ?>
 <?php echo $this->stylesForLayout; ?>
 
-<!-- Le favicons 
+<!-- Le favicons
 ================================================== -->
 <?php echo $this->element('layout/favicons'); ?>
 
-<!-- Le facebook tags 
+<!-- Le facebook tags
 ================================================== -->
 <?php echo $this->element('layout/facebook'); ?>
 
 <?php $minify->jsAddUrl(array(
-  # jQuery v1.10.2 
+  # jQuery v1.10.2
   'vendors/jquery/jquery',
   # Bootstrap v3.0.2
-  'vendors/bootstrap/bootstrap', 
+  'vendors/bootstrap/bootstrap',
   'vendors/bootstrap/prompt.modal',
   # Modernizr 2.7.0 (Custom Build)
   'vendors/modernizr',

@@ -1,5 +1,6 @@
 <?php
-class Contact extends AppModel {
+class Contact extends Model
+{
   public $table = false;
 
   public $validates = array(

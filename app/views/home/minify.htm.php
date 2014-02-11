@@ -1,1 +1,0 @@
-<?php echo get_current_env() ?>

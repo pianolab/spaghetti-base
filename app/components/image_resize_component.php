@@ -2,7 +2,7 @@
 /**
 * @license http://www.opensource.org/licenses/mit-license.php The MIT License
 * @copyright Copyright 2008-2009, Spaghetti* Framework (http://spaghettiphp.org/)
-*/ 
+*/
 
 App::import('Vendor', 'imageResize' . DS . 'm2brimagem.class');
 
@@ -17,7 +17,7 @@ class ImageResizeComponent extends Component
     $resized_file = $file_info['dirname'].'/'.$width.'X'.$height.'-'.$file_info['basename'];
 
     if(!file_exists($resized_file) && in_array(strtolower($file_info['extension']), $this->allowed_ext)):
-      
+
       $oImg = new m2brimagem($file);
       $validates = $oImg->valida();
 
@@ -35,7 +35,7 @@ class ImageResizeComponent extends Component
         $this->captureImage($resized_file);
     endif;
   }
-  
+
   public function grayscale($file, $width, $height) {
     $oImg = new m2brimagem($file,null,true);
     $validates = $oImg->valida();
@@ -46,7 +46,7 @@ class ImageResizeComponent extends Component
       die($validates);
     }
   }
-  
+
   private function captureImage($filename = '', $data = false, $enable_partial = true, $speedlimit = 0) {
       if ($filename == '')
       {

@@ -1,1 +1,0 @@
-<?php echo $this->element('contact/mail', $this->data); ?>

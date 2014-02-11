@@ -5,18 +5,21 @@
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-  <?php echo $this->element('layout/head'); ?>
+  <meta charset="utf-8">
+  <?php echo $html->stylesheet("application", array(), true, true); ?>
+  <title><?php echo $this->pageTitle; ?></title>
 </head>
 <body>
-  <!-- header 
+  <!-- header
   ================================================== -->
   <?php echo $this->element('layout/header'); ?>
   <section class="hero-unit container">
     <h1>Error.page.404</h1>
+
     <?php echo $this->contentForLayout; ?>
-    <p><a href="<?php echo Mapper::url('/', true); ?>" class="btn btn-default btn-large">Go to HOME</a></p>
+    <p><?php echo $html->link("Go to HOME", "/", array("class" => "btn btn-default btn-large")) ?></p>
   </section> <!-- /container -->
-  <!-- footer 
+  <!-- footer
   ================================================== -->
   <?php echo $this->element('layout/footer'); ?>
 </body>

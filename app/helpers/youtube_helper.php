@@ -10,7 +10,8 @@
  * Usage on views
   <?php echo $youtube->show($video["url"], array('width' => '537', 'height' => '361')) ?>
 */
-class YoutubeHelper extends HtmlHelper {
+class YoutubeHelper extends HtmlHelper
+{
 
   public $viewCount = false;
 
@@ -26,10 +27,10 @@ class YoutubeHelper extends HtmlHelper {
   public function show($url, $params = array())
   {
     $params = array_merge(array(
-      "width" => "537", 
+      "width" => "537",
       "height" => "361",
-      "src" => $this->getUrl($url), 
-      "frameborder" => 0, 
+      "src" => $this->getUrl($url),
+      "frameborder" => 0,
       "allowfullscreen" => "allowfullscreen"
     ), $params);
 
@@ -53,7 +54,7 @@ class YoutubeHelper extends HtmlHelper {
     $video_url = is_array($video) ? $this->thumb($video["url"], $video["format"]) : $this->thumb($video, 0);
     return parent::imageLink($video_url, $link_url, $img_attr, $attr, $full);
   }
-  
+
   public function getId($url)
   {
     return $this->returnId($url);

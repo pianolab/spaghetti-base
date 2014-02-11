@@ -1,4 +1,4 @@
-<?php 
+<?php
 # pt-br
 $language = array(
   # tests

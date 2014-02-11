@@ -1,7 +1,7 @@
 <?php
-class UploadHelper extends HtmlHelper 
+class UploadHelper extends HtmlHelper
 {
-  public function image($src, $attr = array(), $full = false) 
+  public function image($src, $attr = array(), $full = false)
   {
     $link = array_unset($attr, "link");
     if (isset($link) && !empty($link)) {

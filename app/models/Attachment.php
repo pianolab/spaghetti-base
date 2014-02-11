@@ -1,5 +1,5 @@
 <?php
-class Attachment extends ActiveRecordModel 
+class Attachment extends ActiveRecordModel
 {
   public function size()
   {

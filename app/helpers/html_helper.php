@@ -7,12 +7,13 @@
  *
  */
 
-class HtmlHelper extends Helper {
+class HtmlHelper extends Helper
+{
     /**
      *  Mantém uma referência à view que chamou o helper.
      */
     protected $view;
-    
+
     public function __construct(&$view) {
         $this->view =& $view;
         $this->view->stylesForLayout = "";
@@ -37,7 +38,7 @@ class HtmlHelper extends Helper {
     }
     /**
      *  Cria HTML para tag de fechamento.
-     * 
+     *
      *  @param string $tag Tag a ser fechada
      *  @return string Tag HMTL fechada
      */
@@ -46,7 +47,7 @@ class HtmlHelper extends Helper {
     }
     /**
      *  Cria HTML para tags de abertura e fechamento contendo algum conteúdo.
-     * 
+     *
      *  @param string $tag Tag a ser criada
      *  @param string $content Conteúdo entre as tags inseridas
      *  @param array $attr Atributos da tag
@@ -62,7 +63,7 @@ class HtmlHelper extends Helper {
     }
     /**
      *  Prepara atributos para utilização em tags HTML.
-     * 
+     *
      *  @param array $attr Atributos a serem preparados
      *  @return string Atributos para preenchimento da tag
      */
@@ -80,7 +81,7 @@ class HtmlHelper extends Helper {
     }
     /**
      *  Cria um link para ser utilizado na aplicação.
-     * 
+     *
      *  @param string $text Conteúdo para o link
      *  @param string $url URL relativa à raiz da aplicação
      *  @param array $attr Atributos da tag
@@ -96,7 +97,7 @@ class HtmlHelper extends Helper {
     }
     /**
      *  Cria um elemento de imagem para ser na aplicação.
-     * 
+     *
      *  @param string $src Caminho da imagem
      *  @param array $attr Atributos da tag
      *  @param boolean $full Verdadeiro para gerar uma URL completa
@@ -115,7 +116,7 @@ class HtmlHelper extends Helper {
             ),
             $attr
         );
-        
+
         if (!$this->external($src)) $src = Mapper::url("/images/" . $src, $full);
 
         $attr["src"] = $src;
@@ -147,7 +148,7 @@ class HtmlHelper extends Helper {
     }
     /**
      *  Cria elementos de folha de estilho para serem usados no HTML.
-     * 
+     *
      *  @param string $href Caminho da folha de estilo a ser inserida no HTML
      *  @param array $attr Atributos da tag
      *  @param boolean $inline Verdadeiro para imprimir a folha de estilo inline
@@ -183,7 +184,7 @@ class HtmlHelper extends Helper {
     }
     /**
      *  Cria um elemento de script para ser usado no HTML.
-     * 
+     *
      *  @param string $src Caminho do script a ser inseido no HTML
      *  @param array $attr Atributos da tag
      *  @param boolean $inline Verdadeiro para imprimir o script inline
@@ -218,7 +219,7 @@ class HtmlHelper extends Helper {
     }
     /*
      *  Cria uma lista a partir de um array.
-     *  
+     *
      *  @param array $list Array com conjunto de elementos da lista
      *  @return string
      */

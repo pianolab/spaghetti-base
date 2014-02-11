@@ -16,26 +16,30 @@ class DateHelper extends Helper {
    *  @param string $date Data compatível com strtotime
    *  @return string Data formatada
    */
-  public function format($format, $date) {
+  public function format($format, $date)
+  {
     $timestamp = strtotime($date);
     return date($format, $timestamp);
   }
 
-  public function show($date) {
+  public function show($date)
+  {
     return $this->format('d/m/Y', $date);
   }
 
-  public function save($date) {
+  public function save($date)
+  {
     return implode('-', array_reverse(explode('/', $date)));
   }
-  
-  public function dayofweek($data) {
+
+  public function dayofweek($data)
+  {
     $ano =  substr($data, 0, 4);
     $mes =  substr($data, 5, -3);
     $dia =  substr($data, 8, 9);
-    
+
     $diasemana = date("w", mktime(0,0,0,$mes,$dia,$ano) );
-    
+
     switch($diasemana) {
       case"0": $diasemana = "Domingo"; break;
       case"1": $diasemana = "Segunda-Feira"; break;
@@ -45,10 +49,10 @@ class DateHelper extends Helper {
       case"5": $diasemana = "Sexta-Feira"; break;
       case"6": $diasemana = "Sábado"; break;
     }
-    
+
     return $diasemana;
   }
-  
+
   public function getMonth($d, $short = false) {
     $arr = explode("-", $d);
     switch ($arr[1]):
@@ -65,21 +69,22 @@ class DateHelper extends Helper {
       case 11: $return = "Novembro"; break;
       case 12: $return = "Dezembro"; break;
     endswitch;
-  
+
     return ($short) ? substr($return,0,3) : $return;
   }
-  
-  function format_date($date = '', $return = 'date', $separate = '/') {
-  $time = substr($date,10);
-  $date = substr($date,0,10);
-  $tmp_date = explode('-',$date);
-  
-  if ($return == 'date') {
-    $formated_date = $tmp_date[2] . $separate . $tmp_date[1] . $separate . $tmp_date[0];
-  } else {
-    $formated_date = $tmp_date[2] . $separate . $tmp_date[1] . $separate . $tmp_date[0] . ' às ' . $time;
-  }
-  
-  return str_replace('//','',$formated_date);
+
+  public function format_date($date = '', $return = 'date', $separate = '/')
+  {
+    $time = substr($date,10);
+    $date = substr($date,0,10);
+    $tmp_date = explode('-',$date);
+
+    if ($return == 'date') {
+      $formated_date = $tmp_date[2] . $separate . $tmp_date[1] . $separate . $tmp_date[0];
+    } else {
+      $formated_date = $tmp_date[2] . $separate . $tmp_date[1] . $separate . $tmp_date[0] . ' às ' . $time;
+    }
+
+    return str_replace('//','',$formated_date);
   }
 }

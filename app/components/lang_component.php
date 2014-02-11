@@ -6,7 +6,7 @@ class LangComponent extends Component
    * Lang variavel
    */
   private $lang;
-  
+
   /**
    * Sets langs on app
    */

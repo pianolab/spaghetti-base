@@ -1,12 +1,12 @@
 <?php
 class AppModel extends Model {
-  
+
   /**
    * Checa se há no banco de dados informações
    * para os campos definidos na variável "cantBeEqualFields"
    *
-   * @param string $data 
-   * @param string $id 
+   * @param string $data
+   * @param string $id
    * @return void
    * @author Djalma Araújo
    */
@@ -20,14 +20,14 @@ class AppModel extends Model {
     endforeach;
     return $return;
   }
-  
-  
+
+
   /**
    * Método utilitário para popular o array
    * de condições para uma busca, utilizando
    * o "or" e "LIKE"
    *
-   * @param string $param 
+   * @param string $param
    * @return void
    * @author Djalma Araújo
    */
@@ -42,14 +42,14 @@ class AppModel extends Model {
       return false;
     endif;
   }
-  
-  
+
+
   /**
    * Pega últimos registros do moelo
    * passando condições como opcional
    *
-   * @param string $limit 
-   * @param string $conditions 
+   * @param string $limit
+   * @param string $conditions
    * @return void
    * @author Djalma Araújo
    */
@@ -60,14 +60,14 @@ class AppModel extends Model {
       "conditions" => empty($conditions) ? $this->conditions : $conditions
     ));
   }
-  
-  
+
+
   /**
    * Pega últimos registros do moelo
    * passando condições como opcional
    *
-   * @param string $limit 
-   * @param string $conditions 
+   * @param string $limit
+   * @param string $conditions
    * @return void
    * @author Djalma Araújo
    */
@@ -76,14 +76,14 @@ class AppModel extends Model {
     $conditions["id !="] = $id;
     return $this->latest($limit, $conditions);
   }
-  
-  
+
+
   /**
    * Gera um TOKEN padrão. Caso seja passado
-   * um array com o campo created, será 
+   * um array com o campo created, será
    * influenciado.
    *
-   * @param string $data 
+   * @param string $data
    * @return void
    * @author Djalma Araújo
    */
@@ -122,11 +122,11 @@ class AppModel extends Model {
 
     ## Execute sql query
     $sql = "SELECT * FROM " . $this->table . " WHERE ( " . $sql . " )";
-    
+
     $title = empty($this->seachTitle) ? 'title' : $this->seachTitle;
     $text = empty($this->seachText) ? 'text' : $this->seachText;
     $image = empty($this->seachImage) ? 'image' : $this->seachImage;
-    
+
     foreach ($this->fetch($sql) as $key => $data) {
       $return[$key]['id'] = $data['id'];
       $return[$key]['title'] = $data[$title];

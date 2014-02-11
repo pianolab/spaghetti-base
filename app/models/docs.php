@@ -3,7 +3,7 @@
 class Docs extends Object {
     protected $navigation;
     protected $path = "docs/developer_guide";
-    
+
     public function __construct() {
         $this->describe();
     }

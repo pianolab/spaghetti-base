@@ -1,4 +1,4 @@
-<?php 
+<?php
 # en-us
 $language = array(
   # tests

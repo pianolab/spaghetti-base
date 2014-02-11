@@ -1,6 +1,6 @@
 Application = {
   init: function () {
-    
+
   }
 };
 

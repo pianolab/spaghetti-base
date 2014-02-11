@@ -1,7 +1,7 @@
 <?php
 
-class DownloadComponent extends Component{
-
+class DownloadComponent extends Component
+{
   public function force_download($filename = '', $data = '')
   {
     if ($filename == '' OR $data == '')

@@ -37,9 +37,9 @@ class UploadifyComponent extends UploadComponent
   }
 
   public function multiple($params = array())
-  {    
+  {
     $is_upload = $this->sendFile($params);
-    
+
     if (!$is_upload) {
       header('HTTP/1.1 406', true, 406);
       throw new Exception('File Not Acceptable');
