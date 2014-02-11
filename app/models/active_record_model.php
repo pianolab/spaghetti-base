@@ -63,9 +63,58 @@ class ActiveRecordModel extends ActiveRecord\Model
    * Truncate text
    * @author Rayann Nayran
    */
-  public function truncate($column, $size)
+  public function truncate($column_text, $size)
   {
-    $dots = strlen($this->{$column}) > $size ? " ..." : null;
-    return mb_substr($this->{$column}, 0, strrpos(mb_substr($this->{$column}, 0, $size), ' ')) . $dots;
+    $dots = strlen($this->{$column_text}) > $size ? " ..." : null;
+    return mb_substr($this->{$column_text}, 0, strrpos(mb_substr($this->{$column_text}, 0, $size), ' ')) . $dots;
+  }
+
+  public function format_date($column_date, $format)
+  {
+    $timestamp = strtotime($this->{$column_date});
+    return date($format, $timestamp);
+  }
+
+  public function week_day($column_date)
+  {
+    $year = substr($this->{$column_date}, 0, 4);
+    $month = substr($this->{$column_date}, 5, -3);
+    $day = substr($this->{$column_date}, 8, 9);
+
+    $week_day = date("w", mktime(0, 0, 0, $month, $day, $year) );
+
+    switch($week_day) {
+      case"0": $week_day = "Domingo"; break;
+      case"1": $week_day = "Segunda-Feira"; break;
+      case"2": $week_day = "Terça-Feira"; break;
+      case"3": $week_day = "Quarta-Feira"; break;
+      case"4": $week_day = "Quinta-Feira"; break;
+      case"5": $week_day = "Sexta-Feira"; break;
+      case"6": $week_day = "Sábado"; break;
+    }
+
+    return $week_day;
+  }
+
+  public function getMonth($column_date, $short = false)
+  {
+    $arr = explode("-", $this->{$column_date});
+
+    switch ($arr[1]):
+      case 1: $return = "Janeiro"; break;
+      case 2: $return = "Fevereiro"; break;
+      case 3: $return = "Março"; break;
+      case 4: $return = "Abril"; break;
+      case 5: $return = "Maio"; break;
+      case 6: $return = "Junho"; break;
+      case 7: $return = "Julho"; break;
+      case 8: $return = "Agosto"; break;
+      case 9: $return = "Setembro"; break;
+      case 10: $return = "Outubro"; break;
+      case 11: $return = "Novembro"; break;
+      case 12: $return = "Dezembro"; break;
+    endswitch;
+
+    return ($short) ? substr($return,0,3) : $return;
   }
 }

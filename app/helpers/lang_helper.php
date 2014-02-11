@@ -7,7 +7,7 @@ App::import('Core', array('view'));
  * por wfsneto
  * @license http://www.opensource.org/licenses/mit-license.php The MIT License
  */
-class LangHelper extends HtmlHelper 
+class LangHelper extends HtmlHelper
 {
   /**
    * Attributes public
@@ -26,12 +26,12 @@ class LangHelper extends HtmlHelper
   public function __construct()
   {
     $this->lang = Session::read('language') ? Session::read('language') : $this->lang_default;
-    
+
     $this->file = !empty($this->file) ? $this->file : $this->file_default;
 
     $this->array = Session::read('array_lang') ? Session::read('array_lang') : array();
   }
-  
+
   /**
    * Utilização da conversão na view
    */
@@ -39,7 +39,7 @@ class LangHelper extends HtmlHelper
   {
     return $this->output($this->translate($string, $file_name));
   }
-  
+
   /**
    * Tradução da string procurada no array
    */
@@ -62,7 +62,7 @@ class LangHelper extends HtmlHelper
       return $translate;
     }
   }
-  
+
   /**
    *  Renderiza um elemento.
    *
@@ -71,7 +71,7 @@ class LangHelper extends HtmlHelper
    *  @return string Resultado da renderização
    */
   public function element($element, $params = array()) {
-    $view = new View();    
+    $view = new View();
     $element = dirname($element) . DS . basename($element) . '.' . $this->lang;
 
     return $view->renderView(App::path('View', $element), $params);

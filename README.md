@@ -1,4 +1,4 @@
-pianolab.base (SpaghettiPHP + php.activeRecord v1.0 + Bootstrap v3.0.0)
+pianolab.base (SpaghettiPHP + php.activeRecord v1.0 + Bootstrap v3.1.0)
 =========
 
 Spaghetti* is a framework written in PHP to help make your day-to-day life more productive and fun.
@@ -50,7 +50,7 @@ $html->tag('p','content for tag', array('class' => 'class-name'));
   - <tt>boolean $full</tt> True to generate a complete URL
 - <b>@return</b>: <tt>string</tt> HTML Link
 
-- With complete URL 
+- With complete URL
 
 ```php
 $html->link('Home','/home', array('title' => 'Go to the home'), true);
@@ -124,12 +124,12 @@ $html->image('http://google.com/logo.png', array('alt' => 'Google picture'));
 
 ```php
 $html->image('http://google.com/logo.png', array(
-  'alt' => 'Google picture', 
-  'before' => 'something before...', 
+  'alt' => 'Google picture',
+  'before' => 'something before...',
   'after' => 'something after...'
 ));
 ```
-```html 
+```html
 <figure>
   <div>something before...</div>
   <img alt="Google picture" title="Google picture" src="http://google.com/logo.png">
@@ -184,7 +184,7 @@ $html->imagelink('http://google.com/logo.png', 'http://google.com', array('alt' 
 Creates sheet elements style for use in HTML.
 
 ```php
-$html->stylesheet(array('screen'), array(), false); 
+$html->stylesheet(array('screen'), array(), false);
 ```
 ```html
 <link href="/styles/screen.css" rel="stylesheet" type="text/css" />
@@ -205,7 +205,7 @@ $html->stylesheet(array('screen'), array(), false);
 
 Creates a script element to be used in HTML.
 ```php
-$html->script(array('jquery'), array(), false); 
+$html->script(array('jquery'), array(), false);
 ```
 ```html
 <script src="/scripts/jquery.js" type="text/javascript"></script>

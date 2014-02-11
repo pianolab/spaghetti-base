@@ -1,6 +1,6 @@
 <!-- Example row of columns -->
 <div class="row">
-  <div class="span6">
+  <div class="col-md-6">
   <h2>Instructions</h2>
   <pre>
 1. git clone git://github.com/pianolab/spaghetti-base.git
@@ -10,7 +10,7 @@
 5. work!</pre>
   </div>
 
-  <div class="span6">
+  <div class="col-md-6">
     <h2>Contains</h2>
     <ul>
       <li>Full MVC Structure (Spaghetti Framework)</li>
@@ -20,8 +20,10 @@
       <li>Lot of snippets (Facebook tags, Analytics, mobile favicons, pagination example)</li>
     </ul>
   </div>
+</div>
 
-  <div class="span12">
+<div class="row">
+  <div class="col-md-12">
     <h2>languages</h2>
     <pre>Arquivo em: <?php echo APP . DS . 'languages' ?></pre>
     <?php echo $html->link(t('Português'), '/lang/change/pt-br') ?> |

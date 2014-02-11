@@ -1,12 +1,12 @@
 <?php
 
-App::import('Vendor', 'minify' . DS . 'Minify' . DS . 'Loader');
+App::import("Vendor", "minify" . DS . "Minify" . DS . "Loader");
 
 class MinifyHelper extends HtmlHelper
 {
   private $JS_DIR;
   private $TEMP_FILES_DIR;
-  private $TYPE_FILE_ALLOWED = array('js', 'temp');
+  private $TYPE_FILE_ALLOWED = array("js", "temp");
 
   public function __construct()
   {
@@ -14,8 +14,8 @@ class MinifyHelper extends HtmlHelper
 
     $this->js = new stdClass;
 
-    $this->TEMP_FILES_DIR = ROOT . DS . 'temp' . DS;
-    $this->JS_DIR = APP . DS . 'webroot' . DS . 'scripts' . DS;
+    $this->TEMP_FILES_DIR = ROOT . DS . "temp" . DS;
+    $this->JS_DIR = APP . DS . "webroot" . DS . "scripts" . DS;
 
     $this->JSMinPlus = new JSMinPlus;
   }
@@ -44,23 +44,23 @@ class MinifyHelper extends HtmlHelper
 
   public function jsAddString($string)
   {
-    $this->js->string .= ' ' . $string;
+    $this->js->string .= " " . $string;
   }
 
   public function jsAddScript($script)
   {
-    if (get_current_env() == 'production') {
+    if (get_current_env() == "production") {
       $this->jsAddString($script);
     }
     else {
-      echo $this->tag('script', $script, array('type' => 'text/javascript')) . "\n";
+      echo $this->tag("script", $script, array("type" => "text/javascript")) . "\n";
     }
   }
 
   public function jsPrepareUrl($url)
   {
     if (!$this->external($url)) {
-      $url = $this->JS_DIR . $this->extension($url, 'js');
+      $url = $this->JS_DIR . $this->extension($url, "js");
       $this->js->hash .= filemtime($url);
     }
     return $url;
@@ -68,11 +68,11 @@ class MinifyHelper extends HtmlHelper
 
   public function jsMin()
   {
-    if (get_current_env() == 'production') {
-      $prefix_name = 'application-';
-      $output_name = $prefix_name . sha1($this->js->hash) . '.min';
+    if (get_current_env() == "production") {
+      $prefix_name = "application-";
+      $output_name = $prefix_name . sha1($this->js->hash) . ".min";
 
-      if (!file_exists($this->JS_DIR . $output_name . '.js')) {
+      if (!file_exists($this->JS_DIR . $output_name . ".js")) {
         $this->jsRemove();
         $output = $this->JSMinPlus->minify($this->js->string);
         $this->createFile($output, $output_name);
@@ -102,10 +102,10 @@ class MinifyHelper extends HtmlHelper
   protected function createFile($content, $file_name = false)
   {
     if ($file_name) {
-      return $this->_createFile($content, $this->JS_DIR, $file_name, 'js');
+      return $this->_createFile($content, $this->JS_DIR, $file_name, "js");
     }
     else {
-      return $this->_createFile($content, $this->TEMP_FILES_DIR, sha1($this->js->hash), 'txt');
+      return $this->_createFile($content, $this->TEMP_FILES_DIR, sha1($this->js->hash), "txt");
     }
   }
 
@@ -113,7 +113,7 @@ class MinifyHelper extends HtmlHelper
   {
     $file_name = $this->extension($folder . $file_name, $extension);
 
-    $fopen = fopen($file_name, 'w') or die('cant_create_file');
+    $fopen = fopen($file_name, "w") or die("cant_create_file");
     fwrite($fopen, $content);
 
     fclose($fopen);
