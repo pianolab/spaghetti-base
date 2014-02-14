@@ -113,4 +113,17 @@ class YoutubeHelper extends HtmlHelper
     return $return;
   }
 
+  public function getDescription($url){
+    $id = $this->getId($url);
+    $content = file_get_contents("https://gdata.youtube.com/feeds/api/videos/" . $id . "?v=2&alt=json&prettyprint=true");
+    $data = json_decode($content, true);
+    return $data['entry']['media$group']['media$description']['$t'];
+  }
+
+  public function getDuration($url){
+    $id = $this->getId($url);
+    $content = file_get_contents("http://youtube.com/get_video_info?video_id=".$id);
+    parse_str($content, $data);
+    return date('i:s',mktime(0,0,$data['length_seconds'],date('d'),date('m'),date('Y')));
+  }
 }
