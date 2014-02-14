@@ -71,4 +71,17 @@ class VimeoHelper extends HtmlHelper
   {
     return "http://player.vimeo.com/video/" . $this->getId($url);
   }
+  
+    public function duration($url)
+  {
+    $id = $this->getId($url);
+
+    if (isset($id)) {
+      $request = json_decode(file_get_contents("http://vimeo.com/api/v2/video/" . $id . ".json"), true);
+    }
+    $seconds = (String) $request[0]['duration'];
+
+    return date('i:s',mktime(0,0,$seconds,date('d'),date('m'),date('Y')));
+    
+  }
 }
