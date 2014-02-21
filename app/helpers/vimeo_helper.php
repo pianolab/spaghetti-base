@@ -1,12 +1,26 @@
 <?php
 class VimeoHelper extends HtmlHelper
 {
+  private $cache = array();
+
+  private function requestDataJSON ($url) {
+    $urlHash = md5($url);
+    
+    if (isset($this->cache[$urlHash])) {
+      return $this->cache[$urlHash];
+    } else {
+      $data = json_decode(file_get_contents($url), true);
+      $this->cache[$urlHash] = $data;
+      return $data;
+    }
+  }
+
   public function thumb($url, $size = "medium")
   {
     $id = $this->getId($url);
 
     if (isset($id)) {
-      $request = json_decode(file_get_contents("http://vimeo.com/api/v2/video/" . $id . ".json"), true);
+      $request = $this->requestDataJSON("http://vimeo.com/api/v2/video/" . $id . ".json");
     }
 
     return (String) $request[0]["thumbnail_" . $size];
@@ -42,7 +56,7 @@ class VimeoHelper extends HtmlHelper
     $id = $this->getId($url);
 
     if (isset($id)) {
-      $request = json_decode(file_get_contents("http://vimeo.com/api/v2/video/" . $id . ".json"), true);
+      $request = $this->requestDataJSON("http://vimeo.com/api/v2/video/" . $id . ".json");
     }
 
     return (String) $request[0]["title"];
@@ -53,7 +67,7 @@ class VimeoHelper extends HtmlHelper
     $id = $this->getId($url);
 
     if (isset($id)) {
-      $request = json_decode(file_get_contents("http://vimeo.com/api/v2/video/" . $id . ".json"), true);
+      $request = $this->requestDataJSON("http://vimeo.com/api/v2/video/" . $id . ".json");
     }
 
     return (String) $request[0]["description"];
@@ -72,12 +86,12 @@ class VimeoHelper extends HtmlHelper
     return "http://player.vimeo.com/video/" . $this->getId($url);
   }
   
-    public function duration($url)
+  public function duration($url)
   {
     $id = $this->getId($url);
 
     if (isset($id)) {
-      $request = json_decode(file_get_contents("http://vimeo.com/api/v2/video/" . $id . ".json"), true);
+      $request = $this->requestDataJSON("http://vimeo.com/api/v2/video/" . $id . ".json");
     }
     $seconds = (String) $request[0]['duration'];
 
