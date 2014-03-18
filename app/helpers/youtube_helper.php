@@ -126,4 +126,16 @@ class YoutubeHelper extends HtmlHelper
     parse_str($content, $data);
     return date('i:s',mktime(0,0,$data['length_seconds'],date('d'),date('m'),date('Y')));
   }
+
+    public function isHd($url)
+  {
+    $id = $this->getId($url);
+    $content = file_get_contents("https://gdata.youtube.com/feeds/api/videos/" . $id . "?v=2&alt=json&prettyprint=true");
+    $data = json_decode($content, true);
+    if (is_null($data['entry']['yt$hd'])) {
+      return false;
+    } else {
+      return true;
+    } 
+  }
 }
