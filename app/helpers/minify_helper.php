@@ -68,21 +68,11 @@ class MinifyHelper extends HtmlHelper
 
   public function jsMin()
   {
-    if (get_current_env() == "production") {
-      $prefix_name = "application-";
-      $output_name = $prefix_name . sha1($this->js->hash) . ".min";
 
-      if (!file_exists($this->JS_DIR . $output_name . ".js")) {
-        $this->jsRemove();
-        $output = $this->JSMinPlus->minify($this->js->string);
-        $this->createFile($output, $output_name);
-      }
-    }
-    else {
-      $urls = is_array($this->js->urls) ? $this->js->urls : array();
-      $extra_urls = is_array($this->js->extra_urls) ? $this->js->extra_urls : array();
-      $output_name = array_merge($urls, $extra_urls);
-    }
+    $urls = is_array($this->js->urls) ? $this->js->urls : array();
+    $extra_urls = is_array($this->js->extra_urls) ? $this->js->extra_urls : array();
+
+    $output_name = array_merge($urls, $extra_urls);
 
     return $this->script($output_name);
   }

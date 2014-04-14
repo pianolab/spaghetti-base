@@ -16,33 +16,17 @@
 <![endif]-->
 
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]><?php echo $html->script('html5'); ?><![endif]-->
+<!--[if lt IE 9]><?php echo $html->script("html5"); ?><![endif]-->
 
 <!-- Le styles
 ================================================== -->
-<?php echo $html->stylesheet('application'); ?>
+<?php echo $html->stylesheet("application"); ?>
 <?php echo $this->stylesForLayout; ?>
 
 <!-- Le favicons
 ================================================== -->
-<?php echo $this->element('layout/favicons'); ?>
+<?php echo $this->element("layout/favicons"); ?>
 
 <!-- Le facebook tags
 ================================================== -->
-<?php echo $this->element('layout/facebook'); ?>
-
-<?php $minify->jsAddUrl(array(
-  # jQuery v1.10.2
-  'vendors/jquery/jquery',
-  # Bootstrap v3.0.2
-  'vendors/bootstrap/bootstrap',
-  'vendors/bootstrap/prompt.modal',
-  # Modernizr 2.7.0 (Custom Build)
-  'vendors/modernizr',
-  # jquery.meio.mask 1.1.11
-  'vendors/meio.mask/jquery.meio.mask',
-  'vendors/meio.mask/jquery.meio.mask.init',
-  # jQuery Validation Plugin 1.11.1
-  'vendors/validate/jquery.validate',
-  'vendors/validate/jquery.validate.init'
-)); ?>
+<?php echo $this->element("layout/facebook"); ?>
