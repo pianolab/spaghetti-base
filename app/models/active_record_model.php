@@ -18,6 +18,13 @@ class ActiveRecordModel extends ActiveRecord\Model
     return $collection;
   }
 
+  public function lang($column)
+  {
+    if (isset($this->{$column . "_" . current_lang()})) {
+      return $this->{$column . "_" . current_lang()};
+    }
+  }
+
   /**
    *  Retorna registros paginados.
    *
