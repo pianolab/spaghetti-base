@@ -15,4 +15,4 @@
   "vendors/validate/jquery.validate.init"
 ), array(), true); ?>
 
-<?php echo $html->scriptsForLayout; ?>
+<?php echo $this->scriptsForLayout; ?>
