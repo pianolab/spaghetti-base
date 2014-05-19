@@ -13,7 +13,7 @@ class LangComponent extends Component
   public function setLang($lang)
   {
     $this->lang = $lang;
-    Config::write('language', $this->lang);
-    Session::write('language', $this->lang);
+    Config::write("language", $this->lang);
+    Session::write("language", $this->lang);
   }
 }

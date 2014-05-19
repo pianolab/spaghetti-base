@@ -8,19 +8,19 @@ var Contact = {
   validations: function () {
     this.formId.validate({
       rules: {
-        'name': {
+        "name": {
           required: true
         },
-        'email': {
+        "email": {
           required: true
         },
-        'phone': {
+        "phone": {
           required: true
         },
-        'message': {
+        "message": {
           required: true
         },
-        'born_in': {
+        "born_in": {
           required: true,
           dateBR: true
         }

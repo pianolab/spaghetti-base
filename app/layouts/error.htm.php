@@ -12,7 +12,7 @@
 <body>
   <!-- header
   ================================================== -->
-  <?php echo $this->element('layout/header'); ?>
+  <?php echo $this->element("layout/header"); ?>
   <section class="hero-unit container">
     <h1>Error.page.404</h1>
 
@@ -21,6 +21,6 @@
   </section> <!-- /container -->
   <!-- footer
   ================================================== -->
-  <?php echo $this->element('layout/footer'); ?>
+  <?php echo $this->element("layout/footer"); ?>
 </body>
 </html>

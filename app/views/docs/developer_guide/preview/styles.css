@@ -17,7 +17,7 @@ h1 {
     letter-spacing: -1px;
     text-transform: uppercase;
 }
- 
+
 h2, h3, h4 {
     margin: 16px 0;
 }
@@ -33,13 +33,13 @@ p {
     p code,
     li code {
         background: #222;
-        font: 9pt Monaco, Consolas, 'Courier New', monospace;
+        font: 9pt Monaco, Consolas, "Courier New", monospace;
         padding: 1px 3px;
     }
 
 pre {
     background: #222;
-    font: 9pt Monaco, Consolas, 'Courier New', monospace;
+    font: 9pt Monaco, Consolas, "Courier New", monospace;
     padding: 24px;
 }
 

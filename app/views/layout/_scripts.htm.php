@@ -1,4 +1,4 @@
-<script type="text/javascript">var base_url = "<?php echo Mapper::url('/') ?>/";var base_path = "<?php echo Mapper::url('/', false) ?>/";</script>
+<script type="text/javascript">var base_url = "<?php echo Mapper::url("/") ?>/";var base_path = "<?php echo Mapper::url("/", false) ?>/";</script>
 <?php echo $html->script(array(
   # jQuery v1.10.2
   "vendors/jquery/jquery",

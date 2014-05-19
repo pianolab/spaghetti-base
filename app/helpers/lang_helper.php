@@ -1,6 +1,6 @@
 <?php
 
-App::import('Core', array('view'));
+App::import("Core", array("view"));
 
 /**
  * LangHelper provê conversão de texto em multilínguas
@@ -15,21 +15,21 @@ class LangHelper extends HtmlHelper
   public $array;
   public $lang;
   public $file;
-  public $files = array('default');
-  public $langs = array('pt-br', 'en-us');
+  public $files = array("default");
+  public $langs = array("pt-br", "en-us");
   /**
    * Attributes private
    */
-  private $lang_default = 'pt-br';
-  private $file_default = 'default';
+  private $lang_default = "pt-br";
+  private $file_default = "default";
 
   public function __construct()
   {
-    $this->lang = Session::read('language') ? Session::read('language') : $this->lang_default;
+    $this->lang = Session::read("language") ? Session::read("language") : $this->lang_default;
 
     $this->file = !empty($this->file) ? $this->file : $this->file_default;
 
-    $this->array = Session::read('array_lang') ? Session::read('array_lang') : array();
+    $this->array = Session::read("array_lang") ? Session::read("array_lang") : array();
   }
 
   /**
@@ -53,8 +53,8 @@ class LangHelper extends HtmlHelper
     } else {
       if (is_array($translate)) {
         $return = array();
-        foreach ($translate['itens'] as $item) {
-          $return[] = $this->html($translate['tag'], $item);
+        foreach ($translate["itens"] as $item) {
+          $return[] = $this->html($translate["tag"], $item);
         }
         $translate = implode(null, $return);
       }
@@ -72,8 +72,8 @@ class LangHelper extends HtmlHelper
    */
   public function element($element, $params = array()) {
     $view = new View();
-    $element = dirname($element) . DS . basename($element) . '.' . $this->lang;
+    $element = dirname($element) . DS . basename($element) . "." . $this->lang;
 
-    return $view->renderView(App::path('View', $element), $params);
+    return $view->renderView(App::path("View", $element), $params);
   }
 }

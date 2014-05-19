@@ -44,14 +44,14 @@ class PaginationHelper extends HtmlHelper
       $options
     );
 
-    $page = Mapper::getNamed('page');
+    $page = Mapper::getNamed("page");
     $pages = $model::$pagination["totalPages"];
     $numbers = array();
 
     for($i = $page - $options["modulus"]; $i <= $page + $options["modulus"]; $i++):
       if($i > 0 && $i <= $pages):
         $attributes = ($i != $page) ? array() : array("class" => $options["current"]);
-        $number = $this->link($i, Mapper::currentRoute() . '?' . $this->queryString($i));
+        $number = $this->link($i, Mapper::currentRoute() . "?" . $this->queryString($i));
         $numbers []= $this->tag($options["tag"], $number, $attributes);
       endif;
     endfor;

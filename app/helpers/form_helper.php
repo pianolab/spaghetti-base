@@ -211,7 +211,7 @@ class FormHelper extends HtmlHelper
    */
   public function hidden($name, array $options = array())
   {
-    return $this->input($name, array_merge($options, array('type' => 'hidden')));
+    return $this->input($name, array_merge($options, array("type" => "hidden")));
   }
   /**
    *  Cria caixa de entrada formatada e com label.
@@ -283,15 +283,15 @@ class FormHelper extends HtmlHelper
       $label = $this->tag("label", $label_text, $label);
     }
 
-    $after .= empty($options['error']) ? null : $this->tag("span", $label, array("class" => "error"));
+    $after .= empty($options["error"]) ? null : $this->tag("span", $label, array("class" => "error"));
 
     # mount content
     $content = $before . t($label) . $between . $input . $after;
 
     if (empty($div)) return $content;
 
-    $div_attr = is_array($div) ? $div : array("class" => "input " . $options['type']);
-    if (!empty($options['error'])) $div_attr["class"] = $div_attr["class"] . " error";
+    $div_attr = is_array($div) ? $div : array("class" => "input " . $options["type"]);
+    if (!empty($options["error"])) $div_attr["class"] = $div_attr["class"] . " error";
 
     return $this->output($this->div($content, $div_attr));
   }

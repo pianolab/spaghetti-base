@@ -1,6 +1,6 @@
 <?php
 $this->pageTitle = $doc["title"];
-$this->breadcrumb = $html->link("página inicial", "/") . " / " . $html->link("documentação", "/docs") . " / <strong>{$doc['title']}</strong>";
+$this->breadcrumb = $html->link("página inicial", "/") . " / " . $html->link("documentação", "/docs") . " / <strong>{$doc["title"]}</strong>";
 ?>
 <section id="content">
 	<aside style="width: 250px; float: left;">

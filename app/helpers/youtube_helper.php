@@ -8,7 +8,7 @@
 
 /*
  * Usage on views
-  <?php echo $youtube->show($video["url"], array('width' => '537', 'height' => '361')) ?>
+  <?php echo $youtube->show($video["url"], array("width" => "537", "height" => "361")) ?>
 */
 class YoutubeHelper extends HtmlHelper
 {
@@ -39,7 +39,7 @@ class YoutubeHelper extends HtmlHelper
 
   public function title($url)
   {
-    $youtube = simplexml_load_file('http://gdata.youtube.com/feeds/api/videos/' . $this->returnId($url) . '?v=2');
+    $youtube = simplexml_load_file("http://gdata.youtube.com/feeds/api/videos/" . $this->returnId($url) . "?v=2");
     return $youtube->title;
   }
 
@@ -117,14 +117,14 @@ class YoutubeHelper extends HtmlHelper
     $id = $this->getId($url);
     $content = file_get_contents("https://gdata.youtube.com/feeds/api/videos/" . $id . "?v=2&alt=json&prettyprint=true");
     $data = json_decode($content, true);
-    return $data['entry']['media$group']['media$description']['$t'];
+    return $data["entry"]["media$group"]["media$description"]["$t"];
   }
 
   public function getDuration($url){
     $id = $this->getId($url);
     $content = file_get_contents("http://youtube.com/get_video_info?video_id=".$id);
     parse_str($content, $data);
-    return date('i:s',mktime(0,0,$data['length_seconds'],date('d'),date('m'),date('Y')));
+    return date("i:s",mktime(0,0,$data["length_seconds"],date("d"),date("m"),date("Y")));
   }
 
     public function isHd($url)
@@ -132,10 +132,10 @@ class YoutubeHelper extends HtmlHelper
     $id = $this->getId($url);
     $content = file_get_contents("https://gdata.youtube.com/feeds/api/videos/" . $id . "?v=2&alt=json&prettyprint=true");
     $data = json_decode($content, true);
-    if (is_null($data['entry']['yt$hd'])) {
+    if (is_null($data["entry"]["yt$hd"])) {
       return false;
     } else {
       return true;
-    } 
+    }
   }
 }

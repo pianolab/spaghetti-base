@@ -5,7 +5,7 @@ class VimeoHelper extends HtmlHelper
 
   private function requestDataJSON ($url) {
     $urlHash = md5($url);
-    
+
     if (isset($this->cache[$urlHash])) {
       return $this->cache[$urlHash];
     } else {
@@ -85,7 +85,7 @@ class VimeoHelper extends HtmlHelper
   {
     return "http://player.vimeo.com/video/" . $this->getId($url);
   }
-  
+
   public function duration($url)
   {
     $id = $this->getId($url);
@@ -93,9 +93,9 @@ class VimeoHelper extends HtmlHelper
     if (isset($id)) {
       $request = $this->requestDataJSON("http://vimeo.com/api/v2/video/" . $id . ".json");
     }
-    $seconds = (String) $request[0]['duration'];
+    $seconds = (String) $request[0]["duration"];
 
-    return date('i:s',mktime(0,0,$seconds,date('d'),date('m'),date('Y')));
-    
+    return date("i:s",mktime(0,0,$seconds,date("d"),date("m"),date("Y")));
+
   }
 }

@@ -5,12 +5,12 @@
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
-  <?php echo $this->element('layout/head'); ?>
+  <?php echo $this->element("layout/head"); ?>
 
-  <?php echo $this->element('layout/analytics'); ?>
+  <?php echo $this->element("layout/analytics"); ?>
 </head>
 <body>
-  <?php echo $this->element('layout/header'); ?>
+  <?php echo $this->element("layout/header"); ?>
 
   <section class="container">
     <?php echo $flash->flash(); ?>
@@ -18,7 +18,7 @@
     <?php echo $this->contentForLayout; ?>
   </section>
 
-  <?php echo $this->element('layout/footer'); ?>
-  <?php echo $this->element('layout/scripts'); ?>
+  <?php echo $this->element("layout/footer"); ?>
+  <?php echo $this->element("layout/scripts"); ?>
 </body>
 </html>

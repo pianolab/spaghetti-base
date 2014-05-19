@@ -132,7 +132,7 @@ class UploadComponent extends Component
     if (has_data($folder)) $this->setPath( Inflector::pluralize($folder) );
 
     $this->extension = $this->ext($filename);
-    return $this->filename = uuid() . '.' . $this->extension;
+    return $this->filename = uuid() . "." . $this->extension;
   }
 
     /**

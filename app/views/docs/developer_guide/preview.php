@@ -11,7 +11,7 @@
     <h1>Preview - Spaghetti*</h1>
     <?php
         include "preview/textile.php";
-        $content = file_get_contents("{$_GET['file']}.textile");
+        $content = file_get_contents("{$_GET["file"]}.textile");
         $textile = new Textile();
         echo $textile->TextileThis($content);
     ?>

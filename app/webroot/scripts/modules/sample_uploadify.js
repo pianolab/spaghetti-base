@@ -4,7 +4,7 @@ var SampleUploadify = {
   },
 
   uploadify: function () {
-    Uploadify.upload($('#sampleId').val(), 'sample', {})
+    Uploadify.upload($("#sampleId").val(), "sample", {})
   }
 };
 

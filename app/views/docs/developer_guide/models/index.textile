@@ -14,7 +14,7 @@ Quando seu modelo herda de @AppModel@, que por sua vez herda de @Model@, você t
 Caso você tenha um modelo que tenha sua respectiva tabela no banco de dados com um nome diferente, ou mesmo que não possua uma tabela, é possível sobrescrever o comportamento do Spaghetti* através do atributo @table@.
 
 pre. class Users extends AppModel {
-    public $table = 'users_table';
+    public $table = "users_table";
 }
 
 Caso nosso modelo fosse usado apenas para validação de dados, e não possuísse uma tabela no banco de dados, @Users::$table@ deveria ser definido como @false@, e então o Spaghetti* ignoraria a relação do modelo com o banco de dados.

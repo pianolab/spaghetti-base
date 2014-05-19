@@ -48,6 +48,6 @@ pre. $conditions = array(
 
 Embora o Spaghetti* cuide do trabalho sujo para você, algumas vezes é necessário sujar as mãos e escrever SQL diretamente. Para isso, você só precisa passar uma string como parâmetro.
 
-pre. $conditions = "id = 1 AND title = 'Hello World'";
+pre. $conditions = "id = 1 AND title = "Hello World"";
 
 p(note). *Nota*: em consultas manuais, os valores não são escapados pelo Spaghetti*. Nunca confie em dados vindos do usuário, e sempre faça o escape de valores.

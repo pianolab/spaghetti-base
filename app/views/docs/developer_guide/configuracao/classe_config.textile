@@ -14,7 +14,7 @@ h2(#config/read). Lendo Configurações
 
 Para a leitura de configurações, usamos o método @Config::read()@. Seu único parâmetro deve ser o nome da configurações que queremos buscar. Por exemplo, para buscarmos @App.language@ que havíamos definido anteriormente, usamos:
 
-pre. Config::read("App.language"); // => 'pt-br'
+pre. Config::read("App.language"); // => "pt-br"
 
 As chamadas a @Config::read()@ podem ser usadas em qualquer parte de sua aplicação, seja em _controllers_, _models_, componentes, _helpers_ e até mesmo em _views_.
 

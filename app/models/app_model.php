@@ -9,7 +9,7 @@ class AppModel extends Model
     $query = strip_tags($query);
     $words = explode(" ", $query);
 
-    // $searchFields = 'Notícias';
+    // $searchFields = "Notícias";
 
     foreach ($words as $key => $word) {
       if (strlen($word) < 3) unset($words[$key]);
@@ -31,15 +31,15 @@ class AppModel extends Model
     ## Execute sql query
     $sql = "SELECT * FROM " . $this->table . " WHERE ( " . $sql . " )";
 
-    $title = empty($this->seachTitle) ? 'title' : $this->seachTitle;
-    $text = empty($this->seachText) ? 'text' : $this->seachText;
-    $image = empty($this->seachImage) ? 'image' : $this->seachImage;
+    $title = empty($this->seachTitle) ? "title" : $this->seachTitle;
+    $text = empty($this->seachText) ? "text" : $this->seachText;
+    $image = empty($this->seachImage) ? "image" : $this->seachImage;
 
     foreach ($this->fetch($sql) as $key => $data) {
-      $return[$key]['id'] = $data['id'];
-      $return[$key]['title'] = $data[$title];
-      $return[$key]['text'] = substr(strip_tags($data[$text]), 0, 255);
-      $return[$key]['image'] = $data[$image];
+      $return[$key]["id"] = $data["id"];
+      $return[$key]["title"] = $data[$title];
+      $return[$key]["text"] = substr(strip_tags($data[$text]), 0, 255);
+      $return[$key]["image"] = $data[$image];
     }
 
     return $return;

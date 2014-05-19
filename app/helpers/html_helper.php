@@ -75,7 +75,7 @@ class HtmlHelper extends Helper
             elseif($value === false):
                 continue;
             endif;
-            $attributes []= $name . '="' . $value . '"';
+            $attributes []= $name . "=\"" . $value . "\"";
         endforeach;
         return join(" ", $attributes);
     }
@@ -104,10 +104,10 @@ class HtmlHelper extends Helper
      *  @return string HTML da imagem a ser inserida
      */
     public function image($src, $attr = array(), $full = false) {
-        $figure = array_unset($attr, 'figure');
+        $figure = array_unset($attr, "figure");
         $attr_figure = is_array($figure) ? $figure : array();
-        $before = array_unset($attr, 'before');
-        $after = array_unset($attr, 'after');
+        $before = array_unset($attr, "before");
+        $after = array_unset($attr, "after");
 
         $attr = array_merge(
             array(

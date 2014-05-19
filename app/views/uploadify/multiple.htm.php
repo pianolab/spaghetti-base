@@ -1,1 +1,1 @@
-<?php echo $this->element('uploadify/list', array('attachment' => $attachment, 'folder' => $folder)); ?>
+<?php echo $this->element("uploadify/list", array("attachment" => $attachment, "folder" => $folder)); ?>

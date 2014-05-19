@@ -4,25 +4,25 @@
 * @copyright Copyright 2008-2009, Spaghetti* Framework (http://spaghettiphp.org/)
 */
 
-App::import('Vendor', 'image_resize' . DS . 'm2brimagem.class');
+App::import("Vendor", "image_resize" . DS . "m2brimagem.class");
 
 class ImageResizeComponent extends Component
 {
   // Allowed extensions
-  var $allowed_ext = array('jpg', 'jpeg', 'gif', 'png');
+  var $allowed_ext = array("jpg", "jpeg", "gif", "png");
 
   // Resize the image and save on cache
   public function resize($file, $width, $height) {
     $file_info = pathinfo($file);
-    $resized_file = $file_info['dirname'].'/'.$width.'X'.$height.'-'.$file_info['basename'];
+    $resized_file = $file_info["dirname"]."/".$width."X".$height."-".$file_info["basename"];
 
-    if(!file_exists($resized_file) && in_array(strtolower($file_info['extension']), $this->allowed_ext)):
+    if(!file_exists($resized_file) && in_array(strtolower($file_info["extension"]), $this->allowed_ext)):
 
       $oImg = new m2brimagem($file);
       $validates = $oImg->valida();
 
-      if ($validates == 'OK'):
-        $oImg->redimensiona($width,$height,'crop');
+      if ($validates == "OK"):
+        $oImg->redimensiona($width,$height,"crop");
         $imgBkp = $oImg;
         $oImg->grava($resized_file);
         $imgBkp->grava();
@@ -39,16 +39,16 @@ class ImageResizeComponent extends Component
   public function grayscale($file, $width, $height) {
     $oImg = new m2brimagem($file,null,true);
     $validates = $oImg->valida();
-    if ($validates == 'OK') {
-      $oImg->redimensiona($width,$height,'crop');
+    if ($validates == "OK") {
+      $oImg->redimensiona($width,$height,"crop");
         $oImg->grava();
     } else {
       die($validates);
     }
   }
 
-  private function captureImage($filename = '', $data = false, $enable_partial = true, $speedlimit = 0) {
-      if ($filename == '')
+  private function captureImage($filename = "", $data = false, $enable_partial = true, $speedlimit = 0) {
+      if ($filename == "")
       {
           return FALSE;
       }
@@ -58,34 +58,34 @@ class ImageResizeComponent extends Component
 
       // Try to determine if the filename includes a file extension.
       // We need it in order to set the MIME type
-      if (FALSE === strpos($filename, '.'))
+      if (FALSE === strpos($filename, "."))
       {
           return FALSE;
       }
 
       // Grab the file extension
-      $x = explode('.', $filename);
+      $x = explode(".", $filename);
       $extension = end($x);
 
       // Load the mime types
       $mimes = array(
-        'jpeg' => 'Content-type: image/jpeg',
-        'jpg' => 'Content-type: image/jpeg',
-        'png' => 'Content-type: image/png',
-        'gif' => 'Content-type: image/gif'
+        "jpeg" => "Content-type: image/jpeg",
+        "jpg" => "Content-type: image/jpeg",
+        "png" => "Content-type: image/png",
+        "gif" => "Content-type: image/gif"
       );
 
-      // Set a default mime if we can't find it
+      // Set a default mime if we can"t find it
       if ( ! isset($mimes[$extension]))
       {
-          if (ereg('Opera(/| )([0-9].[0-9]{1,2})', $_SERVER['HTTP_USER_AGENT']))
+          if (ereg("Opera(/| )([0-9].[0-9]{1,2})", $_SERVER["HTTP_USER_AGENT"]))
               $UserBrowser = "Opera";
-          elseif (ereg('MSIE ([0-9].[0-9]{1,2})', $_SERVER['HTTP_USER_AGENT']))
+          elseif (ereg("MSIE ([0-9].[0-9]{1,2})", $_SERVER["HTTP_USER_AGENT"]))
               $UserBrowser = "IE";
           else
-              $UserBrowser = '';
+              $UserBrowser = "";
 
-          $mime = ($UserBrowser == 'IE' || $UserBrowser == 'Opera') ? 'application/octetstream' : 'application/octet-stream';
+          $mime = ($UserBrowser == "IE" || $UserBrowser == "Opera") ? "application/octetstream" : "application/octet-stream";
       }
       else
       {
@@ -97,7 +97,7 @@ class ImageResizeComponent extends Component
       if($data === false)
       {
           $info = pathinfo($filename);
-          $name = $info['basename'];
+          $name = $info["basename"];
       }
       else
       {
@@ -108,9 +108,9 @@ class ImageResizeComponent extends Component
       @ob_end_clean();
 
       // Check for partial download
-      if(isset($_SERVER['HTTP_RANGE']) && $enable_partial)
+      if(isset($_SERVER["HTTP_RANGE"]) && $enable_partial)
       {
-          list($a, $range) = explode("=", $_SERVER['HTTP_RANGE']);
+          list($a, $range) = explode("=", $_SERVER["HTTP_RANGE"]);
           list($fbyte, $lbyte) = explode("-", $range);
 
           if(!$lbyte)
@@ -128,22 +128,22 @@ class ImageResizeComponent extends Component
       }
 
       // Common headers
-      header('Content-Type: ' . $mime, true);
+      header("Content-Type: " . $mime, true);
       header("Expires: Mon, 26 Jul 1997 05:00:00 GMT", true);
-      header('Accept-Ranges: bytes', true);
+      header("Accept-Ranges: bytes", true);
       header("Cache-control: private", true);
-      header('Pragma: private', true);
+      header("Pragma: private", true);
 
       // Open file
       if($data === false) {
-          $file = fopen($filename, 'r');
+          $file = fopen($filename, "r");
 
           if(!$file)
               return FALSE;
       }
 
       // Cut data for partial download
-      if(isset($_SERVER['HTTP_RANGE']) && $enable_partial)
+      if(isset($_SERVER["HTTP_RANGE"]) && $enable_partial)
           if($data === false)
               fseek($file, $range);
           else
