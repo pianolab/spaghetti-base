@@ -1,6 +1,6 @@
 <?php
 
-App::import("Vendor", "phpActiveRecord" . DS . "ActiveRecord");
+App::import("Vendor", "php_active_record" . DS . "ActiveRecord");
 
 class ActiveRecordModel extends ActiveRecord\Model
 {
@@ -25,6 +25,10 @@ class ActiveRecordModel extends ActiveRecord\Model
     }
   }
 
+  public static function others($limit = 5, $options = array()) {
+    return self::all($options);
+  }
+
   /**
    *  Retorna registros paginados.
    *
@@ -44,7 +48,6 @@ class ActiveRecordModel extends ActiveRecord\Model
       "limit" => $per_page,
     ), $options);
 
-
     self::$pagination = array(
       "totalRecords" => $total_records,
       "totalPages" => ceil($total_records / $per_page),
@@ -61,9 +64,9 @@ class ActiveRecordModel extends ActiveRecord\Model
     return array_chunk(self::paginate($per_page, $options), $quantity);
   }
 
-  static public function group_all($quantity)
+  static public function group_all($quantity, $options = array())
   {
-    return array_chunk(self::all(), $quantity);
+    return array_chunk(self::all($options), $quantity);
   }
 
   /**
@@ -103,7 +106,7 @@ class ActiveRecordModel extends ActiveRecord\Model
     return $week_day;
   }
 
-  public function getMonth($column_date, $short = false)
+  public function get_month($column_date, $short = false)
   {
     $arr = explode("-", $this->{$column_date});
 

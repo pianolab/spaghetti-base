@@ -10,7 +10,7 @@ class AppController extends Controller
   public $uses = array();
   public $arrView = array();
   public $components = array("ImageResize", "Flash", "Upload", "Uploadify");
-  public $helpers = array("Html", "Form", "Lang", "Flash", "Pagination", "Minify");
+  public $helpers = array("Html", "Form", "Lang", "Flash", "Pagination");
 
   /**
    * Filtro antes de executar

@@ -9,7 +9,8 @@
 
 App::import("Helper", "html_helper");
 
-class PaginationHelper extends HtmlHelper {
+class PaginationHelper extends HtmlHelper
+{
   /**
    *  Model a ser utilizado na paginação.
    */
@@ -24,6 +25,7 @@ class PaginationHelper extends HtmlHelper {
   public function model($model) {
     return $this->model = new $model;
   }
+
   /**
    *  Gera uma lista de páginas.
    *
@@ -41,7 +43,7 @@ class PaginationHelper extends HtmlHelper {
       ),
       $options
     );
-    
+
     $page = Mapper::getNamed('page');
     $pages = $model::$pagination["totalPages"];
     $numbers = array();
@@ -55,6 +57,7 @@ class PaginationHelper extends HtmlHelper {
     endfor;
     return join($this->tag($options["tag"], $options["separator"]), $numbers);
   }
+
   /**
    *  Gera o link para a página seguinte de acordo com os dados encontrados.
    *
@@ -70,6 +73,7 @@ class PaginationHelper extends HtmlHelper {
     endif;
     return "";
   }
+
   /**
    *  Gera o link para a página anterior de acordo com os dados encontrados.
    *
@@ -85,6 +89,7 @@ class PaginationHelper extends HtmlHelper {
     endif;
     return "";
   }
+
   /**
    *  Gera o link para a página inicial de acordo com os dados encontrados.
    *
@@ -99,6 +104,7 @@ class PaginationHelper extends HtmlHelper {
     endif;
     return "";
   }
+
   /**
    *  Gera o link para a página final de acordo com os dados encontrados.
    *
@@ -114,6 +120,7 @@ class PaginationHelper extends HtmlHelper {
     endif;
     return "";
   }
+
   /**
    *  Verifica a existência da página seguinte caso não esteja na última página.
    *
@@ -126,6 +133,7 @@ class PaginationHelper extends HtmlHelper {
     endif;
     return null;
   }
+
   /**
    *  Verifica a existência da página anterior caso não esteja na primeira página.
    *
