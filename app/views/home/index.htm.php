@@ -26,8 +26,8 @@
   <div class="col-md-12">
     <h2>languages</h2>
     <pre>Arquivo em: <?php echo APP . DS . "languages" ?></pre>
-    <?php echo $html->link(t("Português"), "/lang/change/pt-br") ?> |
-    <?php echo $html->link(t("Inglês"), "/lang/change/en-us") ?><br>
+    <?php echo $html->link(t("Português"), "/br") ?> |
+    <?php echo $html->link(t("Inglês"), "/en") ?><br>
 
     <?php echo t("wtf") ?> | <?php echo t("test") ?><br />
   </div>

@@ -29,6 +29,9 @@ class AppController extends Controller
 
     // set the array lang
     $this->arrayLang();
+
+    // Page title default
+    $this->pageTitle( empty($this->arrView["page_title"]) ? null : $this->arrView["page_title"] );
   }
 
   /**
@@ -40,9 +43,6 @@ class AppController extends Controller
    */
   public function beforeRender()
   {
-    // Page title default
-    $this->pageTitle( empty($this->arrView["page_title"]) ? null : $this->arrView["page_title"] );
-
     // To we don"t have to repeat the set function with arrView variable.
     $this->set($this->arrView);
   }
@@ -67,7 +67,7 @@ class AppController extends Controller
    * @author Walmir Neto
    */
   protected function pageTitle($title = null) {
-    $compl = empty($title) ? null : $title . " » ";
+    $compl = empty($title) ? null : $title . " | ";
     $this->set("page_title", $compl . APP_NAME);
   }
 
