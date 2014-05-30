@@ -34,28 +34,27 @@ class PaginationHelper extends HtmlHelper
    */
   public function numbers($options = array()) {
     $model = $this->model;
-    $options = array_merge(
-      array(
-        "tag" => "li",
-        "modulus" => 3,
-        "separator" => " ",
-        "current" => "active"
-      ),
-      $options
-    );
 
-    $page = Mapper::getNamed("page");
+    $page = Mapper::getNamed("page") < 1 ? 1 : Mapper::getNamed("page");
     $pages = $model::$pagination["totalPages"];
-    $numbers = array();
 
+    $options = array_merge(array(
+      "tag" => "li",
+      "modulus" => 3,
+      "separator" => " ",
+      "current" => "active"
+    ), $options);
+
+    $numbers = array();
     for($i = $page - $options["modulus"]; $i <= $page + $options["modulus"]; $i++):
       if($i > 0 && $i <= $pages):
-        $attributes = ($i != $page) ? array() : array("class" => $options["current"]);
+        $attributes = ($i == $page) ? array("class" => $options["current"]) : array();
         $number = $this->link($i, Mapper::currentRoute() . "?" . $this->queryString($i));
         $numbers []= $this->tag($options["tag"], $number, $attributes);
       endif;
     endfor;
-    return join($this->tag($options["tag"], $options["separator"]), $numbers);
+
+    return implode($glue, $numbers);
   }
 
   /**
@@ -142,7 +141,7 @@ class PaginationHelper extends HtmlHelper
   public function hasPrevious() {
     $model = $this->model;
     if($this->model):
-      return $model::$pagination["page"] != 1;
+      return $model::$pagination["page"] > 1;
     endif;
     return null;
   }
