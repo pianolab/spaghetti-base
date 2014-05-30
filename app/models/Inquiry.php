@@ -4,8 +4,6 @@ App::import("Vendor", "mailer" . DS . "Mailer");
 
 class Inquiry extends ActiveRecordModel
 {
-  static $before_create = array("send_mail");
-
   static $validates_presence_of = array(
     array("name", "message" => "Não pode ficar em branco"),
     array("email", "message" => "Não pode ficar em branco"),
@@ -17,7 +15,7 @@ class Inquiry extends ActiveRecordModel
   );
 
   static $validates_size_of = array(
-    array("name", "maximum" => 10, "too_long" => "No mínimo 10 caracteres"),
+    array("name", "minimum" => 10, "too_long" => "No mínimo 10 caracteres"),
   );
 
   public function send_mail()
@@ -25,8 +23,8 @@ class Inquiry extends ActiveRecordModel
     $config = array(
       "to" => MAILER_SEND_DEFAULT,
       "from" => array(MAILER_SMTP_USERNAME => "Contato"),
-      "subject" => "Formulário de Contato [ " . APP_NAME . " ]",
-      "views" => "contact/mail",
+      "subject" => "Formulário de Contato :: " . APP_NAME,
+      "views" => "inquiries/mail",
       "data" => array("inquiry" => $this),
     );
 

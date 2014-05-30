@@ -18,7 +18,7 @@ class InquiriesController extends AppController
           $this->FlashComponent->success("Sua mensagem foi enviado com sucesso.<br />Em breve entraremos em contato");
         }
         else {
-          $this->FlashComponent->danger("Ocorreu um erro ao tentar salvar, tente novamente");
+          $this->FlashComponent->danger("Confira o formulário e preencha o correntamente");
         }
       }
     }

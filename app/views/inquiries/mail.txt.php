@@ -1,9 +1,9 @@
-Formulário de contato
---------------------------------------------------------------------------------------
-Nome: <?php echo $contact["name"]; ?>
-E-mail: <?php echo $contact["email"]; ?>
-Assunto: <?php echo $contact["subject"]; ?>
-Telefone: <?php echo $contact["phone"]; ?>
-Mensagem: <?php echo $contact["message"]; ?>
---------------------------------------------------------------------------------------
+Formulário de contato</h1>
+----------------------------------------------------
+Nome: <?php echo $inquiry->name ?>
+E-mail: <?php echo $inquiry->email ?>
+Telefone: <?php echo $inquiry->phone ?>
+Data Nascimento: <?php echo $inquiry->born_in ?>
+Mensagem: <?php echo $inquiry->message ?>
+----------------------------------------------------
 Mensagem enviada ás: <?php echo date("d/m/Y H:i:s"); ?> diretamente do website <?php echo APP_NAME; ?>.
