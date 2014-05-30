@@ -4,8 +4,8 @@
 Mapper::connect("/javascripts/application(-:num)?.js", "/javascripts/application.js");
 
 # lang helper
-Mapper::connect("/lang/change/br", "/br");
-Mapper::connect("/lang/change/en", "/en");
+Mapper::connect("/br", "/lang/change/br");
+Mapper::connect("/en", "/lang/change/en");
 
 /**
  * Definições de seguranção da aplicação

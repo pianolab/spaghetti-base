@@ -78,25 +78,28 @@ class AppController extends Controller
    * @return void
    * @author Diogo Caetano
    */
-  protected function setUrlHistory() {
-    Session::write("uri.history.current", Mapper::here());
+  protected function setUrlHistory()
+  {
+    if ($this->params["extension"] != "js") {
+      Session::write("uri.history.current", Mapper::here());
 
-    $uri = Session::read("uri.history");
-    $uri = is_array($uri) ? $uri : array($uri);
+      $uri = Session::read("uri.history");
+      $uri = is_array($uri) ? $uri : array($uri);
 
-    if($uri[0] !== Mapper::here()) {
-      array_unshift($uri , Mapper::here());
-      Session::write("uri.history.previous", $uri[1]);
+      if($uri[0] !== Mapper::here()) {
+        array_unshift($uri , Mapper::here());
+        Session::write("uri.history.previous", $uri[1]);
+      }
+      if(count($uri) > 2) array_pop($uri);
+
+      Session::write("uri.history", $uri);
+
+      // Histórico da última URL
+      $this->uri["current"] = Session::read("uri.history.current");
+      $this->uri["previous"] = Session::read("uri.history.previous");
+
+      $this->arrView["uri"] = $this->uri;
     }
-    if(count($uri) > 2) array_pop($uri);
-
-    Session::write("uri.history", $uri);
-
-    // Histórico da última URL
-    $this->uri["current"] = Session::read("uri.history.current");
-    $this->uri["previous"] = Session::read("uri.history.previous");
-
-    $this->arrView["uri"] = $this->uri;
   }
 
   /**
