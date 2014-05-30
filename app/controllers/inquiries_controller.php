@@ -6,6 +6,7 @@ class InquiriesController extends AppController
   {
     try {
       $connection = Inquiry::connection();
+      $connection->transaction();;
 
       $this->arrView["inquiry"] = $inquiry = new Inquiry;
 
@@ -13,7 +14,7 @@ class InquiriesController extends AppController
         $inquiry->set_attributes($this->data["inquiry"]);
 
         if ($inquiry->save()) {
-          $inquiry->send_mail();
+          // $inquiry->send_mail();
           $connection->commit();
           $this->FlashComponent->success("Sua mensagem foi enviado com sucesso.<br />Em breve entraremos em contato");
         }

@@ -40,8 +40,8 @@
     "object" => $inquiry,
     "label" => "Data de nascimento",
     "class" => "form-control",
-    "placeholder" => "dd/mm/aaaa",
-    "alt" => "date",
+    "placeholder" => "Ex: AAAA-MM-DD",
+    "alt" => "date-us",
   )); ?>
 
   <br>
