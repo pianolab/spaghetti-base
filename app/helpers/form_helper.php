@@ -248,7 +248,7 @@ class FormHelper extends HtmlHelper
     ), $options);
 
     $options["label"] = t($options["label"]);
-    $options["placeholder"] = t($options["placeholder"]);
+    $options["placeholder"] = has_data($options["placeholder"]) ? t($options["placeholder"]) : $options["label"];
 
     $div = array_unset($options, "div");
     $before = array_unset($options, "before");

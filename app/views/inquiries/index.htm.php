@@ -2,56 +2,42 @@
 
 <div class="row">
   <div class="col-md-12">
-  <h2>Contato</h2>
-
-  <?php echo $form->create("/contato", array("id" => "form-contact", "class" => "form-horizontal")); ?>
-
-  <?php echo $form->input("inquiry.name", array(
-    "object" => $inquiry,
-    "label" => "Nome",
-    "class" => "form-control",
-    "placeholder" => "Digite seu nome",
-  )); ?>
-
-  <?php echo $form->input("inquiry.email", array(
-    "object" => $inquiry,
-    "label" => "Email",
-    "class" => "form-control",
-    "placeholder" => "Digite um email válido",
-  )); ?>
-
-  <?php echo $form->input("inquiry.phone", array(
-    "object" => $inquiry,
-    "label" => "Fone",
-    "class" => "form-control",
-    "placeholder" => "Só números",
-    "alt" => "phone",
-  )); ?>
-
-  <?php echo $form->input("inquiry.message", array(
-    "object" => $inquiry,
-    "label" => "Mensagem",
-    "placeholder" => "Escreva sua mensagem",
-    "class" => "form-control",
-    "type" => "textarea",
-  )); ?>
-
-  <?php echo $form->input("inquiry.born_in", array(
-    "object" => $inquiry,
-    "label" => "Data de nascimento",
-    "class" => "form-control",
-    "placeholder" => "Ex: AAAA-MM-DD",
-    "alt" => "date-us",
-  )); ?>
-
-  <br>
-
-  <?php echo $form->input(null, array(
-    "label" => null, "type" => "submit",
-    "value" => "Enviar Formulário",
-    "class" => "btn btn-lg btn-primary",
-  )); ?>
-
-  <?php echo $form->close(); ?>
+    <h2>Contato</h2>
   </div>
 </div>
+
+<?php echo $bootstrap->create("/contato", array("object" => $inquiry, "id" => "form_new_inquiry", "class" => "form-horizontal")); ?>
+
+  <div class="row">
+    <?php echo $bootstrap->input("inquiry.name", array(
+      "label" => "Nome",
+      "placeholder" => "Digite seu nome",
+    )); ?>
+  </div>
+
+  <div class="row">
+    <?php echo $bootstrap->email("inquiry.email", array(
+      "label" => "Email", "columns" => 4,
+    )); ?>
+
+    <?php echo $bootstrap->phone("inquiry.phone", array(
+      "label" => "Fone", "columns" => 4,
+    )); ?>
+
+    <?php echo $bootstrap->datepicker("inquiry.born_in", array(
+      "label" => "Data de nascimento", "columns" => 4,
+    )); ?>
+  </div>
+
+  <div class="row">
+    <?php echo $bootstrap->textarea("inquiry.message", array(
+      "label" => "Mensagem",
+      "placeholder" => "Escreva sua mensagem",
+    )); ?>
+  </div>
+
+  <div class="row">
+    <?php echo $bootstrap->submit("Enviar messagem"); ?>
+  </div>
+
+<?php echo $bootstrap->close(); ?>

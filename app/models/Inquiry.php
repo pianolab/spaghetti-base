@@ -15,7 +15,7 @@ class Inquiry extends ActiveRecordModel
   );
 
   static $validates_size_of = array(
-    array("name", "minimum" => 10, "too_long" => "No mínimo 10 caracteres"),
+    array("name", "minimum" => 10, "too_short" => "No mínimo 10 caracteres"),
   );
 
   public function send_mail()
