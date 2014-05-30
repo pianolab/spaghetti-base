@@ -57,6 +57,18 @@ define("LIB", CORE . DS . "lib");
  *  Caminho completo para a pasta da aplicação do Spaghetti.
  */
 define("APP", ROOT . DS . "app");
+/**
+ *  Caminho completo para a pasta webroot do Spaghetti.
+ */
+define("WEBROOT", APP . DS . "webroot");
+/**
+ *  Caminho completo para a pasta de scripts javascripts do Spaghetti.
+ */
+define("SCRIPTS_PATH", WEBROOT . DS . "scripts");
+/**
+ *  Caminho completo para a pasta do estilos css do Spaghetti.
+ */
+define("STYLES_PATH", WEBROOT . DS . "styles");
 
 /**
  *  Inclui o arquivo de inicialização de todos os arquivos necessários para o

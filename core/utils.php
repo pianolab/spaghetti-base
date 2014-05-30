@@ -8,15 +8,20 @@
  *
  */
 
-function get_current_env() 
+function env_is($environment)
 {
-  $all_domains = Config::read('all_domains');
+  return get_current_env() == $environment;
+}
 
-  $environment = 'development';
+function get_current_env()
+{
+  $all_domains = Config::read("all_domains");
+
+  $environment = "development";
 
   foreach ($all_domains as $key => $domains) {
     foreach ($domains as $k => $domain) {
-      if (strpos($_SERVER['SERVER_NAME'], $domain) !== false) { $environment = $key; }
+      if (strpos($_SERVER["SERVER_NAME"], $domain) !== false) { $environment = $key; }
     }
   }
 
@@ -25,7 +30,7 @@ function get_current_env()
 
 function t($string, $file_name = false)
 {
-  App::import('Helper', 'lang_helper');
+  App::import("Helper", "lang_helper");
   $lang = new LangHelper();
   return $lang->_($string, $file_name);
 }
@@ -44,7 +49,7 @@ function is_odd($number)
 }
 
 function uuid() {
-    list($timeMid, $timeLow) = explode(' ', microtime());
+    list($timeMid, $timeLow) = explode(" ", microtime());
     return sprintf(
       "%08x-%04x-%04x-%02x%02x-%04x%08x", (int)$timeLow, (int)substr($timeMid, 2) & 0xffff,
       mt_rand(0, 0xfff) | 0x4000, mt_rand(0, 0x3f) | 0x80, mt_rand(0, 0xff), rand(1000, 9999), rand(100, 999)
@@ -63,7 +68,7 @@ function pr($data) {
 
 /**
  *  Retorna os dados enviados em forma de string para exibí-los no navegador.
- * 
+ *
  *  @param array $data Dados a serem observados
  *  @return void
  */

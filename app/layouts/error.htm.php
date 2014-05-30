@@ -1,3 +1,4 @@
+<?php header("HTTP/1.0 404 Page not Found"); ?>
 <?php $this->pageTitle = $page_title ? $page_title : $this->pageTitle; ?>
 <!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->

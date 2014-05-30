@@ -1,5 +1,12 @@
 <?php
 
+# javascripts helper
+Mapper::connect("/javascripts/application(-:num)?.js", "/javascripts/application.js");
+
+# lang helper
+Mapper::connect("/lang/change/br", "/br");
+Mapper::connect("/lang/change/en", "/en");
+
 /**
  * Definições de seguranção da aplicação
  */
@@ -22,8 +29,8 @@ Config::write("default_language", "br");
  * Definições de AMBIENTE de desenvolvimento
  */
 Config::write("all_domains", array(
-  "development" => array("0.0.0.0", "127.0.0.1", "localhost", "lvh.me"),
-  "production" => array("production.com", "dsavh.me"),
+  "development" => array("localhost", "lvh.me"),
+  "production" => array("production.com", "pianolab.lvh.me"),
   "staging" => array("staging.com"),
 )); # development, production
 
