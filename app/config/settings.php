@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Route application
+ */
 # javascripts helper
 Mapper::connect("/javascripts/application(-:num)?.js", "/javascripts/application.js");
 

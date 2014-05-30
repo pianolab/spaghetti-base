@@ -30,4 +30,4 @@ var Contact = {
 
 };
 
-$(document).ready( function () { Contact.init(); });
+$(document).on("ready", function () { Contact.init(); });

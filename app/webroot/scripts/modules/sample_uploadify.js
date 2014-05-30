@@ -8,4 +8,4 @@ var SampleUploadify = {
   }
 };
 
-$(document).ready( function () { SampleUploadify.init(); });
+$(document).on("ready", function () { SampleUploadify.init(); });

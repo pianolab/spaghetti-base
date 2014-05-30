@@ -4,4 +4,4 @@ Application = {
   }
 };
 
-$(document).ready( function () { Application.init(); });
+$(document).on("ready", function () { Application.init(); });
