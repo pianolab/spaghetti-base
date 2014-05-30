@@ -1,6 +1,6 @@
 <?php
 
-App::import("Model", "active_record_model");
+App::import("Model", "ActiveRecordModel");
 
 class AppController extends Controller
 {
