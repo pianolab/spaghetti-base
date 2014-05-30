@@ -3,4 +3,4 @@
 Mapper::root("home");
 
 # contact
-Mapper::connect("/contato", "/contact");
+Mapper::connect("/contato", "/inquiries");

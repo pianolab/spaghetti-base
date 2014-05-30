@@ -36,9 +36,9 @@ define("ANALYTICS_URL", false);
 /**
  * Configurações para o e-mail
  */
-define("MAILER_SEND_DEFAULT", "agencia@pianolab.com.br");
+define("MAILER_SEND_DEFAULT", "suporte@pianolab.com.br");
 
-# config send
+# config send mail
 define("MAILER_TRANSPORT", "smtp");
 define("MAILER_SMTP_HOST", "mail.domain.com");
 define("MAILER_SMTP_PORT", "587");

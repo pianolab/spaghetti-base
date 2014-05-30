@@ -64,6 +64,9 @@ class FormHelper extends HtmlHelper
       ),
       $attributes
     );
+
+    $text = t($text);
+
     switch(array_unset($attributes, "tag")):
       case "image":
         $attributes["alt"] = $text;
@@ -222,17 +225,30 @@ class FormHelper extends HtmlHelper
    */
   public function input($name, $options = array())
   {
+    $array_name = explode(".", $name);
+
+    $object = array_unset($options, "object");
+    $column_name = end($array_name);
+
+    $name = array_shift($array_name);
+    if (has_data($array_name)) $name .= "[" . implode("][", $array_name) . "]";
+
     $options = array_merge(array(
       "name" => $name,
       "type" => "text",
-      "id" => Inflector::camelize("form_" . Inflector::slug($name)),
+      "id" => Inflector::hyphenToUnderscore(Inflector::slug($name)),
       "label" => Inflector::humanize($name),
       "div" => true,
       "before" => null,
       "label" => null,
       "between" => null,
       "after" => null,
+      "error" => has_data($object->errors->{$column_name}) ? $object->errors->{$column_name}[0] : null,
+      "value" => has_data($object->{$column_name}) ? $object->{$column_name} : null,
     ), $options);
+
+    $options["label"] = t($options["label"]);
+    $options["placeholder"] = t($options["placeholder"]);
 
     $div = array_unset($options, "div");
     $before = array_unset($options, "before");
@@ -283,15 +299,16 @@ class FormHelper extends HtmlHelper
       $label = $this->tag("label", $label_text, $label);
     }
 
-    $after .= empty($options["error"]) ? null : $this->tag("span", $label, array("class" => "error"));
+    $after .= empty($options["error"]) ? null : $this->tag("span", $options["error"], array("class" => "has-error"));
 
     # mount content
     $content = $before . t($label) . $between . $input . $after;
 
     if (empty($div)) return $content;
 
-    $div_attr = is_array($div) ? $div : array("class" => "input " . $options["type"]);
-    if (!empty($options["error"])) $div_attr["class"] = $div_attr["class"] . " error";
+    if (is_array($div)) $div_attr = $div;
+    $div_attr["class"] = "input " . $options["type"] . " " . $div_attr["class"];
+    if (!empty($options["error"])) $div_attr["class"] = $div_attr["class"] . " has-error";
 
     return $this->output($this->div($content, $div_attr));
   }

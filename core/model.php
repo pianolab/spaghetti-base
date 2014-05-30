@@ -489,9 +489,15 @@ class Model extends Object {
         if(isset($this->schema["modified"]) && !isset($data["modified"])):
             $data["modified"] = $date;
         endif;
+        if(isset($this->schema["updated_at"]) && !isset($data["updated_at"])):
+            $data["updated_at"] = $date;
+        endif;
         $exists = $this->exists($this->id);
         if(!$exists && isset($this->schema["created"]) && !isset($data["created"])):
             $data["created"] = $date;
+        endif;
+        if(!$exists && isset($this->schema["created_at"]) && !isset($data["created_at"])):
+            $data["created_at"] = $date;
         endif;
         if(!($data = $this->beforeSave($data))) return false;
         if(!is_null($this->id) && $exists):

@@ -33,7 +33,7 @@ Config::write("default_language", "br");
  */
 Config::write("all_domains", array(
   "development" => array("localhost", "lvh.me"),
-  "production" => array("production.com", "pianolab.lvh.me"),
+  "production" => array("production.com"),
   "staging" => array("staging.com"),
 )); # development, production
 
