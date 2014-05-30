@@ -41,22 +41,22 @@ class ActiveRecordModel extends ActiveRecord\Model
 
     $page = has_data($current_page) ? $current_page : 1;
     $offset = ($page - 1) * $per_page;
-    $total_records = self::count();
+    $total_records = has_data($options) ? self::count($options) : self::count();
 
     $options = array_merge(array(
-      "offset" => $offset,
       "limit" => $per_page,
-    ), $options);
+      "offset" => $offset,
+    ), is_array($options) ? $options : array());
 
     self::$pagination = array(
       "totalRecords" => $total_records,
       "totalPages" => ceil($total_records / $per_page),
       "perPage" => $per_page,
       "offset" => $offset,
-      "page" => $page
+      "page" => $page,
     );
 
-    return self::all($options);
+    return self::find("all", $options);
   }
 
   public static function group_paginate($quantity, $per_page = 20, $options = array())
