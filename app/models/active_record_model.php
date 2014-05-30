@@ -127,4 +127,32 @@ class ActiveRecordModel extends ActiveRecord\Model
 
     return ($short) ? substr($return,0,3) : $return;
   }
+
+  public function time_ago($column_name = "created_at")
+  {
+    $timestamp = time() - strtotime($this->{$column_name}->format("Y-m-d H:i:s"));
+
+    if($timestamp < 1) {
+      return "há 1 segundo atrás";
+    }
+    else {
+      $type_times = array(
+        12 * 30 * 24 * 60 * 60 => array("plural" => "anos", "singular" => "ano"),
+        30 * 24 * 60 * 60 => array("plural" => "meses", "singular" => "mês"),
+        24 * 60 * 60 => array("plural" => "dias", "singular" => "dia"),
+        60 * 60 => array("plural" => "horas", "singular" => "hora"),
+        60 => array("plural" => "mínutos", "singular" => "mínuto"),
+        1 => array("plural" => "segundos", "singular" => "segundo"),
+      );
+
+      foreach($type_times as $seconds => $type) {
+        $secs = $timestamp / $seconds;
+
+        if ($secs >= 1) {
+          $time = round($secs);
+          return "há " . $time . " " . ($time > 1 ? $type["plural"] : $type["singular"]) . " atrás";
+        }
+      }
+    }
+  }
 }
