@@ -1,24 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 3.3.9
--- http://www.phpmyadmin.net
---
--- Servidor: localhost
--- Tempo de Geração: Out 03, 2011 as 05:04
--- Versão do Servidor: 5.5.8
--- Versão do PHP: 5.3.5
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Banco de Dados: `upx`
---
-
 -- --------------------------------------------------------
 
 --
@@ -35,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `attachments` (
   `type` varchar(140) DEFAULT NULL,
   `size` varchar(140) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -51,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `modules` (
   `type` varchar(50) NOT NULL DEFAULT 'default',
   `in_menu` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `modules`
@@ -70,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `modules_users` (
   `module_id` int(11) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`module_id`,`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `modules_users`
@@ -91,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `module_menus` (
   `name` varchar(100) NOT NULL DEFAULT '',
   `path` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `module_menus`
@@ -113,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `mod_languages` (
   `flag` varchar(5) NOT NULL DEFAULT '',
   `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `mod_languages`
@@ -139,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `user`
@@ -147,3 +126,21 @@ CREATE TABLE IF NOT EXISTS `user` (
 
 INSERT INTO `user` (`id`, `name`, `email`, `password`, `status`, `privileges`, `created_at`, `updated_at`) VALUES
 (1, 'Agencia Piano Lab', 'agencia@pianolab.com.br', 'ab758a8e39cd39371b9bb807b4e50561', 1, 999, '2009-10-16 09:41:29', '2009-10-16 09:41:29');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `user`
+--
+
+CREATE TABLE IF NOT EXISTS `inquiries` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(140),
+  `email` varchar(100),
+  `phone` varchar(60),
+  `born_in` date,
+  `message` text,
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
