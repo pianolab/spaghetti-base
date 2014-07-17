@@ -130,7 +130,7 @@ INSERT INTO `user` (`id`, `name`, `email`, `password`, `status`, `privileges`, `
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `user`
+-- Estrutura da tabela `inquiries`
 --
 
 CREATE TABLE IF NOT EXISTS `inquiries` (
