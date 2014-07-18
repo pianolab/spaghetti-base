@@ -108,9 +108,7 @@ class ActiveRecordModel extends ActiveRecord\Model
 
   public function get_month($column_date, $short = false)
   {
-    $arr = explode("-", $this->{$column_date});
-
-    switch ($arr[1]):
+    switch ($this->{$column_date}->format('m')):
       case 1: $return = "Janeiro"; break;
       case 2: $return = "Fevereiro"; break;
       case 3: $return = "Março"; break;
