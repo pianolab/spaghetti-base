@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS `attachments` (
   `type` varchar(140) DEFAULT NULL,
   `size` varchar(140) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `modules` (
   `type` varchar(50) NOT NULL DEFAULT 'default',
   `in_menu` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `modules`
@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS `modules_users` (
   `module_id` int(11) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`module_id`,`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `modules_users`
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `module_menus` (
   `name` varchar(100) NOT NULL DEFAULT '',
   `path` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `module_menus`
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `mod_languages` (
   `flag` varchar(5) NOT NULL DEFAULT '',
   `status` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `mod_languages`
@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Extraindo dados da tabela `user`
@@ -143,4 +143,4 @@ CREATE TABLE IF NOT EXISTS `inquiries` (
   `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
