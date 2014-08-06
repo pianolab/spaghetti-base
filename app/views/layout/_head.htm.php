@@ -16,7 +16,7 @@
 <![endif]-->
 
 <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]><?php echo $html->script("html5"); ?><![endif]-->
+<!--[if lt IE 9]><?php echo $html->script("vendors/html5"); ?><![endif]-->
 
 <!-- Le styles
 ================================================== -->

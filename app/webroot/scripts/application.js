@@ -1,6 +1,8 @@
 Application = {
   init: function () {
-
+  	//VENDORS
+  	//minify click delay
+	FastClick.attach(document.body);
   }
 };
 
