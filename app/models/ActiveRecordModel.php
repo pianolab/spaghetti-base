@@ -76,7 +76,11 @@ class ActiveRecordModel extends ActiveRecord\Model
   public function truncate($column_text, $size)
   {
     $dots = strlen($this->{$column_text}) > $size ? " ..." : null;
-    return mb_substr($this->{$column_text}, 0, strrpos(mb_substr($this->{$column_text}, 0, $size), " ")) . $dots;
+    if(strlen($this->{$column_text}) > $size){
+      return mb_substr($this->{$column_text}, 0, strrpos(mb_substr($this->{$column_text}, 0, $size), " ")) . $dots;
+    }else{
+      return $this->{$column_text};
+    }
   }
 
   public function format_date($column_date, $format)
