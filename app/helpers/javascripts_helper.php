@@ -15,6 +15,8 @@ class JavascriptsHelper extends HtmlHelper
     # jQuery Validation Plugin 1.11.1
     "vendors/validate/jquery.validate",
     "vendors/validate/jquery.validate.init",
+    #fastclick
+    "vendors/fastclickjs",
     # Application
     "application",
   );
