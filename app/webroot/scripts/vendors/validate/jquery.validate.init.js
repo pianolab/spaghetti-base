@@ -7,7 +7,7 @@ $.validator.setDefaults({
     $(element).closest('.control-group')
       .removeClass('success').addClass('error');
   },
-  
+
   success: function(element) {
     var icon;
     icon = $('<i>').addClass('icon-ok').text('ok');
