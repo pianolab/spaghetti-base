@@ -9,20 +9,19 @@
  *
  */
 
-class UploadComponent extends Component
-{
+class UploadComponent extends Component {
   /**
    * Tipos de arquivo permitidos.
    */
-  public $allowedTypes = array("jpg", "png", "gif", "jpeg");
+  public $allowedTypes = array('jpeg', 'jpg', 'png');
   /**
    * Tamanho máximo permitido (em MB).
    */
-  public $maxSize = 2;
+  public $maxSize = 10;
   /**
    * Caminho padrão dos arquivos enviados a partir de /app
    */
-  public $path = "/";
+  public $path = '/';
   /**
    * Arquivos enviados pelo cliente.
    */
@@ -36,23 +35,19 @@ class UploadComponent extends Component
    *
    * @return void
    */
-  public function initialize(&$controller) {
-    foreach($_FILES as $file => $content):
-      if(is_array($content["name"])):
-        foreach($content["name"] as $name => $value):
-          if($content["name"][$name] == "") continue;
-          $this->files[$file][$name] = array(
-            "name" => $content["name"][$name],
-            "type" => $content["type"][$name],
-            "tmp_name" => $content["tmp_name"][$name],
-            "error" => $content["error"][$name],
-            "size" => $content["size"][$name]
-          );
-        endforeach;
-      else:
-        $this->files[$file] = $content;
-      endif;
-    endforeach;
+  public function initialize(Controller $controller) {
+    foreach($_FILES as $key => $content) {
+      if(is_array($content['name'])) {
+        foreach ($content as $k => $file) {
+          $files = current($file);
+          if (is_array($files)) {
+            foreach ($files as $kf => $f) {
+              $this->files[$kf][$k] = $f;
+            }
+          }
+        }
+      }
+    }
   }
   /**
    * Valida determinado arquivo.
@@ -61,16 +56,15 @@ class UploadComponent extends Component
    * @return boolean Verdadeiro quando o arquivo é válido
    */
   public function validates($file = array()) {
-    if(empty($file) && !isset($file["name"])):
-      return $this->error("InvalidParam");
+    if(empty($file) && !isset($file['name'])):
+      return $this->error('<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Arquivo não enviado!</p>');
     endif;
-    if($file["size"] > $this->maxSize * 1024 * 1024):
-      return $this->error("FileSizeExceeded");
+    if($file['size'] > $this->maxSize * 1024 * 1024):
     endif;
-    if(!in_array($this->ext($file["name"]), $this->allowedTypes)):
-      return $this->error("FileTypeNotAllowed");
+    if(!in_array($this->ext($file['name']), $this->allowedTypes)):
+      return $this->error('<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Tipo de arquivo não aceito!</p>');
     endif;
-    if($uploadError = $this->UploadError($file["error"])):
+    if($uploadError = $this->UploadError($file['error'])):
       return $this->error($uploadError);
     endif;
     return true;
@@ -86,19 +80,19 @@ class UploadComponent extends Component
    */
   public function upload($file = array(), $path = null, $name = null) {
     $path = is_null($path) ? $this->path : $path;
-    $name = is_null($name) ? $file["name"] : $name;
+    $name = is_null($name) ? $file['name'] : $name;
     if($this->validates($file)):
       $path = $path;
       if(!is_dir($path)):
         mkdir($path, 0777, true);
       endif;
-      if(move_uploaded_file($file["tmp_name"], $path . DS . $name)):
-        return true;
+      if(move_uploaded_file($file['tmp_name'], $path . DS . $name)):
+        return array('status' => true, 'message' => '');
       else:
-        return $this->error("CantMoveFile");
+        return array('status' => false, 'message' => $this->error('CantMoveFile'));
       endif;
     else:
-      return false;
+      return array('status' => false, 'message' => $this->errors);
     endif;
   }
   /**
@@ -108,52 +102,49 @@ class UploadComponent extends Component
    * @param string $path Caminho onde reside o arquivo
    * @return boolean Verdadeiro se o arquivo foi apagado.
    */
-  public function delete($filename = "", $path = null) {
+  public function delete($filename = '', $path = null) {
     $path = is_null($path) ? $this->path : $path;
     $file = $path . DS . $filename;
     if(file_exists($file)):
-      if(unlink($file)):
+      if(@unlink($file)):
         return true;
       else:
-        return $this->error("CantDeleteFile");
+        return $this->error('CantDeleteFile');
       endif;
     else:
-      return $this->error("CantFindFile");
+      return $this->error('CantFindFile');
     endif;
   }
-
-  /**
-   * Generate a unique name for the file
-   *
-   * @param string $filename Nome do arquivo
-   * @return string Extensão do arquivo
-   */
-  public function uniqueName($filename, $folder = null) {
-    if (has_data($folder)) $this->setPath( Inflector::pluralize($folder) );
-
-    $this->extension = $this->ext($filename);
-    return $this->filename = uuid() . "." . $this->extension;
-  }
-
-    /**
-   * Setting name for the folder
-   *
-   * @param string $folder Name of the folder
-   * @return string Extensão do arquivo
-   */
-  public function setPath($folder) {
-    $this->path = UPLOAD_PATH . DS;
-    $this->path .= has_data($folder) ? $folder : null;
-  }
-
   /**
    * Retorna a extensão de um arquivo.
    *
    * @param string $filename Nome do arquivo
    * @return string Extensão do arquivo
    */
-  public function ext($filename = "") {
-    return strtolower(trim(substr($filename, strrpos($filename, ".") + 1, strlen($filename))));
+  public function ext($filename = '') {
+    return strtolower(trim(substr($filename, strrpos($filename, '.') + 1, strlen($filename))));
+  }
+  /**
+   * Generate a unique name for the file
+   *
+   * @param string $filename Nome do arquivo
+   * @return string Extensão do arquivo
+   */
+  public function uniqueName($filename = '') {
+    $extension = $this->ext($filename);
+    $filename = String::uuid();
+    settype($filename, 'string');
+    return $filename .= '.' . $extension;
+  }
+  /**
+   * Setting name for the folder
+   *
+   * @param string $folder Name of the folder
+   * @return string Extensão do arquivo
+   */
+  public function setPath($folder = '') {
+    $this->path = WWW_ROOT . 'attachments' . DS;
+    $this->path .= isset($folder) ? $folder : null;
   }
   /**
    * Adiciona um novo erro ao componente.
@@ -161,8 +152,8 @@ class UploadComponent extends Component
    * @param string $message Mensagem de erro
    * @return false
    */
-  public function error($message = "", $details = array()) {
-    $this->errors[] = $message;
+  public function error($message = '') {
+    $this->errors []= $message;
     return false;
   }
   /**
@@ -184,16 +175,14 @@ class UploadComponent extends Component
     $message = false;
     switch($error):
       case UPLOAD_ERR_OK: break;
-      case UPLOAD_ERR_INI_SIZE: $message = "IniFileSizeExceeded"; break;
-      case UPLOAD_ERR_FORM_SIZE: $message = "FormFileSizeExceeded"; break;
-      case UPLOAD_ERR_PARTIAL: $message = "PartiallyUploaded"; break;
-      case UPLOAD_ERR_NO_FILE: $message = "NoFile"; break;
-      case UPLOAD_ERR_NO_TMP_DIR: $message = "MissingTempDir"; break;
-      case UPLOAD_ERR_CANT_WRITE: $message = "CantWriteFile"; break;
-      default: $message = "UnknownFileError";
+      case UPLOAD_ERR_INI_SIZE: $message = '<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Erro no tamanho do arquivo!</p>'; break;
+      case UPLOAD_ERR_FORM_SIZE: $message = '<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Erro no tamanho do arquivo!</p>'; break;
+      case UPLOAD_ERR_PARTIAL: $message = '<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Parcialmente gravado!</p>'; break;
+      case UPLOAD_ERR_NO_FILE: $message = '<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Sem arquivo!</p>'; break;
+      case UPLOAD_ERR_NO_TMP_DIR: $message = '<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Pasta temporária não encontrada!</p>'; break;
+      case UPLOAD_ERR_CANT_WRITE: $message = '<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Não pode gravar o arquivo!</p>'; break;
+      default: $message = '<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Erro desconhecido!</p>';
     endswitch;
     return $message;
   }
 }
-
-?>

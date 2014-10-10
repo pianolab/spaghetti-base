@@ -1,4 +1,5 @@
 /app/config/database.php
 /sftp-config.json
 /upload
+/.DS_store
 /app/webroot/scripts/application-*
