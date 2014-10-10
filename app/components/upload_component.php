@@ -57,12 +57,12 @@ class UploadComponent extends Component {
    */
   public function validates($file = array()) {
     if(empty($file) && !isset($file['name'])):
-      return $this->error('<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Arquivo não enviado!</p>');
+      return $this->error('<p class="upload-error">Arquivo não enviado!</p>');
     endif;
     if($file['size'] > $this->maxSize * 1024 * 1024):
     endif;
     if(!in_array($this->ext($file['name']), $this->allowedTypes)):
-      return $this->error('<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Tipo de arquivo não aceito!</p>');
+      return $this->error('<p class="upload-error">Tipo de arquivo não aceito!</p>');
     endif;
     if($uploadError = $this->UploadError($file['error'])):
       return $this->error($uploadError);
@@ -175,13 +175,13 @@ class UploadComponent extends Component {
     $message = false;
     switch($error):
       case UPLOAD_ERR_OK: break;
-      case UPLOAD_ERR_INI_SIZE: $message = '<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Erro no tamanho do arquivo!</p>'; break;
-      case UPLOAD_ERR_FORM_SIZE: $message = '<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Erro no tamanho do arquivo!</p>'; break;
-      case UPLOAD_ERR_PARTIAL: $message = '<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Parcialmente gravado!</p>'; break;
-      case UPLOAD_ERR_NO_FILE: $message = '<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Sem arquivo!</p>'; break;
-      case UPLOAD_ERR_NO_TMP_DIR: $message = '<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Pasta temporária não encontrada!</p>'; break;
-      case UPLOAD_ERR_CANT_WRITE: $message = '<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Não pode gravar o arquivo!</p>'; break;
-      default: $message = '<p style="font-weight:bold;color:#F00C2A;letter-spacing:0pt;word-spacing:0pt;font-size:17px;text-align:left;font-family:arial, helvetica, sans-serif;line-height:1;">Erro desconhecido!</p>';
+      case UPLOAD_ERR_INI_SIZE: $message = '<p class="upload-error">Erro no tamanho do arquivo!</p>'; break;
+      case UPLOAD_ERR_FORM_SIZE: $message = '<p class="upload-error">Erro no tamanho do arquivo!</p>'; break;
+      case UPLOAD_ERR_PARTIAL: $message = '<p class="upload-error">Parcialmente gravado!</p>'; break;
+      case UPLOAD_ERR_NO_FILE: $message = '<p class="upload-error">Sem arquivo!</p>'; break;
+      case UPLOAD_ERR_NO_TMP_DIR: $message = '<p class="upload-error">Pasta temporária não encontrada!</p>'; break;
+      case UPLOAD_ERR_CANT_WRITE: $message = '<p class="upload-error">Não pode gravar o arquivo!</p>'; break;
+      default: $message = '<p class="upload-error">Erro desconhecido!</p>';
     endswitch;
     return $message;
   }
