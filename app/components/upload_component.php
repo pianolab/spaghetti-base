@@ -9,19 +9,20 @@
  *
  */
 
-class UploadComponent extends Component {
+class UploadComponent extends Component
+{
   /**
    * Tipos de arquivo permitidos.
    */
-  public $allowedTypes = array('jpeg', 'jpg', 'png');
+  public $allowedTypes = array("jpg", "png", "gif", "jpeg", "pdf", "doc", "docx", "xls", "*");
   /**
    * Tamanho máximo permitido (em MB).
    */
-  public $maxSize = 10;
+  public $maxSize = 2;
   /**
    * Caminho padrão dos arquivos enviados a partir de /app
    */
-  public $path = '/';
+  public $path = "/";
   /**
    * Arquivos enviados pelo cliente.
    */
@@ -35,19 +36,23 @@ class UploadComponent extends Component {
    *
    * @return void
    */
-  public function initialize(Controller $controller) {
-    foreach($_FILES as $key => $content) {
-      if(is_array($content['name'])) {
-        foreach ($content as $k => $file) {
-          $files = current($file);
-          if (is_array($files)) {
-            foreach ($files as $kf => $f) {
-              $this->files[$kf][$k] = $f;
-            }
-          }
-        }
-      }
-    }
+  public function initialize(&$controller) {
+    foreach($_FILES as $file => $content):
+      if(is_array($content["name"])):
+        foreach($content["name"] as $name => $value):
+          if($content["name"][$name] == "") continue;
+          $this->files[$file][$name] = array(
+            "name" => $content["name"][$name],
+            "type" => $content["type"][$name],
+            "tmp_name" => $content["tmp_name"][$name],
+            "error" => $content["error"][$name],
+            "size" => $content["size"][$name]
+          );
+        endforeach;
+      else:
+        $this->files[$file] = $content;
+      endif;
+    endforeach;
   }
   /**
    * Valida determinado arquivo.
@@ -56,15 +61,16 @@ class UploadComponent extends Component {
    * @return boolean Verdadeiro quando o arquivo é válido
    */
   public function validates($file = array()) {
-    if(empty($file) && !isset($file['name'])):
+    if(empty($file) && !isset($file["name"])):
       return $this->error('<p class="upload-error">Arquivo não enviado!</p>');
     endif;
-    if($file['size'] > $this->maxSize * 1024 * 1024):
+    if($file["size"] > $this->maxSize * 1024 * 1024):
+      return $this->error('<p class="upload-error">Tamanho de arquivo excedido!</p>');
     endif;
-    if(!in_array($this->ext($file['name']), $this->allowedTypes)):
+    if(!in_array($this->ext($file["name"]), $this->allowedTypes)):
       return $this->error('<p class="upload-error">Tipo de arquivo não aceito!</p>');
     endif;
-    if($uploadError = $this->UploadError($file['error'])):
+    if($uploadError = $this->UploadError($file["error"])):
       return $this->error($uploadError);
     endif;
     return true;
@@ -80,19 +86,19 @@ class UploadComponent extends Component {
    */
   public function upload($file = array(), $path = null, $name = null) {
     $path = is_null($path) ? $this->path : $path;
-    $name = is_null($name) ? $file['name'] : $name;
+    $name = is_null($name) ? $file["name"] : $name;
     if($this->validates($file)):
       $path = $path;
       if(!is_dir($path)):
         mkdir($path, 0777, true);
       endif;
-      if(move_uploaded_file($file['tmp_name'], $path . DS . $name)):
-        return array('status' => true, 'message' => '');
+      if(move_uploaded_file($file["tmp_name"], $path . DS . $name)):
+        return true;
       else:
-        return array('status' => false, 'message' => $this->error('CantMoveFile'));
+        return $this->error('<p class="upload-error">Não pode mover arquivo!</p>');
       endif;
     else:
-      return array('status' => false, 'message' => $this->errors);
+      return false;
     endif;
   }
   /**
@@ -102,49 +108,52 @@ class UploadComponent extends Component {
    * @param string $path Caminho onde reside o arquivo
    * @return boolean Verdadeiro se o arquivo foi apagado.
    */
-  public function delete($filename = '', $path = null) {
+  public function delete($filename = "", $path = null) {
     $path = is_null($path) ? $this->path : $path;
     $file = $path . DS . $filename;
     if(file_exists($file)):
-      if(@unlink($file)):
+      if(unlink($file)):
         return true;
       else:
-        return $this->error('CantDeleteFile');
+        return $this->error('<p class="upload-error">Não pode deletar arquivo!</p>');
       endif;
     else:
-      return $this->error('CantFindFile');
+        return $this->error('<p class="upload-error">Não pode encontrar arquivo!</p>');
     endif;
   }
-  /**
-   * Retorna a extensão de um arquivo.
-   *
-   * @param string $filename Nome do arquivo
-   * @return string Extensão do arquivo
-   */
-  public function ext($filename = '') {
-    return strtolower(trim(substr($filename, strrpos($filename, '.') + 1, strlen($filename))));
-  }
+
   /**
    * Generate a unique name for the file
    *
    * @param string $filename Nome do arquivo
    * @return string Extensão do arquivo
    */
-  public function uniqueName($filename = '') {
-    $extension = $this->ext($filename);
-    $filename = String::uuid();
-    settype($filename, 'string');
-    return $filename .= '.' . $extension;
+  public function uniqueName($filename, $folder = null) {
+    if (has_data($folder)) $this->setPath( Inflector::pluralize($folder) );
+
+    $this->extension = $this->ext($filename);
+    return $this->filename = uuid() . "." . $this->extension;
   }
-  /**
+
+    /**
    * Setting name for the folder
    *
    * @param string $folder Name of the folder
    * @return string Extensão do arquivo
    */
-  public function setPath($folder = '') {
-    $this->path = WWW_ROOT . 'attachments' . DS;
-    $this->path .= isset($folder) ? $folder : null;
+  public function setPath($folder) {
+    $this->path = UPLOAD_PATH . DS;
+    $this->path .= has_data($folder) ? $folder : null;
+  }
+
+  /**
+   * Retorna a extensão de um arquivo.
+   *
+   * @param string $filename Nome do arquivo
+   * @return string Extensão do arquivo
+   */
+  public function ext($filename = "") {
+    return strtolower(trim(substr($filename, strrpos($filename, ".") + 1, strlen($filename))));
   }
   /**
    * Adiciona um novo erro ao componente.
@@ -152,8 +161,8 @@ class UploadComponent extends Component {
    * @param string $message Mensagem de erro
    * @return false
    */
-  public function error($message = '') {
-    $this->errors []= $message;
+  public function error($message = "", $details = array()) {
+    $this->errors[] = $message;
     return false;
   }
   /**
@@ -186,3 +195,5 @@ class UploadComponent extends Component {
     return $message;
   }
 }
+
+?>
