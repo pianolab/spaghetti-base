@@ -16,11 +16,11 @@ class LangHelper extends HtmlHelper
   public $lang;
   public $file;
   public $files = array("default");
-  public $langs = array("pt-br", "en-us");
+  public $langs = array("br", "en");
   /**
    * Attributes private
    */
-  private $lang_default = "pt-br";
+  private $lang_default = "br";
   private $file_default = "default";
 
   public function __construct()

@@ -1,4 +1,4 @@
-<?php $html->script("modules/contact", array(), false, true); ?>
+<?php $html->script("modules/contact", array(), false); ?>
 
 <div class="row">
   <div class="col-md-12">
