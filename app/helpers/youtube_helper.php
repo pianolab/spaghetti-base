@@ -69,7 +69,7 @@ class YoutubeHelper extends HtmlHelper
   {
     $json = file_get_contents("https://gdata.youtube.com/feeds/api/videos?q=" . $this->returnId($url) . "&alt=json");
     $json = json_decode($json);
-    $this->viewCount = $json->{"feed"}->{"entry"}[0]->{"yt$statistics"}->{"viewCount"};
+    $this->viewCount = $json->{'feed'}->{'entry'}[0]->{'yt$statistics'}->{'viewCount'};
 
     return $this->viewCount;
   }
@@ -117,7 +117,7 @@ class YoutubeHelper extends HtmlHelper
     $id = $this->getId($url);
     $content = file_get_contents("https://gdata.youtube.com/feeds/api/videos/" . $id . "?v=2&alt=json&prettyprint=true");
     $data = json_decode($content, true);
-    return $data["entry"]["media$group"]["media$description"]["$t"];
+    return $data['entry']['media$group']['media$description']['$t'];
   }
 
   public function getDuration($url){
@@ -132,7 +132,7 @@ class YoutubeHelper extends HtmlHelper
     $id = $this->getId($url);
     $content = file_get_contents("https://gdata.youtube.com/feeds/api/videos/" . $id . "?v=2&alt=json&prettyprint=true");
     $data = json_decode($content, true);
-    if (is_null($data["entry"]["yt$hd"])) {
+    if (is_null($data['entry']['yt$hd'])) {
       return false;
     } else {
       return true;
