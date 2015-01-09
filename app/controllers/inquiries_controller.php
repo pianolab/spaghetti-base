@@ -16,7 +16,7 @@ class InquiriesController extends AppController
         if ($inquiry->save()) {
           // $inquiry->send_mail();
           $connection->commit();
-          $this->FlashComponent->success("Sua mensagem foi enviado com sucesso.<br />Em breve entraremos em contato");
+          $this->FlashComponent->success("Sua mensagem foi enviada com sucesso.<br />Em breve entraremos em contato");
         }
         else {
           $this->FlashComponent->danger("Confira o formulário e preencha o correntamente");
