@@ -1,4 +1,4 @@
-Formulário de contato</h1>
+Formulário de contato
 ----------------------------------------------------
 Nome: <?php echo $inquiry->name ?>
 E-mail: <?php echo $inquiry->email ?>
